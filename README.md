@@ -1,0 +1,94 @@
+# LARAVOLT INDONESIA
+
+Package Laravel yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia.  
+Data wilayah diambil dari [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia)
+
+## Instalasi
+
+`composer require laravolt/indonesia`
+
+Tambahkan Service Provider dan Facade pada `config.app`
+
+```
+'providers' => [
+
+    Laravolt\Indonesia\ServiceProvider::class
+
+]
+```
+
+```
+'aliases' => [
+
+    'Indonesia' => Laravolt\Indonesia\Facade::class
+
+]
+```
+
+```
+php artisan laravolt:indonesia:install
+```
+
+## Penggunaan
+
+`Indonesia::getProvinces($numRows = null)`  
+`Indonesia::getCities(($numRows = null)`  
+`Indonesia::getDistricts(($numRows = null)`  
+`Indonesia::getVillages(($numRows = null)`  
+
+Mengambil semua data.
+Jika `$numRows`, maka akan return result dari `paginate()`
+
+---
+
+`Indonesia::getCitiesByProvince($provinceId)`  
+`Indonesia::getDistrictsByCity($cityId)`  
+`Indonesia::getVillagesByDistrict($districtId)`  
+
+---
+
+`Indonesia::getProvince($provinceId)`  
+`Indonesia::getCity($cityId)`  
+`Indonesia::getDistrict($districtId)`  
+`Indonesia::getVillage($villageId)`  
+
+---
+
+`Indonesia::getCityParents($cityId)`  
+`Indonesia::getDistrictParents($districtId)`  
+`Indonesia::getVillageParents($villageId)`  
+
+Memgambil wilayah parent dari wilayah yang diinginkan hingga Provinsi
+
+```
+Contoh: getDistrictParents(10010)
+
+{
+    'district' => ['name' => 'District name'],
+    'city' => ['name' => 'City name'],
+    'province' => ['name' => 'Province name']
+}
+```
+
+---
+
+`Indonesia::getProvinceChilds($provinceId)`  
+`Indonesia::getCityChilds($cityId)`  
+`Indonesia::getDistrictChilds($districtId)`  
+
+Mengambil wilayah child dari wilayah yang diinginkan hingga Village
+
+```
+Contoh: getCityChilds(10010100)
+
+{
+    'name' => 'City name',
+    'districts' => [
+        ['name' => 'District A', 'villages' => [
+            ['name' => 'Village M'],
+            ['name' => 'Village N'],
+            ...
+        ]],
+        ...
+    ]
+}
