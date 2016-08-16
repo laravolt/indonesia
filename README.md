@@ -31,13 +31,14 @@ php artisan laravolt:indonesia:install
 
 ## Penggunaan
 
-`Indonesia::getProvinces($numRows = null)`  
-`Indonesia::getCities(($numRows = null)`  
-`Indonesia::getDistricts(($numRows = null)`  
-`Indonesia::getVillages(($numRows = null)`  
-
-Mengambil semua data.
-Jika `$numRows`, maka akan return result dari `paginate()`
+`Indonesia::getProvinces()`  
+`Indonesia::getProvincesPaginate($numRows = 15)`  
+`Indonesia::getCities()`
+`Indonesia::getCitiesPaginate($numRows = 15)`  
+`Indonesia::getDistricts()`  
+`Indonesia::getDistrictsPaginate($numRows = 15)`  
+`Indonesia::getVillages()`  
+`Indonesia::getVillagesPaginate($numRows = 15)`  
 
 ---
 
