@@ -33,7 +33,7 @@ php artisan laravolt:indonesia:install
 
 `Indonesia::getProvinces()`  
 `Indonesia::getProvincesPaginate($numRows = 15)`  
-`Indonesia::getCities()`
+`Indonesia::getCities()`  
 `Indonesia::getCitiesPaginate($numRows = 15)`  
 `Indonesia::getDistricts()`  
 `Indonesia::getDistrictsPaginate($numRows = 15)`  
