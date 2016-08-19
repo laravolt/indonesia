@@ -26,7 +26,13 @@ Tambahkan Service Provider dan Facade pada `config.app`
 ```
 
 ```
-php artisan laravolt:indonesia:install
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
+```
+```
+php artisan migrate
+```
+```
+php artisan laravolt:indonesia:seed
 ```
 
 ## Penggunaan
