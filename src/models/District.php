@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class District extends Model
 {
-    public function regency()
+    public function city()
 	{
-	    return $this->belongsTo('Laravolt\Indonesia\Models\Regency', 'regency_id');
+	    return $this->belongsTo('Laravolt\Indonesia\Models\City', 'city_id');
 	}
 
 	public function villages()

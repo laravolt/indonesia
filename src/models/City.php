@@ -4,7 +4,7 @@ namespace Laravolt\Indonesia\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Regency extends Model
+class City extends Model
 {
     public function province()
 	{
@@ -13,9 +13,9 @@ class Regency extends Model
 
 	public function districts()
     {
-        return $this->hasMany('Laravolt\Indonesia\Models\District', 'regency_id');
+        return $this->hasMany('Laravolt\Indonesia\Models\District', 'city_id');
     }
-	
+
 	public function getLogoPathAttribute()
     {
     	$folder = 'indonesia-logo/';

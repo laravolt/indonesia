@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Province extends Model
 {
-    public function regencies()
+    public function cities()
     {
-        return $this->hasMany('Laravolt\Indonesia\Models\Regency', 'province_id');
+        return $this->hasMany('Laravolt\Indonesia\Models\City', 'province_id');
     }
-	
+
 	public function getLogoPathAttribute()
     {
     	$folder = 'indonesia-logo/';

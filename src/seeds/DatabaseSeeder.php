@@ -16,7 +16,7 @@ class DatabaseSeeder extends Seeder
         $this->clear_data();
 
         $this->call(ProvincesSeeder::class);
-        $this->call(RegenciesSeeder::class);
+        $this->call(CitiesSeeder::class);
         $this->call(DistrictsSeeder::class);
         $this->call(VillagesSeeder::class);
     }
@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
     function clear_data(){
         \DB::table('villages')->delete();
         \DB::table('districts')->delete();
-        \DB::table('regencies')->delete();
+        \DB::table('cities')->delete();
         \DB::table('provinces')->delete();
     }
 }
