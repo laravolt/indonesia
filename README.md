@@ -37,38 +37,38 @@ php artisan laravolt:indonesia:seed
 
 ## Penggunaan
 
-`Indonesia::getProvinces()`  
-`Indonesia::getProvincesPaginate($numRows = 15)`  
-`Indonesia::getCities()`  
-`Indonesia::getCitiesPaginate($numRows = 15)`  
-`Indonesia::getDistricts()`  
-`Indonesia::getDistrictsPaginate($numRows = 15)`  
-`Indonesia::getVillages()`  
-`Indonesia::getVillagesPaginate($numRows = 15)`  
+`Indonesia::allProvinces()`  
+`Indonesia::paginateProvinces($numRows = 15)`  
+`Indonesia::allCities()`  
+`Indonesia::paginateCities($numRows = 15)`  
+`Indonesia::allDistricts()`  
+`Indonesia::paginateDistricts($numRows = 15)`  
+`Indonesia::allVillages()`  
+`Indonesia::paginateVillages($numRows = 15)`  
 
 ---
 
-`Indonesia::getCitiesByProvince($provinceId)`  
-`Indonesia::getDistrictsByCity($cityId)`  
-`Indonesia::getVillagesByDistrict($districtId)`  
+`Indonesia::findCitiesByProvince($provinceId)`  
+`Indonesia::findDistrictsByCity($cityId)`  
+`Indonesia::findVillagesByDistrict($districtId)`  
 
 ---
 
-`Indonesia::getProvince($provinceId)`  
-`Indonesia::getCity($cityId)`  
-`Indonesia::getDistrict($districtId)`  
-`Indonesia::getVillage($villageId)`  
+`Indonesia::findProvince($provinceId)`  
+`Indonesia::findCity($cityId)`  
+`Indonesia::findDistrict($districtId)`  
+`Indonesia::findVillage($villageId)`  
 
 ---
 
-`Indonesia::getCityParents($cityId)`  
-`Indonesia::getDistrictParents($districtId)`  
-`Indonesia::getVillageParents($villageId)`  
+`Indonesia::findCityParents($cityId)`  
+`Indonesia::findDistrictParents($districtId)`  
+`Indonesia::findVillageParents($villageId)`  
 
 Memgambil wilayah parent dari wilayah yang diinginkan hingga Provinsi
 
 ```
-Contoh: getDistrictParents(10010)
+Contoh: findDistrictParents(10010)
 
 {
     'district' => ['name' => 'District name'],
@@ -79,14 +79,14 @@ Contoh: getDistrictParents(10010)
 
 ---
 
-`Indonesia::getProvinceChilds($provinceId)`  
-`Indonesia::getCityChilds($cityId)`  
-`Indonesia::getDistrictChilds($districtId)`  
+`Indonesia::findProvinceChilds($provinceId)`  
+`Indonesia::findCityChilds($cityId)`  
+`Indonesia::findDistrictChilds($districtId)`  
 
 Mengambil wilayah child dari wilayah yang diinginkan hingga Village
 
 ```
-Contoh: getCityChilds(10010100)
+Contoh: findCityChilds(10010100)
 
 {
     'name' => 'City name',

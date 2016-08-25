@@ -4,99 +4,99 @@ namespace Laravolt\Indonesia;
 
 class Indonesia
 {
-    public function getProvinces()
+    public function allProvinces()
     {
         return Models\Province::all();
     }
 
-    public function getProvincesPaginate($numRows = 15)
+    public function paginateProvinces($numRows = 15)
     {
         return Models\Province::paginate($numRows);
     }
 
-    public function getCities()
+    public function allCities()
     {
         return Models\Regency::all();
     }
 
-    public function getCitiesPaginate($numRows = 15)
+    public function paginateCities($numRows = 15)
     {
         return Models\Regency::paginate($numRows);
     }
 
-    public function getDistricts()
+    public function allDistricts()
     {
         return Models\District::all();
     }
 
-    public function getDistrictsPaginate($numRows = 15)
+    public function paginateDistricts($numRows = 15)
     {
         return Models\District::paginate($numRows);
     }
 
-    public function getVillages()
+    public function allVillages()
     {
         return Models\Village::all();
     }
 
-    public function getVillagesPaginate($numRows = 15)
+    public function paginateVillages($numRows = 15)
     {
         return Models\Village::paginate($numRows);
     }
 
-    public function getCitiesByProvince($provinceId)
+    public function findCitiesByProvince($provinceId)
     {
         return Models\Province::find($provinceId)->regencies;
     }
 
-    public function getDistricsByRegency($cityId)
+    public function findDistricsByRegency($cityId)
     {
         return Models\Regency::find($regencyId)->districts;
     }
 
-    public function getVillagesByDistrict($districtId)
+    public function findVillagesByDistrict($districtId)
     {
         return Models\District::find($districtId)->villages;
     }
 
 
 
-    public function getProvince($provinceId)
+    public function findProvince($provinceId)
     {
         return Models\Province::find($provinceId);
     }
 
-    public function getCity($cityId)
+    public function findCity($cityId)
     {
         return Models\Regency::find($cityId);
     }
 
-    public function getDistrict($districtId)
+    public function findDistrict($districtId)
     {
         return Models\District::find($districtId);
     }
 
-    public function getVillage($villageId)
+    public function findVillage($villageId)
     {
         return Models\Village::find($villageId);
     }
 
 
 
-    public function getCityParents($cityId){
+    public function findCityParents($cityId){
         $province = Models\Regency::find($cityId)->province;
         $parrents = collect(['province' => $province]);
         return $parrents;
     }
 
-    public function getDistrictParents($districtId){
+    public function findDistrictParents($districtId){
         $city = Models\District::find($districtId)->regency;
         $province = Models\Regency::find($city->id)->province;
         $parrents = collect(['city' =>  $city, 'province' =>  $province]);
         return $parrents;
     }
 
-    public function getVillageParents($villageId){
+    public function findVillageParents($villageId){
         $district = Models\Village::find($villageId)->district;
         $city = Models\District::find($district->id)->regency;
         $province = Models\Regency::find($city->id)->province;
@@ -106,19 +106,16 @@ class Indonesia
 
 
 
-    public function getProvinceChilds($provinceId){
+    public function findProvinceChilds($provinceId){
         return Models\Province::where('id', $provinceId)->with('regencies.districts.villages')->get()[0];
     }
 
-    public function getCityChilds($cityId){
+    public function findCityChilds($cityId){
         return Models\Regency::where('id', $cityId)->with('districts.villages')->get()[0];
     }
 
-    public function getDistrictChilds($districtId){
+    public function findDistrictChilds($districtId){
         return Models\District::where('id', $districtId)->with('villages')->get()[0];
     }
-
-
-
 }
 
