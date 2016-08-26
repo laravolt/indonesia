@@ -28,7 +28,7 @@ class VillagesSeeder extends Seeder
                     $value = $value . ",(".$row['id'].",".$row['district_id'].",'".$row['name']."')";
                 }
             }
-            \DB::insert("insert ignore into villages values " . $value);
+            \DB::insert("insert ignore into " . config('indonesia.table_prefix') . "villages values " . $value);
         }
 
 

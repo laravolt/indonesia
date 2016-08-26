@@ -2,10 +2,10 @@
 
 namespace Laravolt\Indonesia\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 class City extends Model
 {
+    protected $table = 'cities';
+
     public function province()
 	{
 	    return $this->belongsTo('Laravolt\Indonesia\Models\Province', 'province_id');

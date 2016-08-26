@@ -22,10 +22,10 @@ class DatabaseSeeder extends Seeder
     }
 
     function clear_data(){
-        \DB::table('villages')->delete();
-        \DB::table('districts')->delete();
-        \DB::table('cities')->delete();
-        \DB::table('provinces')->delete();
+        \DB::table(config('indonesia.table_prefix') . 'villages')->delete();
+        \DB::table(config('indonesia.table_prefix') . 'districts')->delete();
+        \DB::table(config('indonesia.table_prefix') . 'cities')->delete();
+        \DB::table(config('indonesia.table_prefix') . 'provinces')->delete();
     }
 }
 

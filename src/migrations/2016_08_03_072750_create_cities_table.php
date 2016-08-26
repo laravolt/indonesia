@@ -12,13 +12,13 @@ class CreateCitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function(Blueprint $table)
+        Schema::create(config('indonesia.table_prefix') . 'cities', function(Blueprint $table)
         {
             $table->char('id', 4);
             $table->char('province_id', 2);
             $table->string('name', 255);
             $table->primary('id');
-            $table->foreign('province_id')->references('id')->on('provinces');
+            $table->foreign('province_id')->references('id')->on(config('indonesia.table_prefix') . 'provinces');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('cities');
+        Schema::drop(config('indonesia.table_prefix') . 'cities');
     }
 }

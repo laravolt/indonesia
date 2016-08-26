@@ -12,6 +12,6 @@ class CitiesSeeder extends Seeder
         $file = __DIR__. '/../../resources/csv/cities.csv';
         $header = array('id', 'province_id', 'name');
         $data = $Csv->csv_to_array($file, $header);
-        \DB::table('cities')->insert($data);
+        \DB::table(config('indonesia.table_prefix') . 'cities')->insert($data);
     }
 }

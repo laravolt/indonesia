@@ -1,0 +1,11 @@
+<?php
+
+namespace Laravolt\Indonesia\Models;
+
+class Model extends \Illuminate\Database\Eloquent\Model
+{
+    function __construct()
+    {
+    	$this->table = config('indonesia.table_prefix') . $this->table;
+    }
+}

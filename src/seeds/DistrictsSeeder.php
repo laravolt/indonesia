@@ -12,6 +12,6 @@ class DistrictsSeeder extends Seeder
         $file = __DIR__. '/../../resources/csv/districts.csv';
         $header = array('id', 'city_id', 'name');
         $data = $Csv->csv_to_array($file, $header);
-        \DB::table('districts')->insert($data);
+        \DB::table(config('indonesia.table_prefix') . 'districts')->insert($data);
     }
 }

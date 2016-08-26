@@ -12,12 +12,12 @@ class CreateProvincesTable extends Migration
      */
     public function up()
     {
-        Schema::create('provinces', function(Blueprint $table)
+        Schema::create(config('indonesia.table_prefix') . 'provinces', function(Blueprint $table)
         {
             $table->char('id', 2);
             $table->string('name', 255);
             $table->primary('id');
-            
+
         });
     }
 
@@ -28,6 +28,6 @@ class CreateProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('provinces');
+        Schema::drop(config('indonesia.table_prefix') . 'provinces');
     }
 }
