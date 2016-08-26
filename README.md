@@ -48,54 +48,65 @@ php artisan laravolt:indonesia:seed
 
 ---
 
-`Indonesia::findCitiesByProvince($provinceId)`  
-`Indonesia::findDistrictsByCity($cityId)`  
-`Indonesia::findVillagesByDistrict($districtId)`  
+`Indonesia::findProvince($provinceId, $with = null)`  
+`array $with` : `cities, districts, villages, cities.districts, cities.districts.villages, districts.villages`
 
----
+`Indonesia::findCity($cityId, $with = null)`  
+`array $with` : `province, districts, villages, districts.villages`
 
-`Indonesia::findProvince($provinceId)`  
-`Indonesia::findCity($cityId)`  
-`Indonesia::findDistrict($districtId)`  
-`Indonesia::findVillage($villageId)`  
+`Indonesia::findDistrict($districtId, $with = null)`  
+`array $with`: `province, city, city.province, villages`
 
----
+`Indonesia::findVillage($villageId, $with = null)`  
+`array $with`: `province, city, district, district.city, district.city.province`
 
-`Indonesia::findCityParents($cityId)`  
-`Indonesia::findDistrictParents($districtId)`  
-`Indonesia::findVillageParents($villageId)`  
+#### Examples
 
-Memgambil wilayah parent dari wilayah yang diinginkan hingga Provinsi
+```php
+Indonesia::findProvince(11, ['cities']);
 
-```
-Contoh: findDistrictParents(10010)
-
-{
-    'district' => ['name' => 'District name'],
-    'city' => ['name' => 'City name'],
-    'province' => ['name' => 'Province name']
-}
-```
-
----
-
-`Indonesia::findProvinceChilds($provinceId)`  
-`Indonesia::findCityChilds($cityId)`  
-`Indonesia::findDistrictChilds($districtId)`  
-
-Mengambil wilayah child dari wilayah yang diinginkan hingga Village
-
-```
-Contoh: findCityChilds(10010100)
-
-{
-    'name' => 'City name',
-    'districts' => [
-        ['name' => 'District A', 'villages' => [
-            ['name' => 'Village M'],
-            ['name' => 'Village N'],
-            ...
-        ]],
+/*
+Will return
+Province Object {
+    'id' => 11,
+    'name' => 'ACEH',
+    'cities' => City Collections {
+        City Object,
+        City Object,
+        City Object,
         ...
-    ]
+    }
 }
+*/
+
+Indonesia::findProvince(11, ['cities', 'districts.villages'])
+
+/*
+Will return
+Province Object {
+    'id' => 11,
+    'name' => 'ACEH',
+    'cities' => City Collections {
+        City Object,
+        City Object,
+        City Object,
+        ...
+    },
+    'districts' => District Collections {
+        District Object {
+            'id' => 1101010
+            'city_id' => '1101'
+            'name' => 'TEUPAH SELATAN'
+            'province_id' => '11'
+            'villages' => Village Colletions {
+                Village Object,
+                Village Object,
+                Village Object,
+                ...
+            }
+        },
+        ...
+    }
+}
+*/
+```
