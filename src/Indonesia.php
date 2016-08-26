@@ -44,78 +44,108 @@ class Indonesia
         return Models\Village::paginate($numRows);
     }
 
-    public function findCitiesByProvince($provinceId)
+    public function findProvince($provinceId, $with = null)
     {
-        return Models\Province::find($provinceId)->cities;
-    }
+        if($with) {
+            $withVillages = array_search('villages', $with);
 
-    public function findDistricsByCity($cityId)
-    {
-        return Models\City::find($cityId)->districts;
-    }
+            if($withVillages) {
+                unset($with[$withVillages]);
 
-    public function findVillagesByDistrict($districtId)
-    {
-        return Models\District::find($districtId)->villages;
-    }
+                $province = Models\Province::with($with)->find($provinceId);
 
+                $province = $this->loadRelation($province, 'cities.districts.villages');
+            } else {
+                $province = Models\Province::with($with)->find($provinceId);
+            }
 
+            return $province;
+        }
 
-    public function findProvince($provinceId)
-    {
         return Models\Province::find($provinceId);
     }
 
-    public function findCity($cityId)
+    public function findCity($cityId, $with = null)
     {
+        if($with) {
+            return Models\City::with($with)->find($cityId);
+        }
+
         return Models\City::find($cityId);
     }
 
-    public function findDistrict($districtId)
+    public function findDistrict($districtId, $with = null)
     {
+        if($with) {
+            $withProvince = array_search('province', $with);
+
+            if($withProvince) {
+                unset($with[$withProvince]);
+
+                $district = Models\District::with($with)->find($districtId);
+
+                $district = $this->loadRelation($district, 'city.province');
+            } else {
+                $district = Models\District::with($with)->find($districtId);
+            }
+
+            return $district;
+        }
+
         return Models\District::find($districtId);
     }
 
-    public function findVillage($villageId)
+    public function findVillage($villageId, $with = null)
     {
+        if($with) {
+            $withCity = array_search('city', $with);
+            $withProvince = array_search('province', $with);
+
+            if($withCity && $withProvince) {
+                unset($with[$withCity]);
+                unset($with[$withProvince]);
+
+                $village = Models\Village::with($with)->find($villageId);
+
+                $village = $this->loadRelation($village, 'district.city');
+
+                $village = $this->loadRelation($village, 'district.city.province');
+            } else if($withCity) {
+                unset($with[$withCity]);
+
+                $village = Models\Village::with($with)->find($villageId);
+
+                $village = $this->loadRelation($village, 'district.city');
+            } else if($withProvince) {
+                unset($with[$withProvince]);
+
+                $village = Models\Village::with($with)->find($villageId);
+
+                $village = $this->loadRelation($village, 'district.city.province');
+            } else {
+                $village = Models\Village::with($with)->find($villageId);
+            }
+
+            return $village;
+        }
+
         return Models\Village::find($villageId);
     }
 
+    private function loadRelation($object, $relation)
+    {
+        $exploded = explode('.', $relation);
+        $targetRelationName = end($exploded);
 
+        // https://softonsofa.com/laravel-querying-any-level-far-relations-with-simple-trick/
+        // because Eloquent hasManyThrough cannot get through more than one deep relationship
+        $object->load([$relation => function ($q) use ( &$createdValue ) {
+           $createdValue = $q->get()->unique();
+        }]);
 
-    public function findCityParents($cityId){
-        $province = Models\City::find($cityId)->province;
-        $parrents = collect(['province' => $province]);
-        return $parrents;
-    }
+        $object[$targetRelationName] = $createdValue;
 
-    public function findDistrictParents($districtId){
-        $city = Models\District::find($districtId)->City;
-        $province = Models\City::find($city->id)->province;
-        $parrents = collect(['city' =>  $city, 'province' =>  $province]);
-        return $parrents;
-    }
-
-    public function findVillageParents($villageId){
-        $district = Models\Village::find($villageId)->district;
-        $city = Models\District::find($district->id)->City;
-        $province = Models\City::find($city->id)->province;
-        $parrents = collect(['district' => $district, 'city' =>  $city, 'province' =>  $province]);
-        return $parrents;
-    }
-
-
-
-    public function findProvinceChilds($provinceId){
-        return Models\Province::where('id', $provinceId)->with('cities.districts.villages')->get()[0];
-    }
-
-    public function findCityChilds($cityId){
-        return Models\City::where('id', $cityId)->with('districts.villages')->get()[0];
-    }
-
-    public function findDistrictChilds($districtId){
-        return Models\District::where('id', $districtId)->with('villages')->get()[0];
+        return $object;
     }
 }
 

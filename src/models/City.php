@@ -16,6 +16,11 @@ class City extends Model
         return $this->hasMany('Laravolt\Indonesia\Models\District', 'city_id');
     }
 
+    public function villages()
+    {
+        return $this->hasManyThrough('Laravolt\Indonesia\Models\Village', 'Laravolt\Indonesia\Models\District');
+    }
+
 	public function getLogoPathAttribute()
     {
     	$folder = 'indonesia-logo/';

@@ -11,6 +11,11 @@ class Province extends Model
         return $this->hasMany('Laravolt\Indonesia\Models\City', 'province_id');
     }
 
+    public function districts()
+    {
+        return $this->hasManyThrough('Laravolt\Indonesia\Models\District', 'Laravolt\Indonesia\Models\City');
+    }
+
 	public function getLogoPathAttribute()
     {
     	$folder = 'indonesia-logo/';
