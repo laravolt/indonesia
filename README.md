@@ -5,6 +5,7 @@ Data wilayah diambil dari [edwardsamuel/Wilayah-Administratif-Indonesia](https:/
 
 ## Instalasi
 
+### Install dan Daftarkan Package
 `composer require laravolt/indonesia`
 
 Tambahkan Service Provider dan Facade pada `config.app`
@@ -25,12 +26,18 @@ Tambahkan Service Provider dan Facade pada `config.app`
 ]
 ```
 
+### Publish Migration (Hanya Untuk Laravel 5.2)
+Jika Anda menggunakan Laravel versi 5.3, abaikan langkah di bawah ini.
 ```
 php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
 ```
+
+### Jalankan Migration
 ```
 php artisan migrate
 ```
+
+### Jalankan Seeder Untuk Mengisi Data Wilayah
 ```
 php artisan laravolt:indonesia:seed
 ```
