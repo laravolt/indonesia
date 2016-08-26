@@ -51,7 +51,7 @@ class Indonesia
         if($with) {
             $withVillages = array_search('villages', $with);
 
-            if($withVillages) {
+            if($withVillages !== false) {
                 unset($with[$withVillages]);
 
                 $province = Models\Province::with($with)->find($provinceId);
@@ -85,12 +85,12 @@ class Indonesia
         if($with) {
             $withProvince = array_search('province', $with);
 
-            if($withProvince) {
+            if($withProvince !== false) {
                 unset($with[$withProvince]);
 
                 $district = Models\District::with($with)->find($districtId);
 
-                $district = $this->loadRelation($district, 'city.province');
+                $district = $this->loadRelation($district, 'city.province', true);
             } else {
                 $district = Models\District::with($with)->find($districtId);
             }
@@ -109,27 +109,27 @@ class Indonesia
             $withCity = array_search('city', $with);
             $withProvince = array_search('province', $with);
 
-            if($withCity && $withProvince) {
+            if($withCity !== false && $withProvince !== false) {
                 unset($with[$withCity]);
                 unset($with[$withProvince]);
 
                 $village = Models\Village::with($with)->find($villageId);
 
-                $village = $this->loadRelation($village, 'district.city');
+                $village = $this->loadRelation($village, 'district.city', true);
 
-                $village = $this->loadRelation($village, 'district.city.province');
-            } else if($withCity) {
+                $village = $this->loadRelation($village, 'district.city.province', true);
+            } else if($withCity !== false) {
                 unset($with[$withCity]);
 
                 $village = Models\Village::with($with)->find($villageId);
 
-                $village = $this->loadRelation($village, 'district.city');
-            } else if($withProvince) {
+                $village = $this->loadRelation($village, 'district.city', true);
+            } else if($withProvince !== false) {
                 unset($with[$withProvince]);
 
                 $village = Models\Village::with($with)->find($villageId);
 
-                $village = $this->loadRelation($village, 'district.city.province');
+                $village = $this->loadRelation($village, 'district.city.province', true);
             } else {
                 $village = Models\Village::with($with)->find($villageId);
             }
@@ -140,20 +140,28 @@ class Indonesia
         return Models\Village::find($villageId);
     }
 
-    private function loadRelation($object, $relation)
+    private function loadRelation($object, $relation, $belongsTo=false)
     {
         $exploded = explode('.', $relation);
         $targetRelationName = end($exploded);
 
+        // We need to clone it first because $object->load() below will call related relation.
+        // I don't know why
+        $newObject = clone $object;
+
         // https://softonsofa.com/laravel-querying-any-level-far-relations-with-simple-trick/
         // because Eloquent hasManyThrough cannot get through more than one deep relationship
-        $object->load([$relation => function ($q) use ( &$createdValue ) {
-           $createdValue = $q->get()->unique();
+        $object->load([$relation => function ($q) use ( &$createdValue, $belongsTo ) {
+            if($belongsTo) {
+                $createdValue = $q->first();
+            } else {
+                $createdValue = $q->get()->unique();
+            }
         }]);
 
-        $object[$targetRelationName] = $createdValue;
+        $newObject[$targetRelationName] = $createdValue;
 
-        return $object;
+        return $newObject;
     }
 }
 
