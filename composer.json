@@ -5,7 +5,8 @@
     "license": "MIT",
     "authors": [
         {
-            "name": "Akbar Adhatama"
+            "name": "Akbar Adhatama",
+            "email": "am.adhatama@gmail.com"
         },
         {
             "name": "Deri Ramdani",
@@ -20,6 +21,9 @@
     "require": {
         "php" : ">=5.5.0",
         "illuminate/support": "~5.2"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "2.*"
     },
    "extra": {
         "branch-alias": {
