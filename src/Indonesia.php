@@ -4,43 +4,84 @@ namespace Laravolt\Indonesia;
 
 class Indonesia
 {
+    protected $search;
+
+    public function search($location)
+    {
+        $this->search = strtoupper($location);
+
+        return $this;
+    }
+
     public function allProvinces()
     {
+        if ($this->search) {
+            return Models\Province::search($this->search)->get();
+        }
+
         return Models\Province::all();
     }
 
     public function paginateProvinces($numRows = 15)
     {
+        if ($this->search) {
+            return Models\Province::search($this->search)->paginate();
+        }
+
         return Models\Province::paginate($numRows);
     }
 
     public function allCities()
     {
+        if ($this->search) {
+            return Models\City::search($this->search)->get();
+        }
+
         return Models\City::all();
     }
 
     public function paginateCities($numRows = 15)
     {
+        if ($this->search) {
+            return Models\City::search($this->search)->paginate();
+        }
+
         return Models\City::paginate($numRows);
     }
 
     public function allDistricts()
     {
+        if ($this->search) {
+            return Models\District::search($this->search)->get();
+        }
+
         return Models\District::all();
     }
 
     public function paginateDistricts($numRows = 15)
     {
+        if ($this->search) {
+            return Models\District::search($this->search)->paginate();
+        }
+
         return Models\District::paginate($numRows);
     }
 
     public function allVillages()
     {
+        if ($this->search) {
+            return Models\Village::search($this->search)->get();
+        }
+
         return Models\Village::all();
     }
 
     public function paginateVillages($numRows = 15)
     {
+        if ($this->search) {
+            return Models\Village::search($this->search)->paginate();
+        }
+
         return Models\Village::paginate($numRows);
     }
 

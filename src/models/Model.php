@@ -8,4 +8,9 @@ class Model extends \Illuminate\Database\Eloquent\Model
     {
     	$this->table = config('indonesia.table_prefix') . $this->table;
     }
+
+    public function scopeSearch($query, $location)
+    {
+    	return $query->where('name', 'like', '%'.$location.'%');
+    }
 }
