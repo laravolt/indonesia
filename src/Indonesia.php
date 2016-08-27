@@ -13,6 +13,24 @@ class Indonesia
         return $this;
     }
 
+    public function all()
+    {
+        $result = collect([]);
+
+        if ($this->search) {
+            $provinces = Models\Province::search($this->search)->get();
+            $cities = Models\City::search($this->search)->get();
+            $districts = Models\District::search($this->search)->get();
+            $villages = Models\Village::search($this->search)->get();
+            $result->push($provinces);
+            $result->push($cities);
+            $result->push($districts);
+            $result->push($villages);
+        }
+
+        return $result->collapse();
+    }
+
     public function allProvinces()
     {
         if ($this->search) {
