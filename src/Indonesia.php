@@ -105,6 +105,8 @@ class Indonesia
 
     public function findProvince($provinceId, $with = null)
     {
+        $with = (array)$with;
+
         if ($with) {
             $withVillages = array_search('villages', $with);
 
@@ -126,6 +128,8 @@ class Indonesia
 
     public function findCity($cityId, $with = null)
     {
+        $with = (array)$with;
+
         if ($with) {
             return Models\City::with($with)->find($cityId);
         }
@@ -135,6 +139,8 @@ class Indonesia
 
     public function findDistrict($districtId, $with = null)
     {
+        $with = (array)$with;
+
         if ($with) {
             $withProvince = array_search('province', $with);
 
@@ -156,6 +162,8 @@ class Indonesia
 
     public function findVillage($villageId, $with = null)
     {
+        $with = (array)$with;
+
         if ($with) {
             $withCity = array_search('city', $with);
             $withProvince = array_search('province', $with);
