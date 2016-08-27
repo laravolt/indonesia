@@ -117,3 +117,15 @@ Province Object {
 }
 */
 ```
+
+---
+
+`Indonesia::search('jakarta')->all()`  
+`Indonesia::search('jakarta')->allProvinces()`  
+`Indonesia::search('jakarta')->paginateProvinces()`  
+`Indonesia::search('jakarta')->allCities()`  
+`Indonesia::search('jakarta')->paginateCities()`  
+`Indonesia::search('jakarta')->allDistricts()`  
+`Indonesia::search('jakarta')->paginateDistricts()`  
+`Indonesia::search('jakarta')->allVillages()`  
+`Indonesia::search('jakarta')->paginateVillages()`  
