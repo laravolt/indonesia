@@ -27,7 +27,7 @@ class ServiceProvider extends BaseServiceProvider
         }
 
         $this->publishes([
-            __DIR__.'/../config/indonesia.php' => config_path('indonesia.php'),
+            __DIR__.'/../config/indonesia.php' => config_path('laravolt/indonesia.php'),
         ], 'config');
     }
 

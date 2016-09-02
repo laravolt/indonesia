@@ -12,13 +12,13 @@ class CreateDistrictsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('indonesia.table_prefix') . 'districts', function(Blueprint $table)
+        Schema::create(config('laravolt.indonesia.table_prefix') . 'districts', function(Blueprint $table)
         {
             $table->char('id', 7);
             $table->char('city_id', 4);
             $table->string('name', 255);
             $table->primary('id');
-            $table->foreign('city_id')->references('id')->on(config('indonesia.table_prefix') . 'cities');
+            $table->foreign('city_id')->references('id')->on(config('laravolt.indonesia.table_prefix') . 'cities');
         });
     }
 
@@ -29,6 +29,6 @@ class CreateDistrictsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('indonesia.table_prefix') . 'districts');
+        Schema::drop(config('laravolt.indonesia.table_prefix') . 'districts');
     }
 }

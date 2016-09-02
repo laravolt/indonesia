@@ -12,7 +12,7 @@ class CreateProvincesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('indonesia.table_prefix') . 'provinces', function(Blueprint $table)
+        Schema::create(config('laravolt.indonesia.table_prefix') . 'provinces', function(Blueprint $table)
         {
             $table->char('id', 2);
             $table->string('name', 255);
@@ -28,6 +28,6 @@ class CreateProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('indonesia.table_prefix') . 'provinces');
+        Schema::drop(config('laravolt.indonesia.table_prefix') . 'provinces');
     }
 }
