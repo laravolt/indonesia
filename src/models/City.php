@@ -21,6 +21,16 @@ class City extends Model
         return $this->hasManyThrough('Laravolt\Indonesia\Models\Village', 'Laravolt\Indonesia\Models\District');
     }
 
+    public function getNameAttribute()
+    {
+        return title_case($this->attributes['name']);
+    }
+
+    public function getProvinceNameAttribute()
+    {
+        return title_case($this->province->name);
+    }
+
 	public function getLogoPathAttribute()
     {
     	$folder = 'indonesia-logo/';
