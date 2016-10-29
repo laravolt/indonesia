@@ -129,3 +129,13 @@ Province Object {
 `Indonesia::search('jakarta')->paginateDistricts()`  
 `Indonesia::search('jakarta')->allVillages()`  
 `Indonesia::search('jakarta')->paginateVillages()`  
+
+---
+
+# Testing
+
+Run
+
+```
+vendor/bin/phpunit tests
+```
