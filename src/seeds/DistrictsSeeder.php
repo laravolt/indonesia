@@ -12,6 +12,9 @@ class DistrictsSeeder extends Seeder
         $file = __DIR__. '/../../resources/csv/districts.csv';
         $header = array('id', 'city_id', 'name');
         $data = $Csv->csv_to_array($file, $header);
-        \DB::table(config('laravolt.indonesia.table_prefix') . 'districts')->insert($data);
+        $collection = collect($data);
+        foreach($collection->chunk(50) as $chunk) {
+            \DB::table(config('laravolt.indonesia.table_prefix') . 'districts')->insert($chunk->toArray());
+        }
     }
 }
