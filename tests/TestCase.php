@@ -1,0 +1,45 @@
+<?php
+
+namespace Laravolt\Indonesia\Test;
+
+class TestCase extends \Orchestra\Testbench\TestCase
+{
+    public function setUp()
+    {
+        parent::setUp();
+
+        file_put_contents(__DIR__.'/database.sqlite', null);
+
+        $this->loadMigrationsFrom([
+            '--database' => 'sqlite',
+            '--realpath' => realpath(__DIR__.'/../src/migrations'),
+        ]);
+
+        $this->artisan('laravolt:indonesia:seed');
+    }
+
+    protected function getPackageProviders($app)
+    {
+        return [
+            \Laravolt\Indonesia\ServiceProvider::class
+        ];
+    }
+
+    protected function getPackageAliases($app)
+    {
+        return [
+            'Indonesia' => \Laravolt\Indonesia\Facade::class
+        ];
+    }
+
+    protected function getEnvironmentSetUp($app)
+    {
+        $app['config']->set('database.default', 'sqlite');
+        $app['config']->set('database.connections.sqlite', [
+            'driver'   => 'sqlite',
+            'database' => __DIR__.'/database.sqlite',
+            'prefix'   => 'indonesia_',
+        ]);
+        $app['config']->set('indonesia.table_prefix', 'indonesia_');
+    }
+}

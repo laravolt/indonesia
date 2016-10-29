@@ -18,12 +18,19 @@
             "Laravolt\\Indonesia\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Laravolt\\Indonesia\\Test\\": "tests/"
+        }
+    },
     "require": {
         "php" : ">=5.5.0",
         "illuminate/support": "~5.2"
     },
     "require-dev": {
-        "squizlabs/php_codesniffer": "2.*"
+        "phpunit/phpunit" : "4.*",
+        "squizlabs/php_codesniffer": "2.*",
+        "orchestra/testbench": "~3.0"
     },
    "extra": {
         "branch-alias": {
