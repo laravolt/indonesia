@@ -4,6 +4,8 @@ namespace Laravolt\Indonesia\Test;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    protected static $dbInited = false;
+
     public function setUp()
     {
         parent::setUp();
@@ -16,6 +18,19 @@ class TestCase extends \Orchestra\Testbench\TestCase
         ]);
 
         $this->artisan('laravolt:indonesia:seed');
+
+        // if (!static::$dbInited) {
+        //     file_put_contents(__DIR__.'/database.sqlite', null);
+
+        //     $this->loadMigrationsFrom([
+        //         '--database' => 'sqlite',
+        //         '--realpath' => realpath(__DIR__.'/../src/migrations'),
+        //     ]);
+
+        //     $this->artisan('laravolt:indonesia:seed');
+
+        //     static::$dbInited = true;
+        // }
     }
 
     protected function getPackageProviders($app)
