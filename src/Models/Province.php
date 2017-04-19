@@ -20,7 +20,7 @@ class Province extends Model
     {
         return title_case($this->attributes['name']);
     }
-    
+
 	public function getLogoPathAttribute()
     {
     	$folder = 'indonesia-logo/';
