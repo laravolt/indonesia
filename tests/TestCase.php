@@ -10,10 +10,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        file_put_contents(__DIR__.'/database.sqlite', null);
+//        file_put_contents(__DIR__.'/database.sqlite', null);
 
         $this->loadMigrationsFrom([
-            '--database' => 'sqlite',
             '--realpath' => realpath(__DIR__.'/../src/migrations'),
         ]);
 
@@ -52,7 +51,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
             'driver'   => 'sqlite',
-            'database' => __DIR__.'/database.sqlite',
+            'database' => ':memory:',
             'prefix'   => 'indonesia_',
         ]);
         $app['config']->set('indonesia.table_prefix', 'indonesia_');

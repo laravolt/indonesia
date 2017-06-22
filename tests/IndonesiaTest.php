@@ -2,8 +2,6 @@
 
 namespace Laravolt\Indonesia\Test;
 
-use Laravolt\Indonesia\Test\TestCase;
-
 class IndonesiaTest extends TestCase
 {
     // we make only one test case here to reduce the amount of seeding.
