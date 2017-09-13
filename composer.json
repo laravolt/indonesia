@@ -35,6 +35,14 @@
    "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
-        }
-    }
+        },
+       "laravel": {
+           "providers": [
+               "Laravolt\\Indonesia\\ServiceProvider"
+           ],
+           "aliases": {
+               "Indonesia" : "Laravolt\\Indonesia\\Facade"
+           }
+       }
+   }
 }
