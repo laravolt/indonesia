@@ -6,6 +6,8 @@ class District extends Model
 {
 	protected $table = 'districts';
 
+    public $timestamps = false;
+
     public function city()
 	{
 	    return $this->belongsTo('Laravolt\Indonesia\Models\City', 'city_id');
