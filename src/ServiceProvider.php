@@ -2,6 +2,7 @@
 
 namespace Laravolt\Indonesia;
 
+use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;;
 
 class ServiceProvider extends BaseServiceProvider
@@ -26,9 +27,13 @@ class ServiceProvider extends BaseServiceProvider
             ], 'migrations');
         }
 
-        $this->publishes([
-            __DIR__.'/../config/indonesia.php' => config_path('laravolt/indonesia.php'),
-        ], 'config');
+        if (class_exists(Application::class)) {
+            $this->publishes(
+                [
+                    __DIR__.'/../config/indonesia.php' => config_path('laravolt/indonesia.php'),
+                ], 'config'
+            );
+        }
     }
 
     protected function isLaravel53AndUp()
