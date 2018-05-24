@@ -5,8 +5,12 @@ Data wilayah diambil dari [edwardsamuel/Wilayah-Administratif-Indonesia](https:/
 
 ## Instalasi
 
-### Install dan Daftarkan Package
+### Install Package Via Composer
 `composer require laravolt/indonesia`
+
+### Daftarkan Service Provider dan Facade (Untuk Laravel < 5.5)
+
+Mulai versi 5.5 ke atas, Laravel sudah support fitur auto discover sehingga tidak perlu lagi mendaftarkan Service Provider dan Facade secara manual.
 
 Tambahkan Service Provider dan Facade pada `config.app`
 
