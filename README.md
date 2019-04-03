@@ -37,7 +37,7 @@ $app->withFacades();
 $app->withEloquent();
 ```
 
-Dalam file `bootstrap/app.php`, tambahkan daftarkan service provider dan alias/facade
+Dalam file `bootstrap/app.php`, daftarkan service provider dan alias/facade dengan menambahkan kode berokut.
 ```
 $app->register(Laravolt\Indonesia\ServiceProvider::class);
 
