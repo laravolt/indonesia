@@ -30,11 +30,39 @@ Tambahkan Service Provider dan Facade pada `config.app`
 ]
 ```
 
-### Publish Migration (Hanya Untuk Laravel 5.2)
-Jika Anda menggunakan Laravel versi 5.3, abaikan langkah di bawah ini.
+### Daftarkan Service Provider dan Facade untuk Lumen
+Dalam file `bootstrap/app.php`, uncomment baris berikut
+```
+$app->withFacades();
+$app->withEloquent();
+```
+
+Dalam file `bootstrap/app.php`, daftarkan service provider dan alias/facade dengan menambahkan kode berokut.
+```
+$app->register(Laravolt\Indonesia\ServiceProvider::class);
+
+
+// class aliases
+class_alias(Laravolt\Indonesia\Facade::class, 'Indonesia');
+```
+
+Untuk mengatur prefix tabel, buat file `config/indonesia.php`, lalu copy kode berikut (ganti `indonesia_` dengan nilai prefix tabel yang diinginkan),
+```
+<?php
+
+return [
+	'table_prefix'			=> 'indonesia_',
+];
+```
+
+
+### Publish Migration (Hanya Untuk Laravel/Lumen 5.2)
+Jika Anda menggunakan Laravel/Lumen versi 5.3 ke atas, abaikan langkah di bawah ini.
+Untuk Laravel:
 ```
 php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
 ```
+Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/src/migrations` atau [Migrations](src/migrations/)
 
 ### Jalankan Migration
 ```

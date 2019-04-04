@@ -3,6 +3,7 @@
 namespace Laravolt\Indonesia\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Artisan;
 
 class SeedCommand extends Command
 {
@@ -37,7 +38,7 @@ class SeedCommand extends Command
      */
     public function handle()
     {
-        \Artisan::call('db:seed', ['--class' => 'Laravolt\Indonesia\Seeds\DatabaseSeeder']);
+        Artisan::call('db:seed', ['--class' => 'Laravolt\Indonesia\Seeds\DatabaseSeeder']);
         $this->info('Seeded: Laravolt\Indonesia\Seeds\IndonesiaSeeder');
     }
 }
