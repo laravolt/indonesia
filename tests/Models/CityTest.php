@@ -4,6 +4,7 @@ namespace Laravolt\Indonesia\Test\Models;
 
 use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Test\TestCase;
+use Laravolt\Indonesia\Models\Village;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Province;
 use Illuminate\Database\Eloquent\Collection;
@@ -30,6 +31,18 @@ class CityTest extends TestCase
 
         $this->assertInstanceOf(Collection::class, $city->districts);
         $this->assertInstanceOf(District::class, $city->districts->first());
+    }
+
+    /** @test */
+    public function a_city_has_many_villages_relation()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
+        $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+        $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+        $city = City::first();
+
+        $this->assertInstanceOf(Collection::class, $city->villages);
+        $this->assertInstanceOf(Village::class, $city->villages->first());
     }
 
     /** @test */
