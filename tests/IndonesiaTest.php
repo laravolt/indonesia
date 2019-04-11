@@ -12,6 +12,8 @@ class IndonesiaTest extends TestCase
     // because seeding needs to import the csv and takes time.
     public function test()
     {
+        $this->artisan('laravolt:indonesia:seed');
+
         $this->checkSeeder();
         $this->checkProvinces();
         $this->checkCities();

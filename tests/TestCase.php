@@ -11,8 +11,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $this->loadMigrationsFrom([
             '--realpath' => realpath(__DIR__.'/../src/migrations'),
         ]);
-
-        $this->artisan('laravolt:indonesia:seed');
     }
 
     protected function getPackageProviders($app)
