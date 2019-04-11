@@ -2,8 +2,12 @@
 
 namespace Laravolt\Indonesia\Test;
 
+use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
+
 class IndonesiaTest extends TestCase
 {
+    use InteractsWithDatabase;
+
     // we make only one test case here to reduce the amount of seeding.
     // because seeding needs to import the csv and takes time.
     public function test()
@@ -17,17 +21,17 @@ class IndonesiaTest extends TestCase
 
     public function checkSeeder()
     {
-        $this->seeInDatabase('provinces', ['name' => 'ACEH']);
-        $this->seeInDatabase('provinces', ['name' => 'PAPUA']);
+        $this->assertDatabaseHas('provinces', ['name' => 'ACEH']);
+        $this->assertDatabaseHas('provinces', ['name' => 'PAPUA']);
 
-        $this->seeInDatabase('cities', ['name' => 'KABUPATEN SIMEULUE']);
-        $this->seeInDatabase('cities', ['name' => 'KOTA JAYAPURA']);
+        $this->assertDatabaseHas('cities', ['name' => 'KABUPATEN SIMEULUE']);
+        $this->assertDatabaseHas('cities', ['name' => 'KOTA JAYAPURA']);
 
-        $this->seeInDatabase('districts', ['name' => 'TEUPAH SELATAN']);
-        $this->seeInDatabase('districts', ['name' => 'RUMBIO JAYA']);
+        $this->assertDatabaseHas('districts', ['name' => 'TEUPAH SELATAN']);
+        $this->assertDatabaseHas('districts', ['name' => 'RUMBIO JAYA']);
 
-        $this->seeInDatabase('villages', ['name' => 'LATIUNG']);
-        $this->seeInDatabase('villages', ['name' => 'PAYA KALUT']);
+        $this->assertDatabaseHas('villages', ['name' => 'LATIUNG']);
+        $this->assertDatabaseHas('villages', ['name' => 'PAYA KALUT']);
     }
 
     public function checkProvinces()
