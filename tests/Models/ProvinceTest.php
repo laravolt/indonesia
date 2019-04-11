@@ -32,4 +32,22 @@ class ProvinceTest extends TestCase
         $this->assertInstanceOf(Collection::class, $province->districts);
         $this->assertInstanceOf(District::class, $province->districts->first());
     }
+
+    /** @test */
+    public function a_province_has_name_attribute()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
+        $province = Province::first();
+
+        $this->assertEquals('Aceh', $province->name);
+    }
+
+    /** @test */
+    public function a_province_has_logo_path_attribute()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
+        $province = Province::first();
+
+        $this->assertNull($province->logo_path);
+    }
 }
