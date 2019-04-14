@@ -2,6 +2,7 @@
 
 namespace Laravolt\Indonesia\Test;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 
 class IndonesiaTest extends TestCase
@@ -25,15 +26,19 @@ class IndonesiaTest extends TestCase
     {
         $this->assertDatabaseHas('provinces', ['name' => 'ACEH']);
         $this->assertDatabaseHas('provinces', ['name' => 'PAPUA']);
+        $this->assertEquals(34, DB::table('provinces')->count());
 
         $this->assertDatabaseHas('cities', ['name' => 'KABUPATEN SIMEULUE']);
         $this->assertDatabaseHas('cities', ['name' => 'KOTA JAYAPURA']);
+        $this->assertEquals(514, DB::table('cities')->count());
 
         $this->assertDatabaseHas('districts', ['name' => 'TEUPAH SELATAN']);
         $this->assertDatabaseHas('districts', ['name' => 'RUMBIO JAYA']);
+        $this->assertEquals(7093, DB::table('districts')->count());
 
         $this->assertDatabaseHas('villages', ['name' => 'LATIUNG']);
         $this->assertDatabaseHas('villages', ['name' => 'PAYA KALUT']);
+        $this->assertEquals(82043, DB::table('villages')->count());
     }
 
     public function checkProvinces()
