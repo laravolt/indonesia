@@ -3,6 +3,7 @@
 namespace Laravolt\Indonesia\Seeds;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DistrictsSeeder extends Seeder
 {
@@ -14,7 +15,7 @@ class DistrictsSeeder extends Seeder
         $data = $Csv->csv_to_array($file, $header);
         $collection = collect($data);
         foreach($collection->chunk(50) as $chunk) {
-            \DB::table(config('laravolt.indonesia.table_prefix') . 'districts')->insert($chunk->toArray());
+            DB::table(config('laravolt.indonesia.table_prefix') . 'districts')->insert($chunk->toArray());
         }
     }
 }
