@@ -51,7 +51,7 @@ Untuk mengatur prefix tabel, buat file `config/indonesia.php`, lalu copy kode be
 <?php
 
 return [
-	'table_prefix'			=> 'indonesia_',
+	'table_prefix' => 'indonesia_',
 ];
 ```
 Lalu daftarkan konfigurasi dalam `bootstrap/app.php` dengan menambahkan kode berikut.
