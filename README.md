@@ -51,10 +51,13 @@ Untuk mengatur prefix tabel, buat file `config/indonesia.php`, lalu copy kode be
 <?php
 
 return [
-	'table_prefix'			=> 'indonesia_',
+	'table_prefix' => 'indonesia_',
 ];
 ```
-
+Lalu daftarkan konfigurasi dalam `bootstrap/app.php` dengan menambahkan kode berikut.
+```
+$app->configure('indonesia');
+```
 
 ### Publish Migration (Hanya Untuk Laravel/Lumen 5.2)
 Jika Anda menggunakan Laravel/Lumen versi 5.3 ke atas, abaikan langkah di bawah ini.
