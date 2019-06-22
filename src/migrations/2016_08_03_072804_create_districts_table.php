@@ -20,6 +20,7 @@ class CreateDistrictsTable extends Migration
             $table->string('name', 255);
             $table->primary('id');
             $table->foreign('city_id')->references('id')->on(config('laravolt.indonesia.table_prefix') . 'cities');
+            $table->timestamps();
         });
     }
 
