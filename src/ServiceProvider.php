@@ -3,7 +3,7 @@
 namespace Laravolt\Indonesia;
 
 use Illuminate\Foundation\Application;
-use Illuminate\Support\ServiceProvider as BaseServiceProvider;;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -22,6 +22,8 @@ class ServiceProvider extends BaseServiceProvider
     */
     public function boot()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/indonesia.php', 'laravolt.indonesia');
+
         if ($this->isLaravel53AndUp() || $this->isLumen()) {
             $this->loadMigrationsFrom(__DIR__.'/migrations');
         } else {
@@ -37,6 +39,49 @@ class ServiceProvider extends BaseServiceProvider
                 ], 'config'
             );
         }
+
+        $this->loadViewsFrom(realpath(__DIR__.'/../resources/views'), 'indonesia');
+
+        if (config('laravolt.indonesia.route.enabled')) {
+            $this->registerRoutes();
+        }
+
+        if (config('laravolt.indonesia.menu.enabled')) {
+            $this->registerMenu();
+        }
+
+        if ($this->app->bound('laravolt.acl')) {
+            $this->app['laravolt.acl']->registerPermission(Permission::toArray());
+        }
+    }
+
+    protected function registerMenu()
+    {
+        if ($this->app->bound('laravolt.menu')) {
+            $menu = app('laravolt.menu')->add('Data Wilayah');
+            $menu->add(__('Provinsi'), route('indonesia::provinsi.index'))
+                ->data('icon', 'map')
+                ->data('permission', Permission::MANAGE_INDONESIA)
+                ->active(config('laravolt.indonesia.route.prefix').'/provinsi/*');
+            $menu->add(__('Kota/Kabupaten'), route('indonesia::kabupaten.index'))
+                ->data('icon', 'map marker')
+                ->data('permission', Permission::MANAGE_INDONESIA)
+                ->active(config('laravolt.indonesia.route.prefix').'/kabupaten/*');
+            $menu->add(__('Kecamatan'), route('indonesia::kecamatan.index'))
+                ->data('icon', 'map marker alternate')
+                ->data('permission', Permission::MANAGE_INDONESIA)
+                ->active(config('laravolt.indonesia.route.prefix').'/kecamatan/*');
+            $menu->add(__('Desa/Kelurahan'), route('indonesia::kelurahan.index'))
+                ->data('icon', 'map pin')
+                ->data('permission', Permission::MANAGE_INDONESIA)
+                ->active(config('laravolt.indonesia.route.prefix').'/kelurahan/*');
+        }
+    }
+
+    protected function registerRoutes()
+    {
+        $router = $this->app['router'];
+        require __DIR__.'/../routes/web.php';
     }
 
     protected function isLaravel53AndUp()

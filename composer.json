@@ -32,6 +32,9 @@
         "squizlabs/php_codesniffer": "2.*",
         "orchestra/testbench": "~3.0"
     },
+    "suggest": {
+        "laravolt/suitable": "Required if you want to access editor panel"
+    },
    "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
