@@ -13,4 +13,9 @@ class Kelurahan extends Village
     protected $table = 'villages';
 
     protected $guarded = [];
+
+    public function kecamatan()
+    {
+        return $this->belongsTo(Kecamatan::class, 'district_id');
+    }
 }

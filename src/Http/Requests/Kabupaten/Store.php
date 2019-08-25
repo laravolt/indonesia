@@ -14,9 +14,9 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'max:2'],
+            'id' => ['required', 'max:4'],
             'name' => ['required'],
-            'district_id' => ['required'],
+            'province_id' => ['required'],
         ];
     }
 

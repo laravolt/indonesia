@@ -13,4 +13,9 @@ class Kecamatan extends District
     protected $table = 'districts';
 
     protected $guarded = [];
+
+    public function kabupaten()
+    {
+        return $this->belongsTo(Kabupaten::class, 'city_id');
+    }
 }

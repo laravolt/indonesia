@@ -15,6 +15,8 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public function scopeSearch($query, $location)
     {
-    	return $query->where('name', 'like', '%'.$location.'%');
+        if ($location) {
+            $query->where("{$this->table}.name", 'like', '%'.$location.'%');
+        }
     }
 }

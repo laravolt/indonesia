@@ -17,14 +17,7 @@ class ProvinsiController extends Controller
         $data = Provinsi::autoSort()->autoFilter()->search(request('search'))->paginate();
 
         return (new ProvinsiTable($data))
-            ->decorate(function(Builder $table){
-                $table->getDefaultSegment()
-                    ->addLeft(
-                        Action::make('plus', 'Tambah', route('indonesia::provinsi.create'))
-                            ->addClass('primary')
-                    );
-            })
-            ->title(__('Provinsi'))
+            ->title(__('Daftar Provinsi'))
             ->view('indonesia::provinsi.index');
     }
 

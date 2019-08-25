@@ -1,27 +1,29 @@
-@extends(config('laravolt.epicentrum.view.layout'))
+@extends(
+    config('laravolt.indonesia.view.layout'),
+    [
+        'page' => [
+            'title' => __('Provinsi'),
+            'actions' => [
+                [
+                    'label' => __('Lihat Semua Provinsi'),
+                    'class' => '',
+                    'icon' => '',
+                    'url' => route('indonesia::provinsi.index')
+                ],
+            ]
+        ],
+    ]
+)
 
 @section('content')
-
-    <div class="ui secondary menu">
-        <div class="item">
-            <h2>Add Provinsi</h2>
-        </div>
-        <div class="right menu">
-            <div class="item">
-                <a href="{{ route('indonesia::provinsi.index') }}" class="ui button basic small"><i class="icon angle left"></i>
-                    Back to index
-                </a>
-            </div>
-        </div>
-    </div>
-
-    {!! form()->post(route('indonesia::provinsi.store'))->multipart() !!}
-	{!! form()->text('id')->label('Id') !!}
-	{!! form()->text('name')->label('Name') !!}
-    {!! form()->action([
-        form()->submit('Save'),
-        form()->link('Cancel', route('indonesia::provinsi.index'))
-    ]) !!}
-    {!! form()->close() !!}
-
-@stop
+    @component('ui::components.panel', ['title' => __('Tambah Provinsi')])
+        {!! form()->post(route('indonesia::provinsi.store')) !!}
+        {!! form()->text('id')->label('Kode')->required() !!}
+        {!! form()->text('name')->label('Name')->required() !!}
+        {!! form()->action([
+            form()->submit(__('Save')),
+            form()->link(__('Cancel'), route('indonesia::provinsi.index'))
+        ]) !!}
+        {!! form()->close() !!}
+    @endcomponent
+@endsection

@@ -17,14 +17,7 @@ class KabupatenController extends Controller
         $data = Kabupaten::autoSort()->autoFilter()->search(request('search'))->paginate();
 
         return (new KabupatenTable($data))
-            ->decorate(function(Builder $table){
-                $table->getDefaultSegment()
-                    ->addLeft(
-                        Action::make('plus', 'Tambah', route('indonesia::kabupaten.create'))
-                            ->addClass('primary')
-                    );
-            })
-            ->title(__('Kabupaten'))
+            ->title(__('Daftar Kota/Kabupaten'))
             ->view('indonesia::kabupaten.index');
     }
 

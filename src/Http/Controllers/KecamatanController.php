@@ -7,8 +7,6 @@ use Laravolt\Indonesia\Http\Requests\Kecamatan\Store;
 use Laravolt\Indonesia\Http\Requests\Kecamatan\Update;
 use Laravolt\Indonesia\Models\Kecamatan;
 use Laravolt\Indonesia\Tables\KecamatanTable;
-use Laravolt\Suitable\Builder;
-use Laravolt\Suitable\Toolbars\Action;
 
 class KecamatanController extends Controller
 {
@@ -17,14 +15,7 @@ class KecamatanController extends Controller
         $data = Kecamatan::autoSort()->autoFilter()->search(request('search'))->paginate();
 
         return (new KecamatanTable($data))
-            ->decorate(function(Builder $table){
-                $table->getDefaultSegment()
-                    ->addLeft(
-                        Action::make('plus', 'Tambah', route('indonesia::kecamatan.create'))
-                            ->addClass('primary')
-                    );
-            })
-            ->title(__('Kecamatan'))
+            ->title(__('Daftar Kecamatan'))
             ->view('indonesia::kecamatan.index');
     }
 

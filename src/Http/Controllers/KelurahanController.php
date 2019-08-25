@@ -7,8 +7,6 @@ use Laravolt\Indonesia\Http\Requests\Kelurahan\Store;
 use Laravolt\Indonesia\Http\Requests\Kelurahan\Update;
 use Laravolt\Indonesia\Models\Kelurahan;
 use Laravolt\Indonesia\Tables\KelurahanTable;
-use Laravolt\Suitable\Builder;
-use Laravolt\Suitable\Toolbars\Action;
 
 class KelurahanController extends Controller
 {
@@ -17,14 +15,7 @@ class KelurahanController extends Controller
         $data = Kelurahan::autoSort()->autoFilter()->search(request('search'))->paginate();
 
         return (new KelurahanTable($data))
-            ->decorate(function(Builder $table){
-                $table->getDefaultSegment()
-                    ->addLeft(
-                        Action::make('plus', 'Tambah', route('indonesia::kelurahan.create'))
-                            ->addClass('primary')
-                    );
-            })
-            ->title(__('Kelurahan'))
+            ->title(__('Daftar Desa/Kelurahan'))
             ->view('indonesia::kelurahan.index');
     }
 
