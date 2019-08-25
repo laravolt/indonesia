@@ -1,7 +1,7 @@
 @extends(
     config('laravolt.indonesia.view.layout'),
     [
-        'page' => [
+        '__page' => [
             'title' => __('Desa/Kelurahan'),
             'actions' => [
                 [
