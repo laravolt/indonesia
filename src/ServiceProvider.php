@@ -10,7 +10,7 @@ class ServiceProvider extends BaseServiceProvider
     public function register()
     {
         $this->app->bind('indonesia', function() {
-            return new Indonesia;
+            return new IndonesiaService;
         });
 
         $this->commands(\Laravolt\Indonesia\Commands\SeedCommand::class);

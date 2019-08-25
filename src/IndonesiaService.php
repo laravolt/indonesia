@@ -2,7 +2,7 @@
 
 namespace Laravolt\Indonesia;
 
-class Indonesia
+class IndonesiaService
 {
     protected $search;
 
