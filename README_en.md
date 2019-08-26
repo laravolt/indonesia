@@ -1,13 +1,13 @@
 # LARAVOLT INDONESIA
 
-Laravel Package that contains Provinces Data, City/Districts, and Villages in Indonesia.  
+Laravel Package that contains Provinces Data, City/Districts, and Villages in Indonesia.
 Data was taken from [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia)
 
 ## Installation
 
 ### Package Installation
 
-Add Laravolt/Indonesia package with 
+Add Laravolt/Indonesia package with
 
 `composer require laravolt/indonesia`
 
@@ -47,27 +47,27 @@ php artisan laravolt:indonesia:seed
 
 ## Usage
 
-`Indonesia::allProvinces()`  
-`Indonesia::paginateProvinces($numRows = 15)`  
-`Indonesia::allCities()`  
-`Indonesia::paginateCities($numRows = 15)`  
-`Indonesia::allDistricts()`  
-`Indonesia::paginateDistricts($numRows = 15)`  
-`Indonesia::allVillages()`  
-`Indonesia::paginateVillages($numRows = 15)`  
+`Indonesia::allProvinces()`
+`Indonesia::paginateProvinces($numRows = 15)`
+`Indonesia::allCities()`
+`Indonesia::paginateCities($numRows = 15)`
+`Indonesia::allDistricts()`
+`Indonesia::paginateDistricts($numRows = 15)`
+`Indonesia::allVillages()`
+`Indonesia::paginateVillages($numRows = 15)`
 
 ---
 
-`Indonesia::findProvince($provinceId, $with = null)`  
+`Indonesia::findProvince($provinceId, $with = null)`
 `array $with` : `cities, districts, villages, cities.districts, cities.districts.villages, districts.villages`
 
-`Indonesia::findCity($cityId, $with = null)`  
+`Indonesia::findCity($cityId, $with = null)`
 `array $with` : `province, districts, villages, districts.villages`
 
-`Indonesia::findDistrict($districtId, $with = null)`  
+`Indonesia::findDistrict($districtId, $with = null)`
 `array $with`: `province, city, city.province, villages`
 
-`Indonesia::findVillage($villageId, $with = null)`  
+`Indonesia::findVillage($villageId, $with = null)`
 `array $with`: `province, city, district, district.city, district.city.province`
 
 #### Examples
@@ -123,15 +123,15 @@ Province Object {
 
 ---
 
-`Indonesia::search('jakarta')->all()`  
-`Indonesia::search('jakarta')->allProvinces()`  
-`Indonesia::search('jakarta')->paginateProvinces()`  
-`Indonesia::search('jakarta')->allCities()`  
-`Indonesia::search('jakarta')->paginateCities()`  
-`Indonesia::search('jakarta')->allDistricts()`  
-`Indonesia::search('jakarta')->paginateDistricts()`  
-`Indonesia::search('jakarta')->allVillages()`  
-`Indonesia::search('jakarta')->paginateVillages()`  
+`\Indonesia::search('jakarta')->all()`
+`\Indonesia::search('jakarta')->allProvinces()`
+`\Indonesia::search('jakarta')->paginateProvinces()`
+`\Indonesia::search('jakarta')->allCities()`
+`\Indonesia::search('jakarta')->paginateCities()`
+`\Indonesia::search('jakarta')->allDistricts()`
+`\Indonesia::search('jakarta')->paginateDistricts()`
+`\Indonesia::search('jakarta')->allVillages()`
+`\Indonesia::search('jakarta')->paginateVillages()`
 
 ---
 

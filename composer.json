@@ -31,6 +31,10 @@
         "phpunit/phpunit": "^7.5||^8.0",
         "orchestra/testbench": "^3.8"
     },
+    "suggest": {
+        "laravolt/suitable": "Required if you want to access editor panel",
+        "laravolt/ui": "Required if you want to access editor panel"
+    },
    "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"

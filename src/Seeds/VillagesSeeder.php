@@ -21,5 +21,4 @@ class VillagesSeeder extends Seeder
             }
         }
     }
-
 }
