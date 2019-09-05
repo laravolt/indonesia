@@ -9,36 +9,15 @@ class IndonesiaTest extends TestCase
 {
     use InteractsWithDatabase;
 
-    // we make only one test case here to reduce the amount of seeding.
-    // because seeding needs to import the csv and takes time.
-    public function test()
+    /** @test */
+    public function it_can_call_indonesia_service()
     {
         $this->artisan('laravolt:indonesia:seed');
 
-        $this->checkSeeder();
         $this->checkProvinces();
         $this->checkCities();
         $this->checkDistricts();
         $this->checkVillages();
-    }
-
-    public function checkSeeder()
-    {
-        $this->assertDatabaseHas('provinces', ['name' => 'ACEH']);
-        $this->assertDatabaseHas('provinces', ['name' => 'PAPUA']);
-        $this->assertEquals(34, DB::table('provinces')->count());
-
-        $this->assertDatabaseHas('cities', ['name' => 'KABUPATEN SIMEULUE']);
-        $this->assertDatabaseHas('cities', ['name' => 'KOTA JAYAPURA']);
-        $this->assertEquals(514, DB::table('cities')->count());
-
-        $this->assertDatabaseHas('districts', ['name' => 'TEUPAH SELATAN']);
-        $this->assertDatabaseHas('districts', ['name' => 'RUMBIO JAYA']);
-        $this->assertEquals(7093, DB::table('districts')->count());
-
-        $this->assertDatabaseHas('villages', ['name' => 'LATIUNG']);
-        $this->assertDatabaseHas('villages', ['name' => 'PAYA KALUT']);
-        $this->assertEquals(82043, DB::table('villages')->count());
     }
 
     public function checkProvinces()

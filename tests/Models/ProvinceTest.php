@@ -39,7 +39,7 @@ class ProvinceTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
         $province = Province::first();
 
-        $this->assertEquals('Aceh', $province->name);
+        $this->assertEquals('ACEH', $province->name);
     }
 
     /** @test */

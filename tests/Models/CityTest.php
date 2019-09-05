@@ -51,7 +51,7 @@ class CityTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
         $city = City::first();
 
-        $this->assertEquals('Kabupaten Simeulue', $city->name);
+        $this->assertEquals('KABUPATEN SIMEULUE', $city->name);
     }
 
     /** @test */
@@ -61,7 +61,7 @@ class CityTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
         $city = City::first();
 
-        $this->assertEquals('Aceh', $city->province_name);
+        $this->assertEquals('ACEH', $city->province_name);
     }
 
     /** @test */

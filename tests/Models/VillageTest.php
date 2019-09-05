@@ -25,7 +25,7 @@ class VillageTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
         $village = Village::first();
 
-        $this->assertEquals('Latiung', $village->name);
+        $this->assertEquals('LATIUNG', $village->name);
     }
 
     /** @test */
@@ -35,7 +35,7 @@ class VillageTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
         $village = Village::first();
 
-        $this->assertEquals('Teupah Selatan', $village->district_name);
+        $this->assertEquals('TEUPAH SELATAN', $village->district_name);
     }
 
     /** @test */
@@ -46,7 +46,7 @@ class VillageTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
         $village = Village::first();
 
-        $this->assertEquals('Kabupaten Simeulue', $village->city_name);
+        $this->assertEquals('KABUPATEN SIMEULUE', $village->city_name);
     }
 
     /** @test */
@@ -58,6 +58,6 @@ class VillageTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
         $village = Village::first();
 
-        $this->assertEquals('Aceh', $village->province_name);
+        $this->assertEquals('ACEH', $village->province_name);
     }
 }

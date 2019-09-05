@@ -38,7 +38,7 @@ class DistrictTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $district = District::first();
 
-        $this->assertEquals('Teupah Selatan', $district->name);
+        $this->assertEquals('TEUPAH SELATAN', $district->name);
     }
 
     /** @test */
@@ -48,7 +48,7 @@ class DistrictTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $district = District::first();
 
-        $this->assertEquals('Kabupaten Simeulue', $district->city_name);
+        $this->assertEquals('KABUPATEN SIMEULUE', $district->city_name);
     }
 
     /** @test */
@@ -59,6 +59,6 @@ class DistrictTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $district = District::first();
 
-        $this->assertEquals('Aceh', $district->province_name);
+        $this->assertEquals('ACEH', $district->province_name);
     }
 }

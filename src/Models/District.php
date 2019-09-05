@@ -18,18 +18,13 @@ class District extends Model
         return $this->hasMany('Laravolt\Indonesia\Models\Village', 'district_id');
     }
 
-    public function getNameAttribute()
-    {
-        return title_case($this->attributes['name']);
-    }
-
     public function getCityNameAttribute()
     {
-        return title_case($this->city->name);
+        return $this->city->name;
     }
 
     public function getProvinceNameAttribute()
     {
-        return title_case($this->city->province->name);
+        return $this->city->province->name;
     }
 }
