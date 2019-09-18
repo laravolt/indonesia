@@ -19,6 +19,7 @@ class Store extends FormRequest
             'id' => ['required', 'max:10', Rule::unique((new Kelurahan())->getTable())->ignore($this->previous_id, 'id')],
             'name' => ['required'],
             'district_id' => ['required'],
+            'meta' => 'nullable',
         ];
     }
 

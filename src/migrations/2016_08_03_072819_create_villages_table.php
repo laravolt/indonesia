@@ -18,6 +18,7 @@ class CreateVillagesTable extends Migration
             $table->char('id', 10);
             $table->char('district_id', 7);
             $table->string('name', 255);
+            $table->text('meta')->nullable();
             $table->primary('id');
             $table->timestamps();
 
