@@ -18,6 +18,7 @@ class CreateDistrictsTable extends Migration
             $table->char('id', 7);
             $table->char('city_id', 4);
             $table->string('name', 255);
+            $table->text('meta')->nullable();
             $table->primary('id');
             $table->timestamps();
 

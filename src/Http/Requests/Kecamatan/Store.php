@@ -19,6 +19,7 @@ class Store extends FormRequest
             'id' => ['required', 'max:8', Rule::unique((new Kecamatan())->getTable())->ignore($this->previous_id, 'id')],
             'name' => ['required'],
             'city_id' => ['required'],
+            'meta' => 'nullable',
         ];
     }
 

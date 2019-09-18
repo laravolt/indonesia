@@ -17,6 +17,7 @@ class CreateProvincesTable extends Migration
         {
             $table->char('id', 2);
             $table->string('name', 255);
+            $table->text('meta')->nullable();
             $table->primary('id');
             $table->timestamps();
         });
