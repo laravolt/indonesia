@@ -3,6 +3,8 @@
 namespace Laravolt\Indonesia\Http\Requests\Provinsi;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Laravolt\Indonesia\Models\Provinsi;
 
 class Store extends FormRequest
 {
@@ -14,7 +16,7 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'max:2'],
+            'id' => ['required', 'max:2', Rule::unique((new Provinsi())->getTable())->ignore($this->previous_id, 'id')],
             'name' => ['required'],
         ];
     }

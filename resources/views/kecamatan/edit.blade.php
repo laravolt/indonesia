@@ -18,6 +18,7 @@
 @section('content')
     @component('ui::components.panel', ['title' => __('Edit Kecamatan')])
         {!! form()->bind($kecamatan)->put(route('indonesia::kecamatan.update', $kecamatan)) !!}
+        {!! form()->hidden('previous_id')->value($kecamatan->getKey()) !!}
         {!! form()->text('id')->label('Kode')->required() !!}
         {!! form()->text('name')->label('Nama')->required() !!}
         {!! form()->select('city_id', \Laravolt\Indonesia\Models\Kabupaten::pluck('name', 'id'))->label('Kabupaten')->required() !!}

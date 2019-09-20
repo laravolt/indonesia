@@ -2,6 +2,7 @@
 
 namespace Laravolt\Indonesia\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Routing\Controller;
 use Laravolt\Indonesia\Http\Requests\Kelurahan\Store;
 use Laravolt\Indonesia\Http\Requests\Kelurahan\Update;
@@ -45,8 +46,12 @@ class KelurahanController extends Controller
 
     public function destroy(Kelurahan $kelurahan)
     {
-        $kelurahan->delete();
+        try {
+            $kelurahan->delete();
 
-        return redirect()->route('indonesia::kelurahan.index')->withSuccess('Kelurahan deleted');
+            return redirect()->route('indonesia::kelurahan.index')->withSuccess('Kelurahan deleted');
+        } catch (QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 }

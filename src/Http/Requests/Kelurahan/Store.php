@@ -3,6 +3,8 @@
 namespace Laravolt\Indonesia\Http\Requests\Kelurahan;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
+use Laravolt\Indonesia\Models\Kelurahan;
 
 class Store extends FormRequest
 {
@@ -14,7 +16,7 @@ class Store extends FormRequest
     public function rules()
     {
         return [
-            'id' => ['required', 'max:10'],
+            'id' => ['required', 'max:10', Rule::unique((new Kelurahan())->getTable())->ignore($this->previous_id, 'id')],
             'name' => ['required'],
             'district_id' => ['required'],
         ];

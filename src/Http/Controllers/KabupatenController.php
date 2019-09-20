@@ -2,6 +2,7 @@
 
 namespace Laravolt\Indonesia\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Routing\Controller;
 use Laravolt\Indonesia\Http\Requests\Kabupaten\Store;
 use Laravolt\Indonesia\Http\Requests\Kabupaten\Update;
@@ -47,8 +48,12 @@ class KabupatenController extends Controller
 
     public function destroy(Kabupaten $kabupaten)
     {
-        $kabupaten->delete();
+        try {
+            $kabupaten->delete();
 
-        return redirect()->route('indonesia::kabupaten.index')->withSuccess('Kabupaten deleted');
+            return redirect()->route('indonesia::kabupaten.index')->withSuccess('Kabupaten deleted');
+        } catch (QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 }

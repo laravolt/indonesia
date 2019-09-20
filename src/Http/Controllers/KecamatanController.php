@@ -2,6 +2,7 @@
 
 namespace Laravolt\Indonesia\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Routing\Controller;
 use Laravolt\Indonesia\Http\Requests\Kecamatan\Store;
 use Laravolt\Indonesia\Http\Requests\Kecamatan\Update;
@@ -45,8 +46,12 @@ class KecamatanController extends Controller
 
     public function destroy(Kecamatan $kecamatan)
     {
-        $kecamatan->delete();
+        try {
+            $kecamatan->delete();
 
-        return redirect()->route('indonesia::kecamatan.index')->withSuccess('Kecamatan deleted');
+            return redirect()->route('indonesia::kecamatan.index')->withSuccess('Kecamatan deleted');
+        } catch (QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 }

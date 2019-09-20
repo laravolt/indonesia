@@ -2,6 +2,7 @@
 
 namespace Laravolt\Indonesia\Http\Controllers;
 
+use Illuminate\Database\QueryException;
 use Illuminate\Routing\Controller;
 use Laravolt\Indonesia\Http\Requests\Provinsi\Store;
 use Laravolt\Indonesia\Http\Requests\Provinsi\Update;
@@ -42,13 +43,17 @@ class ProvinsiController extends Controller
     {
         $provinsi->update($request->validated());
 
-        return redirect()->back()->withSuccess('Provinsi saved');
+        return redirect()->route('indonesia::provinsi.show', $provinsi)->withSuccess('Provinsi saved');
     }
 
     public function destroy(Provinsi $provinsi)
     {
-        $provinsi->delete();
+        try {
+            $provinsi->delete();
 
-        return redirect()->route('indonesia::provinsi.index')->withSuccess('Provinsi deleted');
+            return redirect()->route('indonesia::provinsi.index')->withSuccess('Provinsi deleted');
+        } catch (QueryException $e) {
+            return redirect()->back()->withError($e->getMessage());
+        }
     }
 }

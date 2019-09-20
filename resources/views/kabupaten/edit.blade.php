@@ -18,6 +18,7 @@
 @section('content')
     @component('ui::components.panel', ['title' => __('Edit Kota/Kabupaten')])
         {!! form()->bind($kabupaten)->put(route('indonesia::kabupaten.update', $kabupaten)) !!}
+        {!! form()->hidden('previous_id')->value($kabupaten->getKey()) !!}
         {!! form()->text('id')->label('Kode')->required() !!}
         {!! form()->text('name')->label('Name')->required() !!}
         {!! form()->select('province_id', \Laravolt\Indonesia\Models\Provinsi::pluck('name', 'id'))->label('Provinsi')->required() !!}
