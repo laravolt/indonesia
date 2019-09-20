@@ -19,8 +19,12 @@ class CreateVillagesTable extends Migration
             $table->char('district_id', 7);
             $table->string('name', 255);
             $table->primary('id');
-            $table->foreign('district_id')->references('id')->on(config('laravolt.indonesia.table_prefix') . 'districts');
             $table->timestamps();
+
+            $table->foreign('district_id')
+                ->references('id')
+                ->on(config('laravolt.indonesia.table_prefix').'districts')
+                ->onUpdate('cascade')->onDelete('restrict');
         });
     }
 
