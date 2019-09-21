@@ -6,6 +6,10 @@ class City extends Model
 {
     protected $table = 'cities';
 
+    protected $casts = [
+        'meta' => 'array',
+    ];
+
     public $timestamps = false;
 
     public function province()
