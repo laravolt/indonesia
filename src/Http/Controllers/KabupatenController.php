@@ -43,7 +43,7 @@ class KabupatenController extends Controller
     {
         $kabupaten->update($request->validated());
 
-        return redirect()->back()->withSuccess('Kabupaten saved');
+        return redirect()->route('indonesia::kabupaten.edit', $kabupaten)->withSuccess('Kabupaten saved');
     }
 
     public function destroy(Kabupaten $kabupaten)

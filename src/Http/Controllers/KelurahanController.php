@@ -41,7 +41,7 @@ class KelurahanController extends Controller
     {
         $kelurahan->update($request->validated());
 
-        return redirect()->back()->withSuccess('Kelurahan saved');
+        return redirect()->route('indonesia::kelurahan.edit', $kelurahan)->withSuccess('Kelurahan saved');
     }
 
     public function destroy(Kelurahan $kelurahan)

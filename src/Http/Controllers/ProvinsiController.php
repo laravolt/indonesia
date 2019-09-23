@@ -43,7 +43,7 @@ class ProvinsiController extends Controller
     {
         $provinsi->update($request->validated());
 
-        return redirect()->route('indonesia::provinsi.show', $provinsi)->withSuccess('Provinsi saved');
+        return redirect()->route('indonesia::provinsi.edit', $provinsi)->withSuccess('Provinsi saved');
     }
 
     public function destroy(Provinsi $provinsi)

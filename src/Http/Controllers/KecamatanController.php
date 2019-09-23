@@ -41,7 +41,7 @@ class KecamatanController extends Controller
     {
         $kecamatan->update($request->validated());
 
-        return redirect()->back()->withSuccess('Kecamatan saved');
+        return redirect()->route('indonesia::kecamatan.edit', $kecamatan)->withSuccess('Kecamatan saved');
     }
 
     public function destroy(Kecamatan $kecamatan)
