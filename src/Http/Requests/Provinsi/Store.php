@@ -18,6 +18,7 @@ class Store extends FormRequest
         return [
             'id' => ['required', 'max:2', Rule::unique((new Provinsi())->getTable())->ignore($this->previous_id, 'id')],
             'name' => ['required'],
+            'meta' => 'nullable',
         ];
     }
 

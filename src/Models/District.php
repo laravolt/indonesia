@@ -6,6 +6,10 @@ class District extends Model
 {
 	protected $table = 'districts';
 
+    protected $casts = [
+        'meta' => 'array',
+    ];
+
     public $timestamps = false;
 
     public function city()
