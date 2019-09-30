@@ -13,7 +13,7 @@ class KelurahanController extends Controller
 {
     public function index()
     {
-        $data = Kelurahan::autoSort()->autoFilter()->search(request('search'))->paginate();
+        $data = Kelurahan::with('kecamatan')->autoSort()->autoFilter()->search(request('search'))->paginate();
 
         return (new KelurahanTable($data))
             ->title(__('Daftar Desa/Kelurahan'))

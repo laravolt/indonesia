@@ -14,6 +14,8 @@ class Kelurahan extends Village
 
     protected $guarded = [];
 
+    protected $searchableColumn = ['id', 'name', 'kecamatan.name'];
+
     public function kecamatan()
     {
         return $this->belongsTo(Kecamatan::class, 'district_id');

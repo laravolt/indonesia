@@ -15,7 +15,7 @@ class KabupatenController extends Controller
 {
     public function index()
     {
-        $data = Kabupaten::autoSort()->autoFilter()->search(request('search'))->paginate();
+        $data = Kabupaten::with('province')->autoSort()->autoFilter()->search(request('search'))->paginate();
 
         return (new KabupatenTable($data))
             ->title(__('Daftar Kota/Kabupaten'))

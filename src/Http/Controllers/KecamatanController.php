@@ -13,7 +13,7 @@ class KecamatanController extends Controller
 {
     public function index()
     {
-        $data = Kecamatan::autoSort()->autoFilter()->search(request('search'))->paginate();
+        $data = Kecamatan::with('kabupaten')->autoSort()->autoFilter()->search(request('search'))->paginate();
 
         return (new KecamatanTable($data))
             ->title(__('Daftar Kecamatan'))

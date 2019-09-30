@@ -13,4 +13,11 @@ class Kabupaten extends City
     protected $table = 'cities';
 
     protected $guarded = [];
+
+    protected $searchableColumn = ['id', 'name', 'provinsi.name'];
+
+    public function provinsi()
+    {
+        return $this->belongsTo(Provinsi::class, 'province_id');
+    }
 }
