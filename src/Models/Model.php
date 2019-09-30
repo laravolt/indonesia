@@ -6,7 +6,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
 {
     protected $keyType = 'string';
 
-    protected $searchableColumn = ['id', 'name'];
+    protected $searchableColumns = ['id', 'name'];
 
     public function __construct(array $attributes = [])
     {
@@ -17,8 +17,8 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public function scopeSearch($query, $keyword)
     {
-        if ($keyword && $this->searchableColumn) {
-            $query->whereLike($this->searchableColumn, $keyword);
+        if ($keyword && $this->searchableColumns) {
+            $query->whereLike($this->searchableColumns, $keyword);
         }
     }
 }

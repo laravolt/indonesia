@@ -14,7 +14,7 @@ class Kecamatan extends District
 
     protected $guarded = [];
 
-    protected $searchableColumn = ['id', 'name', 'kabupaten.name'];
+    protected $searchableColumns = ['id', 'name', 'kabupaten.name'];
 
     public function kabupaten()
     {
