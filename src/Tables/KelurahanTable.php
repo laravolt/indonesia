@@ -13,7 +13,7 @@ class KelurahanTable extends \Laravolt\Suitable\TableView
             \Laravolt\Suitable\Columns\Id::make('id', 'Kode')->sortable(),
             \Laravolt\Suitable\Columns\Text::make('name', 'Desa/Kelurahan')->sortable(),
             \Laravolt\Suitable\Columns\Text::make('district_name', 'Kecamatan')->sortable('kecamatan.name'),
-            \Laravolt\Suitable\Columns\RestfulButton::make('indonesia::kelurahan')->except('view'),
+            \Laravolt\Suitable\Columns\RestfulButton::make('indonesia::kelurahan', __('Action'))->except('view'),
         ];
     }
 }

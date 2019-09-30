@@ -13,7 +13,7 @@ class KabupatenTable extends \Laravolt\Suitable\TableView
             \Laravolt\Suitable\Columns\Id::make('id', 'Kode')->sortable(),
             \Laravolt\Suitable\Columns\Text::make('name', 'Kota/Kabupaten')->sortable(),
             \Laravolt\Suitable\Columns\Text::make('province_name', 'Provinsi')->sortable('province.name'),
-            \Laravolt\Suitable\Columns\RestfulButton::make('indonesia::kabupaten')->except('view'),
+            \Laravolt\Suitable\Columns\RestfulButton::make('indonesia::kabupaten', __('Action'))->except('view'),
         ];
     }
 }

@@ -12,7 +12,7 @@ class ProvinsiTable extends \Laravolt\Suitable\TableView
             Numbering::make('No'),
             \Laravolt\Suitable\Columns\Id::make('id', 'Kode')->sortable(),
             \Laravolt\Suitable\Columns\Text::make('name', 'Provinsi')->sortable(),
-            \Laravolt\Suitable\Columns\RestfulButton::make('indonesia::provinsi')->except('view'),
+            \Laravolt\Suitable\Columns\RestfulButton::make('indonesia::provinsi', __('Action'))->except('view'),
         ];
     }
 }
