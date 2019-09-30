@@ -14,7 +14,7 @@ class Kelurahan extends Village
 
     protected $guarded = [];
 
-    protected $searchableColumn = ['id', 'name', 'kecamatan.name'];
+    protected $searchableColumns = ['id', 'name', 'kecamatan.name'];
 
     public function kecamatan()
     {

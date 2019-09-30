@@ -14,7 +14,7 @@ class Kabupaten extends City
 
     protected $guarded = [];
 
-    protected $searchableColumn = ['id', 'name', 'provinsi.name'];
+    protected $searchableColumns = ['id', 'name', 'provinsi.name'];
 
     public function provinsi()
     {
