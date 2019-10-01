@@ -4,6 +4,10 @@ namespace Laravolt\Indonesia\Seeds;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Laravolt\Indonesia\Models\Kabupaten;
+use Laravolt\Indonesia\Models\Kecamatan;
+use Laravolt\Indonesia\Models\Kelurahan;
+use Laravolt\Indonesia\Models\Provinsi;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,7 +18,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->clear_data();
+        $this->reset();
 
         $this->call(ProvincesSeeder::class);
         $this->call(CitiesSeeder::class);
@@ -22,11 +26,16 @@ class DatabaseSeeder extends Seeder
         $this->call(VillagesSeeder::class);
     }
 
-    function clear_data(){
-        DB::table(config('laravolt.indonesia.table_prefix') . 'villages')->delete();
-        DB::table(config('laravolt.indonesia.table_prefix') . 'districts')->delete();
-        DB::table(config('laravolt.indonesia.table_prefix') . 'cities')->delete();
-        DB::table(config('laravolt.indonesia.table_prefix') . 'provinces')->delete();
+    function reset()
+    {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+
+        Kelurahan::truncate();
+        Kecamatan::truncate();
+        Kabupaten::truncate();
+        Provinsi::truncate();
+
+        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
 
