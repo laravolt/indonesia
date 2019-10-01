@@ -8,8 +8,6 @@ use Laravolt\Indonesia\Http\Requests\Kabupaten\Store;
 use Laravolt\Indonesia\Http\Requests\Kabupaten\Update;
 use Laravolt\Indonesia\Models\Kabupaten;
 use Laravolt\Indonesia\Tables\KabupatenTable;
-use Laravolt\Suitable\Builder;
-use Laravolt\Suitable\Toolbars\Action;
 
 class KabupatenController extends Controller
 {

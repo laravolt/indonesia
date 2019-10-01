@@ -9,12 +9,11 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
-        $this->app->bind('indonesia', function() {
-            return new IndonesiaService;
+        $this->app->bind('indonesia', function () {
+            return new IndonesiaService();
         });
 
         $this->commands(\Laravolt\Indonesia\Commands\SeedCommand::class);
-
     }
 
     /*
@@ -28,7 +27,7 @@ class ServiceProvider extends BaseServiceProvider
             $this->loadMigrationsFrom(__DIR__.'/migrations');
         } else {
             $this->publishes([
-                __DIR__ . '/migrations' => $this->app->databasePath() . '/migrations'
+                __DIR__.'/migrations' => $this->app->databasePath().'/migrations',
             ], 'migrations');
         }
 

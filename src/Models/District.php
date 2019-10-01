@@ -4,7 +4,7 @@ namespace Laravolt\Indonesia\Models;
 
 class District extends Model
 {
-	protected $table = 'districts';
+    protected $table = 'districts';
 
     protected $casts = [
         'meta' => 'array',
@@ -13,11 +13,11 @@ class District extends Model
     public $timestamps = false;
 
     public function city()
-	{
-	    return $this->belongsTo('Laravolt\Indonesia\Models\City', 'city_id');
-	}
+    {
+        return $this->belongsTo('Laravolt\Indonesia\Models\City', 'city_id');
+    }
 
-	public function villages()
+    public function villages()
     {
         return $this->hasMany('Laravolt\Indonesia\Models\Village', 'district_id');
     }
