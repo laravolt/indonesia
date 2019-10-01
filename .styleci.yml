@@ -1,0 +1,4 @@
+preset: recommended
+
+disabled:
+  - align_double_arrow
