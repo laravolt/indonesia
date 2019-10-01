@@ -4,23 +4,22 @@ namespace Laravolt\Indonesia\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Support\Facades\DB;
 
-class SeedCommand extends Command
+class TestSeedCommand extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'laravolt:indonesia:seed';
+    protected $signature = 'laravolt:indonesia:test:seed';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Seed database';
+    protected $description = 'Seed test database';
 
     /**
      * Create a new command instance.
@@ -39,11 +38,7 @@ class SeedCommand extends Command
      */
     public function handle()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
-
         Artisan::call('db:seed', ['--class' => 'Laravolt\Indonesia\Seeds\DatabaseSeeder']);
         $this->info('Seeded: Laravolt\Indonesia\Seeds\IndonesiaSeeder');
-
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }

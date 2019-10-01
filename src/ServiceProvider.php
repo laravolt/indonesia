@@ -14,6 +14,7 @@ class ServiceProvider extends BaseServiceProvider
         });
 
         $this->commands(\Laravolt\Indonesia\Commands\SeedCommand::class);
+        $this->commands(\Laravolt\Indonesia\Commands\TestSeedCommand::class);
 
     }
 

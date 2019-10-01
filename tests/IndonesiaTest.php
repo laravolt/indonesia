@@ -12,7 +12,7 @@ class IndonesiaTest extends TestCase
     /** @test */
     public function it_can_call_indonesia_service()
     {
-        $this->artisan('laravolt:indonesia:seed');
+        $this->artisan('laravolt:indonesia:test:seed');
 
         $this->checkProvinces();
         $this->checkCities();

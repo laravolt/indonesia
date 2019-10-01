@@ -28,14 +28,12 @@ class DatabaseSeeder extends Seeder
 
     function reset()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
 
         Kelurahan::truncate();
         Kecamatan::truncate();
         Kabupaten::truncate();
         Provinsi::truncate();
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
     }
 }
 
