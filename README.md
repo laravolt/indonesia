@@ -1,5 +1,6 @@
 [![StyleCI](https://github.styleci.io/repos/63410706/shield?branch=master)](https://github.styleci.io/repos/63410706)
 [![Build Status](https://travis-ci.org/laravolt/indonesia.svg?branch=master)](https://travis-ci.org/laravolt/indonesia)
+[![Coverage Status](https://coveralls.io/repos/github/laravolt/indonesia/badge.svg?branch=master)](https://coveralls.io/github/laravolt/indonesia?branch=master)
 # LARAVOLT INDONESIA
 
 Package Laravel yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia.
