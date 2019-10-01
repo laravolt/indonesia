@@ -3,7 +3,7 @@
 namespace Laravolt\Indonesia\Seeds;
 
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Schema;
 use Laravolt\Indonesia\Models\Kabupaten;
 use Laravolt\Indonesia\Models\Kecamatan;
 use Laravolt\Indonesia\Models\Kelurahan;
@@ -28,14 +28,14 @@ class DatabaseSeeder extends Seeder
 
     function reset()
     {
-        DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+        Schema::disableForeignKeyConstraints();
 
         Kelurahan::truncate();
         Kecamatan::truncate();
         Kabupaten::truncate();
         Provinsi::truncate();
 
-        DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        Schema::disableForeignKeyConstraints();
     }
 }
 
