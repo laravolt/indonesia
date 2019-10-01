@@ -2,7 +2,6 @@
 
 namespace Laravolt\Indonesia\Test;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 
 class IndonesiaTest extends TestCase

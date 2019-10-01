@@ -8,8 +8,6 @@ use Laravolt\Indonesia\Http\Requests\Provinsi\Store;
 use Laravolt\Indonesia\Http\Requests\Provinsi\Update;
 use Laravolt\Indonesia\Models\Provinsi;
 use Laravolt\Indonesia\Tables\ProvinsiTable;
-use Laravolt\Suitable\Builder;
-use Laravolt\Suitable\Toolbars\Action;
 
 class ProvinsiController extends Controller
 {
