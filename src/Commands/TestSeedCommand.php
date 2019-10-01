@@ -4,6 +4,7 @@ namespace Laravolt\Indonesia\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
+use Illuminate\Support\Facades\DB;
 
 class TestSeedCommand extends Command
 {
@@ -38,7 +39,11 @@ class TestSeedCommand extends Command
      */
     public function handle()
     {
+        DB::raw('PRAGMA foreign_keys=0');
+
         Artisan::call('db:seed', ['--class' => 'Laravolt\Indonesia\Seeds\DatabaseSeeder']);
         $this->info('Seeded: Laravolt\Indonesia\Seeds\IndonesiaSeeder');
+
+        DB::raw('PRAGMA foreign_keys=1');
     }
 }
