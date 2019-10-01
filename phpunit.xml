@@ -7,4 +7,13 @@
             <directory>tests</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+            <exclude>
+                <directory>./src/migrations</directory>
+                <directory>./src/Seeds</directory>
+            </exclude>
+        </whitelist>
+    </filter>
 </phpunit>
