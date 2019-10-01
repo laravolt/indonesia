@@ -2,12 +2,12 @@
 
 namespace Laravolt\Indonesia\Test\Models;
 
+use Illuminate\Database\Eloquent\Collection;
 use Laravolt\Indonesia\Models\City;
-use Laravolt\Indonesia\Test\TestCase;
-use Laravolt\Indonesia\Models\Village;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Province;
-use Illuminate\Database\Eloquent\Collection;
+use Laravolt\Indonesia\Models\Village;
+use Laravolt\Indonesia\Test\TestCase;
 
 class CityTest extends TestCase
 {

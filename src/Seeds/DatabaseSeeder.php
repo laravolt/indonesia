@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VillagesSeeder::class);
     }
 
-    function reset()
+    public function reset()
     {
         Schema::disableForeignKeyConstraints();
 
@@ -38,5 +38,3 @@ class DatabaseSeeder extends Seeder
         Schema::disableForeignKeyConstraints();
     }
 }
-
-
