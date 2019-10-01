@@ -5,6 +5,9 @@ php:
   - 7.2
   - 7.3
 
+before_script:
+  - travis_retry composer update --prefer-dist --no-interaction
+
 script:
   - mkdir -p build/logs
   - vendor/bin/phpunit -c phpunit.xml --coverage-clover build/logs/clover.xml
