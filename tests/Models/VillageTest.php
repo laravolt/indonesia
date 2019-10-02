@@ -62,7 +62,7 @@ class VillageTest extends TestCase
     }
 
     /** @test */
-    public function a_province_can_store_meta_column()
+    public function a_village_can_store_meta_column()
     {
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
         $village = Village::first();
