@@ -3,7 +3,6 @@
 namespace Laravolt\Indonesia\Test\Models;
 
 use Laravolt\Indonesia\Models\District;
-use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\Village;
 use Laravolt\Indonesia\Test\TestCase;
 
