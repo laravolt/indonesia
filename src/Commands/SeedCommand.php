@@ -38,7 +38,7 @@ class SeedCommand extends Command
      */
     public function handle()
     {
-        Artisan::call('db:seed', ['--class' => 'Laravolt\Indonesia\Seeds\DatabaseSeeder']);
+        Artisan::call('db:seed', ['--class' => 'Laravolt\Indonesia\Seeds\DatabaseSeeder', '--force' => true]);
         $this->info('Seeded: Laravolt\Indonesia\Seeds\IndonesiaSeeder');
     }
 }
