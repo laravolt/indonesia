@@ -72,4 +72,14 @@ class CityTest extends TestCase
 
         $this->assertNull($city->logo_path);
     }
+
+    /** @test */
+    public function a_city_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
+        $city = City::first();
+        $city->meta = ['luas_wilayah' => 200.2];
+        $city->save();
+        $this->assertEquals(['luas_wilayah' => 200.2], $city->meta);
+    }
 }

@@ -3,6 +3,7 @@
 namespace Laravolt\Indonesia\Test\Models;
 
 use Laravolt\Indonesia\Models\District;
+use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\Village;
 use Laravolt\Indonesia\Test\TestCase;
 
@@ -59,5 +60,15 @@ class VillageTest extends TestCase
         $village = Village::first();
 
         $this->assertEquals('ACEH', $village->province_name);
+    }
+
+    /** @test */
+    public function a_province_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+        $village = Village::first();
+        $village->meta = ['luas_wilayah' => 200.2];
+        $village->save();
+        $this->assertEquals(['luas_wilayah' => 200.2], $village->meta);
     }
 }
