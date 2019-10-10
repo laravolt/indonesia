@@ -60,4 +60,14 @@ class VillageTest extends TestCase
 
         $this->assertEquals('ACEH', $village->province_name);
     }
+
+    /** @test */
+    public function a_village_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+        $village = Village::first();
+        $village->meta = ['luas_wilayah' => 200.2];
+        $village->save();
+        $this->assertEquals(['luas_wilayah' => 200.2], $village->meta);
+    }
 }

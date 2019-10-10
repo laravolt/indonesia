@@ -50,4 +50,14 @@ class ProvinceTest extends TestCase
 
         $this->assertNull($province->logo_path);
     }
+
+    /** @test */
+    public function a_province_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
+        $province = Province::first();
+        $province->meta = ['luas_wilayah' => 200.2];
+        $province->save();
+        $this->assertEquals(['luas_wilayah' => 200.2], $province->meta);
+    }
 }

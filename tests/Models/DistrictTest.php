@@ -61,4 +61,14 @@ class DistrictTest extends TestCase
 
         $this->assertEquals('ACEH', $district->province_name);
     }
+
+    /** @test */
+    public function a_district_can_store_meta_column()
+    {
+        $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+        $district = District::first();
+        $district->meta = ['luas_wilayah' => 200.2];
+        $district->save();
+        $this->assertEquals(['luas_wilayah' => 200.2], $district->meta);
+    }
 }
