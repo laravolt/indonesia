@@ -17,7 +17,7 @@ class Provinsi extends Province
     public function getAddressAttribute()
     {
         return sprintf(
-            "%s, Indonesia",
+            '%s, Indonesia',
             $this->name
         );
     }

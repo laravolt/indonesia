@@ -16,6 +16,7 @@ class ProvincesSeeder extends Seeder
         $data = array_map(function ($arr) {
             $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
             unset($arr['lat'], $arr['long']);
+
             return $arr + ['created_at' => now(), 'updated_at' => now()];
         }, $data);
 
