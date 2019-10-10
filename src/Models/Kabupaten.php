@@ -20,4 +20,13 @@ class Kabupaten extends City
     {
         return $this->belongsTo(Provinsi::class, 'province_id');
     }
+
+    public function getAddressAttribute()
+    {
+        return sprintf(
+            "%s, %s, Indonesia",
+            $this->name,
+            $this->provinsi->name
+        );
+    }
 }

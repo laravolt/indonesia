@@ -20,4 +20,15 @@ class Kelurahan extends Village
     {
         return $this->belongsTo(Kecamatan::class, 'district_id');
     }
+
+    public function getAddressAttribute()
+    {
+        return sprintf(
+            "%s, %s, %s, %s, Indonesia",
+            $this->name,
+            $this->kecamatan->name,
+            $this->kecamatan->kabupaten->name,
+            $this->kecamatan->kabupaten->provinsi->name
+        );
+    }
 }
