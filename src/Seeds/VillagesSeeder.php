@@ -13,8 +13,16 @@ class VillagesSeeder extends Seeder
         $csv = new CsvtoArray();
         $resourceFiles = File::allFiles(__DIR__.'/../../resources/csv/villages');
         foreach ($resourceFiles as $file) {
-            $header = ['id', 'district_id', 'name'];
+            $header = ['id', 'district_id', 'name', 'lat', 'long'];
             $data = $csv->csv_to_array($file->getRealPath(), $header);
+
+            $data = array_map(function ($arr) {
+                $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
+                unset($arr['lat'], $arr['long']);
+
+                return $arr + ['created_at' => now(), 'updated_at' => now()];
+            }, $data);
+
             $collection = collect($data);
             foreach ($collection->chunk(50) as $chunk) {
                 DB::table(config('laravolt.indonesia.table_prefix').'villages')->insert($chunk->toArray());

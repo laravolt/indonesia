@@ -9,12 +9,15 @@ class DistrictsSeeder extends Seeder
 {
     public function run()
     {
-        $Csv = new CsvtoArray();
+        $csv = new CsvtoArray();
         $file = __DIR__.'/../../resources/csv/districts.csv';
-        $header = ['id', 'city_id', 'name'];
-        $data = $Csv->csv_to_array($file, $header);
+        $header = ['id', 'city_id', 'name', 'lat', 'long'];
+        $data = $csv->csv_to_array($file, $header);
         $data = array_map(function ($arr) {
-            return $arr + ['created_at' => now()];
+            $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
+            unset($arr['lat'], $arr['long']);
+
+            return $arr + ['created_at' => now(), 'updated_at' => now()];
         }, $data);
 
         $collection = collect($data);

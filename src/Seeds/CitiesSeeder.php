@@ -11,10 +11,13 @@ class CitiesSeeder extends Seeder
     {
         $Csv = new CsvtoArray();
         $file = __DIR__.'/../../resources/csv/cities.csv';
-        $header = ['id', 'province_id', 'name'];
+        $header = ['id', 'province_id', 'name', 'lat', 'long'];
         $data = $Csv->csv_to_array($file, $header);
         $data = array_map(function ($arr) {
-            return $arr + ['created_at' => now()];
+            $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
+            unset($arr['lat'], $arr['long']);
+
+            return $arr + ['created_at' => now(), 'updated_at' => now()];
         }, $data);
 
         $collection = collect($data);
