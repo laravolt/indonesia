@@ -24,7 +24,7 @@ class Kelurahan extends Village
     public function getAddressAttribute()
     {
         return sprintf(
-            "%s, %s, %s, %s, Indonesia",
+            '%s, %s, %s, %s, Indonesia',
             $this->name,
             $this->kecamatan->name,
             $this->kecamatan->kabupaten->name,

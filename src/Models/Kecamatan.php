@@ -24,7 +24,7 @@ class Kecamatan extends District
     public function getAddressAttribute()
     {
         return sprintf(
-            "%s, %s, %s, Indonesia",
+            '%s, %s, %s, Indonesia',
             $this->name,
             $this->kabupaten->name,
             $this->kabupaten->provinsi->name

@@ -24,7 +24,7 @@ class Kabupaten extends City
     public function getAddressAttribute()
     {
         return sprintf(
-            "%s, %s, Indonesia",
+            '%s, %s, Indonesia',
             $this->name,
             $this->provinsi->name
         );
