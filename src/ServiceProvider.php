@@ -4,6 +4,8 @@ namespace Laravolt\Indonesia;
 
 use Illuminate\Foundation\Application;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Laravolt\Indonesia\Commands\SeedCommand;
+use Laravolt\Indonesia\Commands\SyncCoordinateCommand;
 
 class ServiceProvider extends BaseServiceProvider
 {
@@ -13,7 +15,10 @@ class ServiceProvider extends BaseServiceProvider
             return new IndonesiaService();
         });
 
-        $this->commands(\Laravolt\Indonesia\Commands\SeedCommand::class);
+        $this->commands([
+            SeedCommand::class,
+            SyncCoordinateCommand::class,
+        ]);
     }
 
     /*

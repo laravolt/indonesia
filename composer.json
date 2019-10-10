@@ -1,7 +1,17 @@
 {
     "name": "laravolt/indonesia",
     "description": "Package Laravel yang berisi data Provinsi, Kabupaten/Kota, Kecamatan, dan Keluarahan/Desa di seluruh Indonesia.",
-    "keywords": ["laravel", "laravolt", "indonesia", "provinsi", "kabupaten", "kota", "kecamatan", "kelurahan", "desa"],
+    "keywords": [
+        "laravel",
+        "laravolt",
+        "indonesia",
+        "provinsi",
+        "kabupaten",
+        "kota",
+        "kecamatan",
+        "kelurahan",
+        "desa"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -36,19 +46,20 @@
     },
     "suggest": {
         "laravolt/suitable": "Required if you want to access editor panel",
-        "laravolt/ui": "Required if you want to access editor panel"
+        "laravolt/ui": "Required if you want to access editor panel",
+        "spatie/geocoder": "Synchronize latitude longitude data directly using Google's Geocoding Service"
     },
-   "extra": {
+    "extra": {
         "branch-alias": {
             "dev-master": "1.0-dev"
         },
-       "laravel": {
-           "providers": [
-               "Laravolt\\Indonesia\\ServiceProvider"
-           ],
-           "aliases": {
-               "Indonesia" : "Laravolt\\Indonesia\\Facade"
-           }
-       }
-   }
+        "laravel": {
+            "providers": [
+                "Laravolt\\Indonesia\\ServiceProvider"
+            ],
+            "aliases": {
+                "Indonesia": "Laravolt\\Indonesia\\Facade"
+            }
+        }
+    }
 }
