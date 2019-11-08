@@ -49,17 +49,15 @@ $app->register(Laravolt\Indonesia\ServiceProvider::class);
 class_alias(Laravolt\Indonesia\Facade::class, 'Indonesia');
 ```
 
-Untuk mengatur prefix tabel, buat file `config/indonesia.php`, lalu copy kode berikut (ganti `indonesia_` dengan nilai prefix tabel yang diinginkan),
+Untuk mengatur prefix tabel, buat file `config/laravolt.php`, lalu copy kode berikut (ganti `indonesia_` dengan nilai prefix tabel yang diinginkan),
 ```
 <?php
 
 return [
-	'table_prefix' => 'indonesia_',
+    'indonesia' => [
+        'table_prefix' => 'indonesia_',
+    ],
 ];
-```
-Lalu daftarkan konfigurasi dalam `bootstrap/app.php` dengan menambahkan kode berikut.
-```
-$app->configure('indonesia');
 ```
 
 ### Publish Migration (Hanya Untuk Laravel/Lumen 5.2)
