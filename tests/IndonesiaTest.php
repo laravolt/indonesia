@@ -17,6 +17,7 @@ class IndonesiaTest extends TestCase
         $this->checkCities();
         $this->checkDistricts();
         $this->checkVillages();
+        $this->search();
     }
 
     public function checkProvinces()
@@ -172,5 +173,12 @@ class IndonesiaTest extends TestCase
         $this->assertNotEmpty($result->district);
         $this->assertNotEmpty($result->district->city);
         $this->assertNotEmpty($result->district->city->province);
+    }
+
+    public function search()
+    {
+        $results = \Indonesia::search('BATAM')->all();
+
+        $this->assertNotEmpty($results);
     }
 }

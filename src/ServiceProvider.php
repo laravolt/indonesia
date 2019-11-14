@@ -2,8 +2,11 @@
 
 namespace Laravolt\Indonesia;
 
+use Illuminate\Database\Eloquent\Builder as EloquentBuilder;
 use Illuminate\Foundation\Application;
+use Illuminate\Support\Arr;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use Illuminate\Support\Str;
 use Laravolt\Indonesia\Commands\SeedCommand;
 use Laravolt\Indonesia\Commands\SyncCoordinateCommand;
 
@@ -57,6 +60,8 @@ class ServiceProvider extends BaseServiceProvider
         if ($this->app->bound('laravolt.acl')) {
             $this->app['laravolt.acl']->registerPermission(Permission::toArray());
         }
+
+        $this->registerMacro();
     }
 
     protected function registerMenu()
@@ -79,6 +84,35 @@ class ServiceProvider extends BaseServiceProvider
                 ->data('icon', 'map pin')
                 ->data('permission', Permission::MANAGE_INDONESIA)
                 ->active(config('laravolt.indonesia.route.prefix').'/kelurahan/*');
+        }
+    }
+
+    protected function registerMacro()
+    {
+        if (!EloquentBuilder::hasGlobalMacro('whereLike')) {
+            EloquentBuilder::macro('whereLike', function ($attributes, string $searchTerm) {
+                $this->where(function (EloquentBuilder $query) use ($attributes, $searchTerm) {
+                    foreach (Arr::wrap($attributes) as $attribute) {
+                        $query->when(
+                            Str::contains($attribute, '.'),
+                            function (EloquentBuilder $query) use ($attribute, $searchTerm) {
+                                [$relationName, $relationAttribute] = explode('.', $attribute);
+
+                                $query->orWhereHas($relationName,
+                                    function (EloquentBuilder $query) use ($relationAttribute, $searchTerm) {
+                                        $query->where($relationAttribute, 'LIKE', "%{$searchTerm}%");
+                                    });
+                            },
+                            function (EloquentBuilder $query) use ($attribute, $searchTerm) {
+                                $table = $query->getModel()->getTable();
+                                $query->orWhere(sprintf('%s.%s', $table, $attribute), 'LIKE', "%{$searchTerm}%");
+                            }
+                        );
+                    }
+                });
+
+                return $this;
+            });
         }
     }
 
