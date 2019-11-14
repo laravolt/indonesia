@@ -89,31 +89,29 @@ class ServiceProvider extends BaseServiceProvider
 
     protected function registerMacro()
     {
-        if (!EloquentBuilder::hasGlobalMacro('whereLike')) {
-            EloquentBuilder::macro('whereLike', function ($attributes, string $searchTerm) {
-                $this->where(function (EloquentBuilder $query) use ($attributes, $searchTerm) {
-                    foreach (Arr::wrap($attributes) as $attribute) {
-                        $query->when(
-                            Str::contains($attribute, '.'),
-                            function (EloquentBuilder $query) use ($attribute, $searchTerm) {
-                                [$relationName, $relationAttribute] = explode('.', $attribute);
+        EloquentBuilder::macro('whereLike', function ($attributes, string $searchTerm) {
+            $this->where(function (EloquentBuilder $query) use ($attributes, $searchTerm) {
+                foreach (Arr::wrap($attributes) as $attribute) {
+                    $query->when(
+                        Str::contains($attribute, '.'),
+                        function (EloquentBuilder $query) use ($attribute, $searchTerm) {
+                            [$relationName, $relationAttribute] = explode('.', $attribute);
 
-                                $query->orWhereHas($relationName,
-                                    function (EloquentBuilder $query) use ($relationAttribute, $searchTerm) {
-                                        $query->where($relationAttribute, 'LIKE', "%{$searchTerm}%");
-                                    });
-                            },
-                            function (EloquentBuilder $query) use ($attribute, $searchTerm) {
-                                $table = $query->getModel()->getTable();
-                                $query->orWhere(sprintf('%s.%s', $table, $attribute), 'LIKE', "%{$searchTerm}%");
-                            }
-                        );
-                    }
-                });
-
-                return $this;
+                            $query->orWhereHas($relationName,
+                                function (EloquentBuilder $query) use ($relationAttribute, $searchTerm) {
+                                    $query->where($relationAttribute, 'LIKE', "%{$searchTerm}%");
+                                });
+                        },
+                        function (EloquentBuilder $query) use ($attribute, $searchTerm) {
+                            $table = $query->getModel()->getTable();
+                            $query->orWhere(sprintf('%s.%s', $table, $attribute), 'LIKE', "%{$searchTerm}%");
+                        }
+                    );
+                }
             });
-        }
+
+            return $this;
+        });
     }
 
     protected function registerRoutes()
