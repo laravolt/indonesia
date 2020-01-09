@@ -2,8 +2,8 @@
 
 namespace Laravolt\Indonesia\Models;
 
-use Laravolt\Suitable\AutoFilter;
-use Laravolt\Suitable\AutoSort;
+use Laravolt\Support\Traits\AutoFilter;
+use Laravolt\Support\Traits\AutoSort;
 
 class Kelurahan extends Village
 {

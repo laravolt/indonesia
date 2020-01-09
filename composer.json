@@ -15,6 +15,10 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Bayu Hendra Winata",
+            "email": "bayu.hendra@javan.co.id"
+        },
+        {
             "name": "Akbar Adhatama",
             "email": "am.adhatama@gmail.com"
         },
@@ -34,19 +38,19 @@
         }
     },
     "require": {
-        "php": ">=7.1.3",
-        "illuminate/support": "5.7.*|5.8.*|6.*",
-        "laravolt/suitable": "^3.5",
+        "php": ">=7.2",
+        "illuminate/support": "^6.0",
+        "laravolt/support": "^2.0",
         "bensampo/laravel-enum": "^1.26"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.5||^8.0",
+        "phpunit/phpunit": "^8.0",
         "php-coveralls/php-coveralls": "^2.1",
-        "orchestra/testbench": "^3.8"
+        "orchestra/testbench": "^3.8",
+        "laravolt/suitable": "^3.6"
     },
     "suggest": {
         "laravolt/suitable": "Required if you want to access editor panel",
-        "laravolt/ui": "Required if you want to access editor panel",
         "spatie/geocoder": "Synchronize latitude longitude data directly using Google's Geocoding Service"
     },
     "extra": {
