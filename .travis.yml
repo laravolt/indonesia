@@ -3,10 +3,9 @@ language: php
 php:
   - 7.2
   - 7.3
-  - 7.4
 
 before_script:
-  - travis_retry composer update --no-dev --prefer-dist --no-interaction
+  - travis_retry composer update --prefer-dist --no-interaction
 
 script:
   - mkdir -p build/logs
