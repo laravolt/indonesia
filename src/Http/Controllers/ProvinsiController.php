@@ -6,7 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Routing\Controller;
 use Laravolt\Indonesia\Http\Requests\Provinsi\Store;
 use Laravolt\Indonesia\Http\Requests\Provinsi\Update;
-use Laravolt\Indonesia\Models\Provinsi;
+use Laravolt\Indonesia\Models\Extended\Provinsi;
 use Laravolt\Indonesia\Tables\ProvinsiTable;
 
 class ProvinsiController extends Controller

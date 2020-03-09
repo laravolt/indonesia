@@ -6,7 +6,7 @@ use Illuminate\Database\QueryException;
 use Illuminate\Routing\Controller;
 use Laravolt\Indonesia\Http\Requests\Kelurahan\Store;
 use Laravolt\Indonesia\Http\Requests\Kelurahan\Update;
-use Laravolt\Indonesia\Models\Kelurahan;
+use Laravolt\Indonesia\Models\Extended\Kelurahan;
 use Laravolt\Indonesia\Tables\KelurahanTable;
 
 class KelurahanController extends Controller

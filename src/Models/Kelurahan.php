@@ -2,14 +2,8 @@
 
 namespace Laravolt\Indonesia\Models;
 
-use Laravolt\Support\Traits\AutoFilter;
-use Laravolt\Support\Traits\AutoSort;
-
 class Kelurahan extends Village
 {
-    use AutoFilter;
-    use AutoSort;
-
     protected $table = 'villages';
 
     protected $guarded = [];
