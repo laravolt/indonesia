@@ -43,7 +43,8 @@ class ServiceProvider extends BaseServiceProvider
             $this->publishes(
                 [
                     __DIR__.'/../config/indonesia.php' => config_path('laravolt/indonesia.php'),
-                ], 'config'
+                ],
+                'config'
             );
         }
 
@@ -97,10 +98,12 @@ class ServiceProvider extends BaseServiceProvider
                         function (EloquentBuilder $query) use ($attribute, $searchTerm) {
                             [$relationName, $relationAttribute] = explode('.', $attribute);
 
-                            $query->orWhereHas($relationName,
+                            $query->orWhereHas(
+                                $relationName,
                                 function (EloquentBuilder $query) use ($relationAttribute, $searchTerm) {
                                     $query->where($relationAttribute, 'LIKE', "%{$searchTerm}%");
-                                });
+                                }
+                            );
                         },
                         function (EloquentBuilder $query) use ($attribute, $searchTerm) {
                             $table = $query->getModel()->getTable();
