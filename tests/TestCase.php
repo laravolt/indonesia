@@ -8,9 +8,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         parent::setUp();
 
-        $this->loadMigrationsFrom([
-            '--realpath' => realpath(__DIR__.'/../src/migrations'),
-        ]);
+        $this->loadMigrationsFrom(__DIR__.'/../src/migrations');
     }
 
     protected function getPackageProviders($app)
