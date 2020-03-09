@@ -16,7 +16,7 @@ class IndonesiaTest extends TestCase
         $this->checkProvinces();
         $this->checkCities();
         $this->checkDistricts();
-        $this->checkVillages();
+        // $this->checkVillages();
         $this->search();
     }
 
