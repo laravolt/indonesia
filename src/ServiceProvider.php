@@ -31,12 +31,11 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->mergeConfigFrom(__DIR__.'/../config/indonesia.php', 'laravolt.indonesia');
 
-        if ($this->isLaravel53AndUp() || $this->isLumen()) {
-            $this->loadMigrationsFrom(__DIR__.'/migrations');
+        $databasePath = __DIR__.'/../database/migrations';
+        if ($this->isLumen()) {
+            $this->loadMigrationsFrom($databasePath);
         } else {
-            $this->publishes([
-                __DIR__.'/migrations' => $this->app->databasePath().'/migrations',
-            ], 'migrations');
+            $this->publishes([$databasePath => database_path('migrations')], 'migrations');
         }
 
         if (class_exists(Application::class)) {
@@ -121,11 +120,6 @@ class ServiceProvider extends BaseServiceProvider
     {
         $router = $this->app['router'];
         require __DIR__.'/../routes/web.php';
-    }
-
-    protected function isLaravel53AndUp()
-    {
-        return version_compare($this->app->version(), '5.3.0', '>=');
     }
 
     protected function isLaravel()
