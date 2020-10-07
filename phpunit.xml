@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <phpunit
-        colors="true"
-        bootstrap="vendor/autoload.php">
-    <testsuites>
-        <testsuite name="Laravolt Indonesia Test Suite">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
-    <filter>
-        <whitelist processUncoveredFilesFromWhitelist="true">
-            <directory suffix=".php">./src</directory>
-            <exclude>
-                <directory>./src/migrations</directory>
-                <directory>./src/Seeds</directory>
-            </exclude>
-        </whitelist>
-    </filter>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  colors="true"
+  bootstrap="vendor/autoload.php"
+  xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage processUncoveredFiles="true">
+    <include>
+      <directory suffix=".php">./src</directory>
+    </include>
+    <exclude>
+      <directory>./src/migrations</directory>
+      <directory>./src/Seeds</directory>
+    </exclude>
+  </coverage>
+  <testsuites>
+    <testsuite name="Laravolt Indonesia Test Suite">
+      <directory>tests</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
