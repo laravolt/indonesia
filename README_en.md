@@ -30,7 +30,7 @@ Add Facade and Service Provider in `config/app.php`
 ```
 
 ### Publish Migration (Only for Laravel 5.2)
-If you are using Laravel versi 5.3+, you can ignore this step.
+If you are using Laravel version 5.3+, you can ignore this step.
 ```
 php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
 ```
@@ -89,7 +89,7 @@ Province Object {
 }
 */
 
-Indonesia::findProvince(11, ['cities', 'districts.villages'])
+Indonesia::findProvince(11, ['cities', 'districts.villages']);
 
 /*
 Will return
