@@ -73,7 +73,7 @@ Untuk Laravel:
 ```
 php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
 ```
-Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/src/migrations` atau [Migrations](src/migrations/)
+Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/database/migrations` atau [Migrations](database/migrations/)
 
 ### Jalankan Migration
 ```
@@ -129,7 +129,7 @@ Province Object {
 }
 */
 
-Indonesia::findProvince(11, ['cities', 'districts.villages'])
+Indonesia::findProvince(11, ['cities', 'districts.villages']);
 
 /*
 Will return
