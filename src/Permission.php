@@ -2,9 +2,12 @@
 
 namespace Laravolt\Indonesia;
 
-use BenSampo\Enum\Enum;
-
-final class Permission extends Enum
+final class Permission
 {
     const MANAGE_INDONESIA = 'indonesia::manage-all';
+
+    static function toArray()
+    {
+        return [self::MANAGE_INDONESIA];
+    }
 }
