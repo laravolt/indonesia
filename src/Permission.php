@@ -6,7 +6,7 @@ final class Permission
 {
     const MANAGE_INDONESIA = 'indonesia::manage-all';
 
-    static function toArray()
+    public static function toArray()
     {
         return [self::MANAGE_INDONESIA];
     }
