@@ -13,19 +13,21 @@ class VillageTest extends TestCase
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+
         $village = Village::first();
 
         $this->assertInstanceOf(District::class, $village->district);
-        $this->assertEquals($village->district_id, $village->district->id);
+        $this->assertEquals($village->district_code, $village->district->code);
     }
 
     /** @test */
     public function a_village_has_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+
         $village = Village::first();
 
-        $this->assertEquals('LATIUNG', $village->name);
+        $this->assertEquals('KEUDE BAKONGAN', $village->name);
     }
 
     /** @test */
@@ -33,9 +35,10 @@ class VillageTest extends TestCase
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+
         $village = Village::first();
 
-        $this->assertEquals('TEUPAH SELATAN', $village->district_name);
+        $this->assertEquals('BAKONGAN', $village->district_name);
     }
 
     /** @test */
@@ -44,9 +47,10 @@ class VillageTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+
         $village = Village::first();
 
-        $this->assertEquals('KABUPATEN SIMEULUE', $village->city_name);
+        $this->assertEquals('KABUPATEN ACEH SELATAN', $village->city_name);
     }
 
     /** @test */
@@ -56,6 +60,7 @@ class VillageTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+
         $village = Village::first();
 
         $this->assertEquals('ACEH', $village->province_name);
@@ -65,9 +70,11 @@ class VillageTest extends TestCase
     public function a_village_can_store_meta_column()
     {
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+
         $village = Village::first();
         $village->meta = ['luas_wilayah' => 200.2];
         $village->save();
+
         $this->assertEquals(['luas_wilayah' => 200.2], $village->meta);
     }
 }
