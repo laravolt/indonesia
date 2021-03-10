@@ -14,7 +14,7 @@ class Village extends Model
 
     public function district()
     {
-        return $this->belongsTo('Laravolt\Indonesia\Models\District', 'district_id');
+        return $this->belongsTo('Laravolt\Indonesia\Models\District', 'district_code', 'code');
     }
 
     public function getDistrictNameAttribute()

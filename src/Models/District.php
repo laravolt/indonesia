@@ -14,12 +14,12 @@ class District extends Model
 
     public function city()
     {
-        return $this->belongsTo('Laravolt\Indonesia\Models\City', 'city_id');
+        return $this->belongsTo('Laravolt\Indonesia\Models\City', 'city_code', 'code');
     }
 
     public function villages()
     {
-        return $this->hasMany('Laravolt\Indonesia\Models\Village', 'district_id');
+        return $this->hasMany('Laravolt\Indonesia\Models\Village', 'district_code', 'code');
     }
 
     public function getCityNameAttribute()

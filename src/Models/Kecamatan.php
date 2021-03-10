@@ -8,11 +8,11 @@ class Kecamatan extends District
 
     protected $guarded = [];
 
-    protected $searchableColumns = ['id', 'name', 'kabupaten.name'];
+    protected $searchableColumns = ['code', 'name', 'kabupaten.name'];
 
     public function kabupaten()
     {
-        return $this->belongsTo(Kabupaten::class, 'city_id');
+        return $this->belongsTo(Kabupaten::class, 'city_code');
     }
 
     public function getAddressAttribute()
