@@ -6,7 +6,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
 {
     protected $keyType = 'string';
 
-    protected $searchableColumns = ['id', 'name'];
+    protected $searchableColumns = ['code', 'name'];
 
     public function __construct(array $attributes = [])
     {

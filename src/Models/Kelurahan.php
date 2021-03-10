@@ -8,11 +8,11 @@ class Kelurahan extends Village
 
     protected $guarded = [];
 
-    protected $searchableColumns = ['id', 'name', 'kecamatan.name'];
+    protected $searchableColumns = ['code', 'name', 'kecamatan.name'];
 
     public function kecamatan()
     {
-        return $this->belongsTo(Kecamatan::class, 'district_id');
+        return $this->belongsTo(Kecamatan::class, 'district_code');
     }
 
     public function getAddressAttribute()

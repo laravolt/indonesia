@@ -8,11 +8,11 @@ class Kabupaten extends City
 
     protected $guarded = [];
 
-    protected $searchableColumns = ['id', 'name', 'provinsi.name'];
+    protected $searchableColumns = ['code', 'name', 'provinsi.name'];
 
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'province_id');
+        return $this->belongsTo(Provinsi::class, 'province_code');
     }
 
     public function getAddressAttribute()
