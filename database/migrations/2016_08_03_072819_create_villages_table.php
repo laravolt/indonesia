@@ -14,15 +14,15 @@ class CreateVillagesTable extends Migration
     public function up()
     {
         Schema::create(config('laravolt.indonesia.table_prefix').'villages', function (Blueprint $table) {
-            $table->char('id', 10);
-            $table->char('district_id', 7);
+            $table->bigIncrements('id');
+            $table->char('code', 10)->unique();
+            $table->char('district_code', 7);
             $table->string('name', 255);
             $table->text('meta')->nullable();
-            $table->primary('id');
             $table->timestamps();
 
-            $table->foreign('district_id')
-                ->references('id')
+            $table->foreign('district_code')
+                ->references('code')
                 ->on(config('laravolt.indonesia.table_prefix').'districts')
                 ->onUpdate('cascade')->onDelete('restrict');
         });
