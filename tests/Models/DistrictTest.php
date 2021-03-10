@@ -15,10 +15,11 @@ class DistrictTest extends TestCase
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+
         $district = District::first();
 
         $this->assertInstanceOf(City::class, $district->city);
-        $this->assertEquals($district->city_id, $district->city->id);
+        $this->assertEquals($district->city_code, $district->city->code);
     }
 
     /** @test */
@@ -26,6 +27,7 @@ class DistrictTest extends TestCase
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\VillagesSeeder');
+
         $district = District::first();
 
         $this->assertInstanceOf(Collection::class, $district->villages);
@@ -36,9 +38,10 @@ class DistrictTest extends TestCase
     public function a_district_has_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+
         $district = District::first();
 
-        $this->assertEquals('TEUPAH SELATAN', $district->name);
+        $this->assertEquals('BAKONGAN', $district->name);
     }
 
     /** @test */
@@ -46,9 +49,10 @@ class DistrictTest extends TestCase
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+
         $district = District::first();
 
-        $this->assertEquals('KABUPATEN SIMEULUE', $district->city_name);
+        $this->assertEquals('KABUPATEN ACEH SELATAN', $district->city_name);
     }
 
     /** @test */
@@ -57,6 +61,7 @@ class DistrictTest extends TestCase
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+
         $district = District::first();
 
         $this->assertEquals('ACEH', $district->province_name);
@@ -66,9 +71,11 @@ class DistrictTest extends TestCase
     public function a_district_can_store_meta_column()
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
+
         $district = District::first();
         $district->meta = ['luas_wilayah' => 200.2];
         $district->save();
+
         $this->assertEquals(['luas_wilayah' => 200.2], $district->meta);
     }
 }
