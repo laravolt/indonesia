@@ -13,7 +13,7 @@ class DistrictsSeeder extends Seeder
         $now = Carbon::now();
         $csv = new CsvtoArray();
         $file = __DIR__.'/../../resources/csv/districts.csv';
-        $header = ['id', 'city_id', 'name', 'lat', 'long'];
+        $header = ['code', 'city_code', 'name', 'lat', 'long'];
         $data = $csv->csv_to_array($file, $header);
         $data = array_map(function ($arr) use ($now) {
             $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
