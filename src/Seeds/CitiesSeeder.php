@@ -13,11 +13,15 @@ class CitiesSeeder extends Seeder
         $now = Carbon::now();
         $Csv = new CsvtoArray();
         $file = __DIR__.'/../../resources/csv/cities.csv';
-        $header = ['code', 'province_code', 'name', 'lat', 'long'];
+        $header = ['code', 'province_code', 'name', 'lat', 'long', 'postal'];
         $data = $Csv->csv_to_array($file, $header);
         $data = array_map(function ($arr) use ($now) {
-            $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
-            unset($arr['lat'], $arr['long']);
+            $arr['meta'] = json_encode([
+                'lat' => $arr['lat'],
+                'long' => $arr['long'],
+                'postal' => $arr['postal'],
+            ]);
+            unset($arr['lat'], $arr['long'], $arr['postal']);
 
             return $arr + ['created_at' => $now, 'updated_at' => $now];
         }, $data);
