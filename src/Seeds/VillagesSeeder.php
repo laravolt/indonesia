@@ -14,13 +14,18 @@ class VillagesSeeder extends Seeder
         $now = Carbon::now();
         $csv = new CsvtoArray();
         $resourceFiles = File::allFiles(__DIR__.'/../../resources/csv/villages');
+
         foreach ($resourceFiles as $file) {
-            $header = ['code', 'district_code', 'name', 'lat', 'long'];
+            $header = ['code', 'district_code', 'name', 'lat', 'long', 'postal'];
             $data = $csv->csv_to_array($file->getRealPath(), $header);
 
             $data = array_map(function ($arr) use ($now) {
-                $arr['meta'] = json_encode(['lat' => $arr['lat'], 'long' => $arr['long']]);
-                unset($arr['lat'], $arr['long']);
+                $arr['meta'] = json_encode([
+                    'lat' => $arr['lat'],
+                    'long' => $arr['long'],
+                    'postal' => $arr['postal'],
+                ]);
+                unset($arr['lat'], $arr['long'], $arr['postal']);
 
                 return $arr + ['created_at' => $now, 'updated_at' => $now];
             }, $data);
