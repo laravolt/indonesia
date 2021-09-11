@@ -27,7 +27,7 @@ class VillagesSeeder extends Seeder
 
             $collection = collect($data);
             foreach ($collection->chunk(50) as $chunk) {
-                DB::table(config('laravolt.indonesia.table_prefix').'villages')->insert($chunk->toArray());
+                DB::table(config('laravolt.indonesia.table_prefix').'villages')->insertOrIgnore($chunk->toArray());
             }
         }
     }
