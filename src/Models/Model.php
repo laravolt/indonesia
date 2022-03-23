@@ -8,6 +8,14 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     protected $searchableColumns = ['code', 'name'];
 
+    protected $casts = [
+        'meta' => 'array',
+    ];
+
+    protected $guarded = [];
+
+    public $timestamps = false;
+
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);

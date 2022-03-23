@@ -4,19 +4,15 @@ namespace Laravolt\Indonesia\Models;
 
 class Kecamatan extends District
 {
-    protected $table = 'districts';
-
-    protected $guarded = [];
-
-    protected $searchableColumns = ['code', 'name', 'kabupaten.name'];
-
     public function kabupaten()
     {
-        return $this->belongsTo(Kabupaten::class, 'city_code');
+        return $this->city();
     }
 
     public function getAddressAttribute()
     {
+        $this->load('kabupaten.provinsi');
+
         return sprintf(
             '%s, %s, %s, Indonesia',
             $this->name,

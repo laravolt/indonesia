@@ -4,19 +4,15 @@ namespace Laravolt\Indonesia\Models;
 
 class Kabupaten extends City
 {
-    protected $table = 'cities';
-
-    protected $guarded = [];
-
-    protected $searchableColumns = ['code', 'name', 'provinsi.name'];
-
     public function provinsi()
     {
-        return $this->belongsTo(Provinsi::class, 'province_code');
+        return $this->province();
     }
 
     public function getAddressAttribute()
     {
+        $this->load('provinsi');
+
         return sprintf(
             '%s, %s, Indonesia',
             $this->name,
