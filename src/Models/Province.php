@@ -6,12 +6,6 @@ class Province extends Model
 {
     protected $table = 'provinces';
 
-    protected $casts = [
-        'meta' => 'array',
-    ];
-
-    public $timestamps = false;
-
     public function cities()
     {
         return $this->hasMany('Laravolt\Indonesia\Models\City', 'province_code', 'code');
