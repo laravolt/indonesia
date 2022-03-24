@@ -2,13 +2,9 @@
 
 namespace Laravolt\Indonesia\Models;
 
+use Laravolt\Indonesia\Models\Traits\AddressTrait;
+
 class Provinsi extends Province
 {
-    public function getAddressAttribute()
-    {
-        return sprintf(
-            '%s, Indonesia',
-            $this->name
-        );
-    }
+    use AddressTrait;
 }

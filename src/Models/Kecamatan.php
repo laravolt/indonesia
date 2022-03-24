@@ -2,22 +2,14 @@
 
 namespace Laravolt\Indonesia\Models;
 
+use Laravolt\Indonesia\Models\Traits\AddressTrait;
+
 class Kecamatan extends District
 {
+    use AddressTrait;
+
     public function kabupaten()
     {
         return $this->city();
-    }
-
-    public function getAddressAttribute()
-    {
-        $this->load('kabupaten.provinsi');
-
-        return sprintf(
-            '%s, %s, %s, Indonesia',
-            $this->name,
-            $this->kabupaten->name,
-            $this->kabupaten->provinsi->name
-        );
     }
 }
