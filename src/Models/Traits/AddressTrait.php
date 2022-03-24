@@ -2,10 +2,8 @@
 
 namespace Laravolt\Indonesia\Models\Traits;
 
-use Laravolt\Indonesia\Models\Province;
-
 /**
- * getAddressAttribute
+ * getAddressAttribute.
  */
 trait AddressTrait
 {
