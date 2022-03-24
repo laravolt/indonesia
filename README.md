@@ -17,7 +17,7 @@ Mulai versi 5.5 ke atas, Laravel sudah support fitur auto discover sehingga tida
 
 Tambahkan Service Provider dan Facade pada `config.app`
 
-```
+```php
 'providers' => [
 
     Laravolt\Indonesia\ServiceProvider::class
@@ -25,7 +25,7 @@ Tambahkan Service Provider dan Facade pada `config.app`
 ]
 ```
 
-```
+```php
 'aliases' => [
 
     'Indonesia' => Laravolt\Indonesia\Facade::class
@@ -35,13 +35,13 @@ Tambahkan Service Provider dan Facade pada `config.app`
 
 ### Daftarkan Service Provider dan Facade untuk Lumen
 Dalam file `bootstrap/app.php`, uncomment baris berikut
-```
+```php
 $app->withFacades();
 $app->withEloquent();
 ```
 
 Dalam file `bootstrap/app.php`, daftarkan service provider dan alias/facade dengan menambahkan kode berokut.
-```
+```php
 $app->register(Laravolt\Indonesia\ServiceProvider::class);
 
 
@@ -50,7 +50,7 @@ class_alias(Laravolt\Indonesia\Facade::class, 'Indonesia');
 ```
 
 Untuk mengatur prefix tabel, buat file `config/laravolt.php`, lalu copy kode berikut (ganti `indonesia_` dengan nilai prefix tabel yang diinginkan),
-```
+```php
 <?php
 
 return [
@@ -60,7 +60,7 @@ return [
 ];
 ```
 Lalu daftarkan konfigurasi dalam `bootstrap/app.php` dengan menambahkan kode berikut.
-```
+```php
 $app->configure('laravolt');
 ```
 
@@ -70,45 +70,79 @@ Untuk selanjutnya, konfigurasi bisa dipanggil dengan cara `config('laravolt.indo
 
 Jika Anda menggunakan Laravel/Lumen versi 5.3 ke atas, abaikan langkah di bawah ini.
 Untuk Laravel:
-```
+```php
 php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
 ```
 Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/database/migrations` atau [Migrations](database/migrations/)
 
 ### Jalankan Migration
-```
+```php
 php artisan migrate
 ```
 
 ### Jalankan Seeder Untuk Mengisi Data Wilayah
-```
+```php
 php artisan laravolt:indonesia:seed
+```
+
+### Untuk menambahkan seedernya ke file `DatabaseSeeder.php` ikuti contoh berikut:
+```php
+namespace Database\Seeders;
+
+use Illuminate\Database\Seeder;
+use Laravolt\Indonesia\Seeds\CitiesSeeder;
+use Laravolt\Indonesia\Seeds\VillagesSeeder;
+use Laravolt\Indonesia\Seeds\DistrictsSeeder;
+use Laravolt\Indonesia\Seeds\ProvincesSeeder;
+
+class DatabaseSeeder extends Seeder
+{
+    /**
+     * Seed the application's database.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $this->call([
+            ProvincesSeeder::class,
+            CitiesSeeder::class,
+            DistrictsSeeder::class,
+            VillagesSeeder::class,
+        ]);
+    }
+}
+
 ```
 
 ## Penggunaan
 
-`\Indonesia::allProvinces()`
-`\Indonesia::paginateProvinces($numRows = 15)`
-`\Indonesia::allCities()`
-`\Indonesia::paginateCities($numRows = 15)`
-`\Indonesia::allDistricts()`
-`\Indonesia::paginateDistricts($numRows = 15)`
-`\Indonesia::allVillages()`
-`\Indonesia::paginateVillages($numRows = 15)`
+```php
+\Indonesia::allProvinces()
+\Indonesia::paginateProvinces($numRows = 15)
+\Indonesia::allCities()
+\Indonesia::paginateCities($numRows = 15)
+\Indonesia::allDistricts()
+\Indonesia::paginateDistricts($numRows = 15)
+\Indonesia::allVillages()
+\Indonesia::paginateVillages($numRows = 15)
+```
 
 ---
 
-`Indonesia::findProvince($provinceId, $with = null)`
-`array $with` : `cities, districts, villages, cities.districts, cities.districts.villages, districts.villages`
+```php
+\Indonesia::findProvince($provinceId, $with = null)
+// array $with : ['cities', 'districts', 'villages', 'cities.districts', 'cities.districts.villages', 'districts.villages']
 
-`Indonesia::findCity($cityId, $with = null)`
-`array $with` : `province, districts, villages, districts.villages`
+\Indonesia::findCity($cityId, $with = null)
+// array $with : ['province', 'districts', 'villages', 'districts.villages']
 
-`Indonesia::findDistrict($districtId, $with = null)`
-`array $with`: `province, city, city.province, villages`
+Indonesia::findDistrict($districtId, $with = null)
+// array $with : ['province', 'city', 'city.province', 'villages']
 
-`Indonesia::findVillage($villageId, $with = null)`
-`array $with`: `province, city, district, district.city, district.city.province`
+\Indonesia::findVillage($villageId, $with = null)
+// array $with : ['province', 'city', 'district', 'district.city', 'district.city.province']
+```
 
 #### Examples
 
@@ -163,15 +197,17 @@ Province Object {
 
 ---
 
-`Indonesia::search('jakarta')->all()`
-`Indonesia::search('jakarta')->allProvinces()`
-`Indonesia::search('jakarta')->paginateProvinces()`
-`Indonesia::search('jakarta')->allCities()`
-`Indonesia::search('jakarta')->paginateCities()`
-`Indonesia::search('jakarta')->allDistricts()`
-`Indonesia::search('jakarta')->paginateDistricts()`
-`Indonesia::search('jakarta')->allVillages()`
-`Indonesia::search('jakarta')->paginateVillages()`
+```php
+\Indonesia::search('jakarta')->all()
+\Indonesia::search('jakarta')->allProvinces()
+\Indonesia::search('jakarta')->paginateProvinces()
+\Indonesia::search('jakarta')->allCities()
+\Indonesia::search('jakarta')->paginateCities()
+\Indonesia::search('jakarta')->allDistricts()
+\Indonesia::search('jakarta')->paginateDistricts()
+\Indonesia::search('jakarta')->allVillages()
+\Indonesia::search('jakarta')->paginateVillages()
+```
 
 ---
 

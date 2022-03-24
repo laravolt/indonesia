@@ -4,13 +4,9 @@ namespace Laravolt\Indonesia\Models;
 
 class District extends Model
 {
+    protected $searchableColumns = ['code', 'name', 'city.name'];
+
     protected $table = 'districts';
-
-    protected $casts = [
-        'meta' => 'array',
-    ];
-
-    public $timestamps = false;
 
     public function city()
     {

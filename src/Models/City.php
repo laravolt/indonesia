@@ -6,11 +6,7 @@ class City extends Model
 {
     protected $table = 'cities';
 
-    protected $casts = [
-        'meta' => 'array',
-    ];
-
-    public $timestamps = false;
+    protected $searchableColumns = ['code', 'name', 'province.name'];
 
     public function province()
     {

@@ -4,19 +4,15 @@ namespace Laravolt\Indonesia\Models;
 
 class Kelurahan extends Village
 {
-    protected $table = 'villages';
-
-    protected $guarded = [];
-
-    protected $searchableColumns = ['code', 'name', 'kecamatan.name'];
-
     public function kecamatan()
     {
-        return $this->belongsTo(Kecamatan::class, 'district_code');
+        return $this->district();
     }
 
     public function getAddressAttribute()
     {
+        $this->load('kecamatan.kabupaten.provinsi');
+
         return sprintf(
             '%s, %s, %s, %s, Indonesia',
             $this->name,

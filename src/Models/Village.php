@@ -6,11 +6,7 @@ class Village extends Model
 {
     protected $table = 'villages';
 
-    protected $casts = [
-        'meta' => 'array',
-    ];
-
-    public $timestamps = false;
+    protected $searchableColumns = ['code', 'name', 'district.name'];
 
     public function district()
     {
