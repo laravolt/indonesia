@@ -2,10 +2,8 @@
 
 namespace Laravolt\Indonesia\Models\Traits;
 
-use Laravolt\Indonesia\Models\Province;
-
 /**
- * getAddressAttribute
+ * getAddressAttribute.
  */
 trait AddressTrait
 {
@@ -27,7 +25,7 @@ trait AddressTrait
             case 'Laravolt\Indonesia\Models\Kelurahan':
                 $this->load('district.city.province');
 
-                $data = [$this->name, $this->district_name,$this->city_name, $this->province_name];
+                $data = [$this->name, $this->district_name, $this->city_name, $this->province_name];
                 $address = vsprintf('%s, %s, %s, %s', $data);
                 break;
 
