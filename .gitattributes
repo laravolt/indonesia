@@ -1,0 +1,9 @@
+# https://www.kernel.org/pub/software/scm/git/docs/gitattributes.html
+
+.github/                export-ignore
+tests/                  export-ignore
+.editorconfig           export-ignore
+.gitattributes          export-ignore
+.gitignore              export-ignore
+.php-cs-fixer.php       export-ignore
+phpunit.xml             export-ignore

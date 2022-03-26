@@ -1,38 +1,46 @@
 <?php
 
-namespace Laravolt\Indonesia\Models;
+namespace KodePandai\Indonesia\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Staudenmeir\EloquentHasManyDeep\HasManyDeep;
+use Staudenmeir\EloquentHasManyDeep\HasRelationships;
 
 class Province extends Model
 {
-    protected $table = 'provinces';
+    use HasRelationships;
 
-    public function cities()
+    protected $primaryKey = 'code';
+
+    protected $fillable = [
+        'code', 'name', 'latitude', 'longitude',
+    ];
+
+    public $timestamps = false;
+
+    public function __construct(array $attributes = [])
     {
-        return $this->hasMany('Laravolt\Indonesia\Models\City', 'province_code', 'code');
-    }
-
-    public function districts()
-    {
-        return $this->hasManyThrough(
-            'Laravolt\Indonesia\Models\District',
-            'Laravolt\Indonesia\Models\City',
-            'province_code',
-            'city_code',
-            'code',
-            'code'
-        );
-    }
-
-    public function getLogoPathAttribute()
-    {
-        $folder = 'indonesia-logo/';
-        $id = $this->getAttributeValue('id');
-        $arr_glob = glob(public_path().'/'.$folder.$id.'.*');
-
-        if (count($arr_glob) == 1) {
-            $logo_name = basename($arr_glob[0]);
-
-            return url($folder.$logo_name);
+        if (empty($this->table)) {
+            $this->setTable(config('indonesia.table_prefix').'provinces');
         }
+
+        parent::__construct($attributes);
+    }
+
+    public function cities(): HasMany
+    {
+        return $this->hasMany(City::class);
+    }
+
+    public function districts(): HasManyThrough
+    {
+        return $this->hasManyThrough(District::class, City::class);
+    }
+
+    public function villages(): HasManyDeep
+    {
+        return $this->hasManyDeep(Village::class, [City::class, District::class]);
     }
 }

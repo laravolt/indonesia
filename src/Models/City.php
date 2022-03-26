@@ -1,50 +1,43 @@
 <?php
 
-namespace Laravolt\Indonesia\Models;
+namespace KodePandai\Indonesia\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 
 class City extends Model
 {
-    protected $table = 'cities';
+    protected $primaryKey = 'code';
 
-    protected $searchableColumns = ['code', 'name', 'province.name'];
+    protected $fillable = [
+        'code', 'province_code', 'name', 'latitude', 'longitude',
+    ];
 
-    public function province()
+    public $timestamps = false;
+
+    public function __construct(array $attributes = [])
     {
-        return $this->belongsTo('Laravolt\Indonesia\Models\Province', 'province_code', 'code');
-    }
-
-    public function districts()
-    {
-        return $this->hasMany('Laravolt\Indonesia\Models\District', 'city_code', 'code');
-    }
-
-    public function villages()
-    {
-        return $this->hasManyThrough(
-            'Laravolt\Indonesia\Models\Village',
-            'Laravolt\Indonesia\Models\District',
-            'city_code',
-            'district_code',
-            'code',
-            'code'
-        );
-    }
-
-    public function getProvinceNameAttribute()
-    {
-        return $this->province->name;
-    }
-
-    public function getLogoPathAttribute()
-    {
-        $folder = 'indonesia-logo/';
-        $id = $this->getAttributeValue('id');
-        $arr_glob = glob(public_path().'/'.$folder.$id.'.*');
-
-        if (count($arr_glob) == 1) {
-            $logo_name = basename($arr_glob[0]);
-
-            return url($folder.$logo_name);
+        if (empty($this->table)) {
+            $this->setTable(config('indonesia.table_prefix').'cities');
         }
+
+        parent::__construct($attributes);
+    }
+
+    public function province(): BelongsTo
+    {
+        return $this->belongsTo(Province::class);
+    }
+
+    public function districts(): HasMany
+    {
+        return $this->hasMany(District::class);
+    }
+
+    public function villages(): HasManyThrough
+    {
+        return $this->hasManyThrough(Village::class, District::class);
     }
 }

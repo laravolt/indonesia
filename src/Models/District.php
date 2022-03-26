@@ -1,30 +1,50 @@
 <?php
 
-namespace Laravolt\Indonesia\Models;
+namespace KodePandai\Indonesia\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOneThrough;
 
 class District extends Model
 {
-    protected $searchableColumns = ['code', 'name', 'city.name'];
+    protected $primaryKey = 'code';
 
-    protected $table = 'districts';
+    protected $fillable = [
+        'code', 'city_code', 'name', 'latitude', 'longitude',
+    ];
 
-    public function city()
+    public $timestamps = false;
+
+    public function __construct(array $attributes = [])
     {
-        return $this->belongsTo('Laravolt\Indonesia\Models\City', 'city_code', 'code');
+        if (empty($this->table)) {
+            $this->setTable(config('indonesia.table_prefix') . 'districts');
+        }
+
+        parent::__construct($attributes);
     }
 
-    public function villages()
+    public function province(): HasOneThrough
     {
-        return $this->hasMany('Laravolt\Indonesia\Models\Village', 'district_code', 'code');
+        return $this->hasOneThrough(
+            Province::class,
+            City::class,
+            'code',
+            'code',
+            'city_code',
+            'province_code',
+        );
     }
 
-    public function getCityNameAttribute()
+    public function city(): BelongsTo
     {
-        return $this->city->name;
+        return $this->belongsTo(City::class);
     }
 
-    public function getProvinceNameAttribute()
+    public function villages(): HasMany
     {
-        return $this->city->province->name;
+        return $this->hasMany(Village::class);
     }
 }

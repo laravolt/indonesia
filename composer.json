@@ -1,66 +1,56 @@
 {
-    "name": "laravolt/indonesia",
-    "description": "Package Laravel yang berisi data Provinsi, Kabupaten/Kota, Kecamatan, dan Keluarahan/Desa di seluruh Indonesia.",
+    "name": "kodepandai/laravel-indonesia",
+    "description": "Indonesia administrative data for laravel",
     "keywords": [
         "laravel",
-        "laravolt",
         "indonesia",
-        "provinsi",
-        "kabupaten",
-        "kota",
-        "kecamatan",
-        "kelurahan",
-        "desa"
+        "administrative"
     ],
+    "homepage": "https://github.com/kodepandai/laravel-indonesia",
     "license": "MIT",
-    "authors": [
-        {
-            "name": "Bayu Hendra Winata",
-            "email": "bayu.hendra@javan.co.id"
-        },
-        {
-            "name": "Akbar Adhatama",
-            "email": "am.adhatama@gmail.com"
-        },
-        {
-            "name": "Deri Ramdani",
-            "email": "deri.ramdani1@gmail.com"
-        }
-    ],
+    "require": {
+        "php": "^8.0|^8.1",
+        "ext-zip": "*",
+        "illuminate/contracts": "^9.0",
+        "staudenmeir/eloquent-has-many-deep": "^1.15"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.8",
+        "orchestra/testbench": "^7.2",
+        "pestphp/pest": "^1.21"
+    },
     "autoload": {
         "psr-4": {
-            "Laravolt\\Indonesia\\": "src/"
+            "KodePandai\\Indonesia\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Laravolt\\Indonesia\\Test\\": "tests/"
+            "KodePandai\\Indonesia\\Tests\\": "tests/"
         }
-    },
-    "require": {
-        "php": "^7.3|^8.0",
-        "illuminate/support": "^8.0|^9.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.0",
-        "php-coveralls/php-coveralls": "^2.1",
-        "orchestra/testbench": "^6.0|^7.0"
-    },
-    "suggest": {
-        "laravolt/suitable": "Required if you want to access editor panel",
-        "spatie/geocoder": "Synchronize latitude longitude data directly using Google's Geocoding Service"
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "1.0-dev"
-        },
         "laravel": {
             "providers": [
-                "Laravolt\\Indonesia\\ServiceProvider"
-            ],
-            "aliases": {
-                "Indonesia": "Laravolt\\Indonesia\\Facade"
-            }
+                "KodePandai\\Indonesia\\IndonesiaServiceProvider"
+            ]
         }
-    }
+    },
+    "scripts": {
+        "lint": "php-cs-fixer fix --allow-risky=yes",
+        "pest": "pest --stop-on-failure",
+        "coverage": "XDEBUG_MODE=coverage pest --coverage",
+        "test": [
+            "@lint",
+            "@pest"
+        ]
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
