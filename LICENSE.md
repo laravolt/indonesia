@@ -1,6 +1,6 @@
 # The MIT License (MIT)
 
-Copyright (c) 2022 Kode Pandai - https://github.com/kodepandai
+Copyright (c) 2022 Kode Pandai - https://github.com/kodepandai  
 Copyright (c) 2016 Laravolt
 
 Permission is hereby granted, free of charge, to any person obtaining a copy

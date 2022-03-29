@@ -9,7 +9,7 @@ which *ONLY* provides model, migration, seeder and a simple API endpoint.
 
 | feature            | kodepandai/laravel-indonesia | laravolt/indonesia     |
 |--------------------| ---------------------------- | ---------------------- |
-| installed size     | X MB                         | 4.6 MB                 |
+| installed size     | 1.6 MB                       | 4.6 MB                 |
 | raw data           | compressed with gzip         | uncompressed           |
 
 TODO: add more feature comparison
