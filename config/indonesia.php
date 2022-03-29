@@ -41,7 +41,7 @@ return [
          * Specify which column will be displayed in the response data.
          * Only support columns from database.
          */
-        'reponse_columns' => [
+        'response_columns' => [
             //.
             'province' => ['code', 'name'],
 

@@ -20,7 +20,7 @@ class IndonesiaApiController extends Controller
      */
     public function provinces(Request $request): JsonResponse|string
     {
-        $query = Province::select(config('indonesia.api.reponse_columns.province'));
+        $query = Province::select(config('indonesia.api.response_columns.province'));
 
         return $this->getResponse($request, $query);
     }
@@ -30,7 +30,7 @@ class IndonesiaApiController extends Controller
      */
     public function cities(Request $request): JsonResponse|string
     {
-        $query = City::select(config('indonesia.api.reponse_columns.city'));
+        $query = City::select(config('indonesia.api.response_columns.city'));
 
         if ($request->filled('province_code')) {
             $query->where('province_code', $request->province_code);
@@ -48,7 +48,7 @@ class IndonesiaApiController extends Controller
      */
     public function districts(Request $request): JsonResponse|string
     {
-        $query = District::select(config('indonesia.api.reponse_columns.district'));
+        $query = District::select(config('indonesia.api.response_columns.district'));
 
         if ($request->filled('city_code')) {
             $query->where('city_code', $request->city_code);
@@ -75,7 +75,7 @@ class IndonesiaApiController extends Controller
             return $this->responseAsJson(null, false, $message, $status);
         }
 
-        $query = Village::select(config('indonesia.api.reponse_columns.village'));
+        $query = Village::select(config('indonesia.api.response_columns.village'));
 
         if ($request->filled('district_code')) {
             $query->where('district_code', $request->district_code);
