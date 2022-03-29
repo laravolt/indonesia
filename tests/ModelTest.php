@@ -18,7 +18,6 @@ it('can set table_prefix config', function () {
         ->toBe('provinces')
         ->not->toBe('indonesia_provinces');
 
-
     Config::set('indonesia.table_prefix', 'indonesia_');
     expect(new City())->getTable()->toBe('indonesia_cities');
 
