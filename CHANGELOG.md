@@ -2,9 +2,9 @@
 
 All notable changes to `laravel-indonesia` will be documented in this file.
 
-## v1.0.0 
+## [v1.0.0](https://github.com/kodepandai/laravel-indonesia/compare/4f0ed1b...v1.0.0) - 29 Mar 2022
 
-Rework from [laravol/indonesia](https://github.com/laravel/indonesia)
+Rework from [laravolt/indonesia](https://github.com/laravolt/indonesia)
 
 ### Added
 
