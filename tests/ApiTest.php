@@ -75,7 +75,8 @@ it('can get cities with latitude and longitude', function () {
     getJson(route('api.indonesia.cities'))
         ->assertOk()
         ->assertSee('latitude')
-        ->assertSee('longitude');
+        ->assertSee('longitude')
+        ->assertDontSee('province_code');
 });
 
 it('can get cities by province_code', function () {
@@ -136,7 +137,8 @@ it('can get districts with latitude and longitude', function () {
     getJson(route('api.indonesia.districts'))
         ->assertOk()
         ->assertSee('latitude')
-        ->assertSee('longitude');
+        ->assertSee('longitude')
+        ->assertDontSee('city_code');
 });
 
 it('can get districts by city_code', function () {
@@ -196,13 +198,13 @@ it('can get villages as html', function () {
         ->assertDontSee('data');
 });
 
-it('can get villages with latitude and longitude', function () {
+it('can get villages with latitude, longitude and postal_code', function () {
     getJson(route('api.indonesia.villages', ['district_code' => 110101]))
         ->assertOk()
         ->assertDontSee('latitude')
         ->assertDontSee('longitude');
     Config::set('indonesia.api.reponse_columns.village', [
-        'code', 'name', 'latitude', 'longitude',
+        'code', 'name', 'latitude', 'longitude', 'postal_code',
     ]);
     getJson(route('api.indonesia.villages', ['district_code' => 110101]))
         ->assertOk()

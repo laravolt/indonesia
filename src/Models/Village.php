@@ -15,7 +15,7 @@ class Village extends Model
     protected $primaryKey = 'code';
 
     protected $fillable = [
-        'code', 'district_code', 'name', 'latitude', 'longitude',
+        'code', 'district_code', 'name', 'latitude', 'longitude', 'postal_code',
     ];
 
     public $timestamps = false;

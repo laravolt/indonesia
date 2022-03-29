@@ -49,6 +49,7 @@ return new class extends Migration
             $table->string('name', 255);
             $table->string('latitude')->nullable();
             $table->string('longitude')->nullable();
+            $table->string('postal_code')->nullable();
 
             $table->foreign('district_code')
                 ->references('code')

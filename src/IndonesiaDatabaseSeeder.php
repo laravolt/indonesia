@@ -105,6 +105,7 @@ class IndonesiaDatabaseSeeder extends Seeder
                     'name' => $item[2],
                     'latitude' => $item[3],
                     'longitude' => $item[4],
+                    'postal_code' => $item[5],
                 ];
             }, $this->csvToArray(gzdecode($content)));
 
@@ -117,7 +118,9 @@ class IndonesiaDatabaseSeeder extends Seeder
         $data = [];
 
         foreach (explode(PHP_EOL, $content) as $item) {
-            $data[] = str_getcsv($item);
+            if (! empty($item)) {
+                $data[] = str_getcsv($item);
+            }
         }
 
         return $data;
