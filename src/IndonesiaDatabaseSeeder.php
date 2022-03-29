@@ -13,7 +13,7 @@ class IndonesiaDatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        $this->command->info('Start indonesia seeder...');
+        $this->command->info('> Start indonesia seeder...');
 
         $startTime = microtime(true);
 
@@ -28,7 +28,7 @@ class IndonesiaDatabaseSeeder extends Seeder
 
         $endTime = round(microtime(true) - $startTime, 2);
 
-        $this->command->info("✔ OK: Took {$endTime} seconds.");
+        $this->command->info("> ✔ OK: Took {$endTime} seconds.");
     }
 
     protected function seedProvinces(): void
@@ -37,16 +37,21 @@ class IndonesiaDatabaseSeeder extends Seeder
 
         $content = file_get_contents(__DIR__.'/../database/raw/provinces.csv.gz');
 
-        $provinces = array_map(function ($item) {
+        $data = $this->csvToArray(gzdecode($content));
+
+        Province::insert($this->mapProvincesData($data));
+    }
+
+    protected function mapProvincesData(array $data): array
+    {
+        return array_map(function ($item) {
             return [
                 'code' => $item[0],
                 'name' => $item[1],
                 'latitude' => $item[2],
                 'longitude' => $item[3],
             ];
-        }, $this->csvToArray(gzdecode($content)));
-
-        Province::insert($provinces);
+        }, $data);
     }
 
     protected function seedCities(): void
@@ -55,7 +60,14 @@ class IndonesiaDatabaseSeeder extends Seeder
 
         $content = file_get_contents(__DIR__.'/../database/raw/cities.csv.gz');
 
-        $cities = array_map(function ($item) {
+        $data = $this->csvToArray(gzdecode($content));
+
+        City::insert($this->mapCitiesData($data));
+    }
+
+    protected function mapCitiesData(array $data): array
+    {
+        return array_map(function ($item) {
             return [
                 'code' => $item[0],
                 'province_code' => $item[1],
@@ -63,9 +75,7 @@ class IndonesiaDatabaseSeeder extends Seeder
                 'latitude' => $item[3],
                 'longitude' => $item[4],
             ];
-        }, $this->csvToArray(gzdecode($content)));
-
-        City::insert($cities);
+        }, $data);
     }
 
     protected function seedDistricts(): void
@@ -74,7 +84,14 @@ class IndonesiaDatabaseSeeder extends Seeder
 
         $content = file_get_contents(__DIR__.'/../database/raw/districts.csv.gz');
 
-        $districts = array_map(function ($item) {
+        $data = $this->csvToArray(gzdecode($content));
+
+        District::insert($this->mapDistrictsData($data));
+    }
+
+    protected function mapDistrictsData(array $data): array
+    {
+        return array_map(function ($item) {
             return [
                 'code' => $item[0],
                 'city_code' => $item[1],
@@ -82,9 +99,7 @@ class IndonesiaDatabaseSeeder extends Seeder
                 'latitude' => $item[3],
                 'longitude' => $item[4],
             ];
-        }, $this->csvToArray(gzdecode($content)));
-
-        District::insert($districts);
+        }, $data);
     }
 
     protected function seedVillages(): void
@@ -98,19 +113,24 @@ class IndonesiaDatabaseSeeder extends Seeder
         foreach ($files as $file) {
             $content = file_get_contents($path.'/'.$file);
 
-            $villages = array_map(function ($item) {
-                return [
-                    'code' => $item[0],
-                    'district_code' => $item[1],
-                    'name' => $item[2],
-                    'latitude' => $item[3],
-                    'longitude' => $item[4],
-                    'postal_code' => $item[5],
-                ];
-            }, $this->csvToArray(gzdecode($content)));
+            $data = $this->csvToArray(gzdecode($content));
 
-            Village::insert($villages);
+            Village::insert($this->mapVillagesData($data));
         }
+    }
+
+    protected function mapVillagesData(array $data): array
+    {
+        return array_map(function ($item) {
+            return [
+                'code' => $item[0],
+                'district_code' => $item[1],
+                'name' => $item[2],
+                'latitude' => $item[3],
+                'longitude' => $item[4],
+                'postal_code' => $item[5],
+            ];
+        }, $data);
     }
 
     protected function csvToArray(string $content): array
