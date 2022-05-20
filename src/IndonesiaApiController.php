@@ -17,8 +17,10 @@ class IndonesiaApiController extends Controller
 {
     /**
      * Get provinces data.
+     *
+     * @return JsonResponse|string
      */
-    public function provinces(Request $request): JsonResponse|string
+    public function provinces(Request $request)
     {
         $query = Province::select(config('indonesia.api.response_columns.province'));
 
@@ -27,8 +29,10 @@ class IndonesiaApiController extends Controller
 
     /**
      * Get cities data.
+     *
+     * @return JsonResponse|string
      */
-    public function cities(Request $request): JsonResponse|string
+    public function cities(Request $request)
     {
         $query = City::select(config('indonesia.api.response_columns.city'));
 
@@ -37,7 +41,9 @@ class IndonesiaApiController extends Controller
         }
 
         if ($request->filled('province_name')) {
-            $query->whereRelation('province', 'name', $request->province_name);
+            $query->whereHas('province', function ($sQuery) use ($request) {
+                $sQuery->where('name', $request->province_name);
+            });
         }
 
         return $this->getResponse($request, $query);
@@ -45,8 +51,10 @@ class IndonesiaApiController extends Controller
 
     /**
      * Get districts data.
+     *
+     * @return JsonResponse|string
      */
-    public function districts(Request $request): JsonResponse|string
+    public function districts(Request $request)
     {
         $query = District::select(config('indonesia.api.response_columns.district'));
 
@@ -55,7 +63,9 @@ class IndonesiaApiController extends Controller
         }
 
         if ($request->filled('city_name')) {
-            $query->whereRelation('city', 'name', $request->city_name);
+            $query->whereHas('city', function ($sQuery) use ($request) {
+                $sQuery->where('name', $request->city_name);
+            });
         }
 
         return $this->getResponse($request, $query);
@@ -63,8 +73,10 @@ class IndonesiaApiController extends Controller
 
     /**
      * Get villages data.
+     *
+     * @return JsonResponse|string
      */
-    public function villages(Request $request): JsonResponse|string
+    public function villages(Request $request)
     {
         //
         if (empty($request->district_code) && empty($request->district_name)) {
@@ -82,7 +94,9 @@ class IndonesiaApiController extends Controller
         }
 
         if ($request->filled('district_name')) {
-            $query->whereRelation('district', 'name', $request->district_name);
+            $query->whereHas('district', function ($sQuery) use ($request) {
+                $sQuery->where('name', $request->district_name);
+            });
         }
 
         return $this->getResponse($request, $query);
@@ -90,8 +104,10 @@ class IndonesiaApiController extends Controller
 
     /**
      * Get response as JSON or as HTML options.
+     *
+     * @return JsonResponse|string
      */
-    protected function getResponse(Request $request, Builder $query): string|JsonResponse
+    protected function getResponse(Request $request, Builder $query)
     {
         $data = $query->get();
 
@@ -101,9 +117,11 @@ class IndonesiaApiController extends Controller
 
     /**
      * Generate response as json.
+     *
+     * @param mixed $data
      */
     protected function responseAsJson(
-        mixed $data,
+        $data,
         bool $success = true,
         string $message = 'Success',
         int $status = Response::HTTP_OK

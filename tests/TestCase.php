@@ -2,10 +2,7 @@
 
 namespace KodePandai\Indonesia\Tests;
 
-use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
-use Illuminate\Foundation\Testing\RefreshDatabaseState;
-use KodePandai\Indonesia\IndonesiaDatabaseSeeder;
+use Illuminate\Foundation\Testing\DatabaseTransactions;
 use KodePandai\Indonesia\IndonesiaServiceProvider;
 
 /**
@@ -13,7 +10,7 @@ use KodePandai\Indonesia\IndonesiaServiceProvider;
  */
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-    use LazilyRefreshDatabase;
+    use DatabaseTransactions;
 
     /**
      * @param  \Illuminate\Foundation\Application  $app
@@ -26,28 +23,12 @@ class TestCase extends \Orchestra\Testbench\TestCase
     /**
      * @param  \Illuminate\Foundation\Application  $app
      */
-    protected function defineEnvironment($app): void
+    protected function getEnvironmentSetup($app): void
     {
         $app['config']->set('database.default', 'testbench');
         $app['config']->set('database.connections.testbench', [
             'driver' => 'sqlite',
             'database' => 'database.sqlite',
         ]);
-    }
-
-    protected function refreshTestDatabase(): void
-    {
-        if (! RefreshDatabaseState::$migrated) {
-            //.
-            $this->artisan('migrate:fresh', $this->migrateFreshUsing());
-
-            $this->artisan('db:seed', ['class' => IndonesiaDatabaseSeeder::class]);
-
-            $this->app[Kernel::class]->setArtisan(null);
-
-            RefreshDatabaseState::$migrated = true;
-        }
-
-        $this->beginDatabaseTransaction();
     }
 }

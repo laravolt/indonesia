@@ -11,26 +11,26 @@ use KodePandai\Indonesia\Tests\TestCase;
 uses(TestCase::class);
 
 it('can set table_prefix config', function () {
-    expect(new Province())->getTable()->toBe('indonesia_provinces');
+    expect((new Province)->getTable())->toBe('indonesia_provinces');
 
     Config::set('indonesia.table_prefix', '');
-    expect(new Province())->getTable()
+    expect((new Province)->getTable())
         ->toBe('provinces')
         ->not->toBe('indonesia_provinces');
 
     Config::set('indonesia.table_prefix', 'indonesia_');
-    expect(new City())->getTable()->toBe('indonesia_cities');
+    expect((new City)->getTable())->toBe('indonesia_cities');
 
     Config::set('indonesia.table_prefix', 'indo_');
-    expect(new City())->getTable()
+    expect((new City)->getTable())
         ->toBe('indo_cities')
         ->not->toBe('indonesia_cities');
 
     Config::set('indonesia.table_prefix', 'indonesia_');
-    expect(new District())->getTable()->toBe('indonesia_districts');
+    expect((new District)->getTable())->toBe('indonesia_districts');
 
     Config::set('indonesia.table_prefix', 'master_');
-    expect(new District())->getTable()
+    expect((new District)->getTable())
         ->toBe('master_districts')
         ->not->toBe('indonesia_districts');
 });
@@ -38,125 +38,125 @@ it('can set table_prefix config', function () {
 it('can get a province', function () {
     expect(Province::first())->not->toBeEmpty();
 
-    expect(Province::find(33))
-        ->code->toBe(33)
-        ->name->toBe('JAWA TENGAH')
-        ->latitude->toBe('-7.150975')
-        ->longitude->toBe('110.1402594');
+    $province = Province::find(33);
+    expect($province->code)->toBe(33);
+    expect($province->name)->toBe('JAWA TENGAH');
+    expect($province->latitude)->toBe('-7.150975');
+    expect($province->longitude)->toBe('110.1402594');
 });
 
 it('can get province model relations', function () {
-    expect(Province::find(33)->cities)
-        ->toBeInstanceOf(Collection::class)
-        ->count()->toBe(35)
-        ->first()->code->toBe(3301)
-        ->first()->name->toBe('KABUPATEN CILACAP')
-        ->last()->code->toBe(3376)
-        ->last()->name->toBe('KOTA TEGAL');
+    $cities = Province::find(33)->cities;
+    expect($cities)->toBeInstanceOf(Collection::class);
+    expect($cities->count())->toBe(35);
+    expect($cities->first()->code)->toBe(3301);
+    expect($cities->first()->name)->toBe('KABUPATEN CILACAP');
+    expect($cities->last()->code)->toBe(3376);
+    expect($cities->last()->name)->toBe('KOTA TEGAL');
 
-    expect(Province::find(33)->districts)
-        ->toBeInstanceOf(Collection::class)
-        ->count()->toBe(576)
-        ->first()->code->toBe(330101)
-        ->first()->name->toBe('KEDUNGREJA')
-        ->last()->code->toBe(337604)
-        ->last()->name->toBe('MARGADANA');
+    $districts = Province::find(33)->districts;
+    expect($districts)->toBeInstanceOf(Collection::class);
+    expect($districts->count())->toBe(576);
+    expect($districts->first()->code)->toBe(330101);
+    expect($districts->first()->name)->toBe('KEDUNGREJA');
+    expect($districts->last()->code)->toBe(337604);
+    expect($districts->last()->name)->toBe('MARGADANA');
 
-    expect(Province::find(33)->villages)
-        ->toBeInstanceOf(Collection::class)
-        ->count()->toBe(8562)
-        ->first()->code->toBe(3301012001)
-        ->first()->name->toBe('TAMBAKREJA')
-        ->last()->code->toBe(3376041007)
-        ->last()->name->toBe('PESURUNGAN LOR');
+    $villlages = Province::find(33)->villages;
+    expect($villlages)->toBeInstanceOf(Collection::class);
+    expect($villlages->count())->toBe(8562);
+    expect($villlages->first()->code)->toBe(3301012001);
+    expect($villlages->first()->name)->toBe('TAMBAKREJA');
+    expect($villlages->last()->code)->toBe(3376041007);
+    expect($villlages->last()->name)->toBe('PESURUNGAN LOR');
 });
 
 it('can get a city', function () {
     expect(City::first())->not->toBeEmpty();
 
-    expect(City::find(3374))
-        ->code->toBe(3374)
-        ->name->toBe('KOTA SEMARANG')
-        ->latitude->toBe('-7.0051453')
-        ->longitude->toBe('110.4381254');
+    $city = City::find(3374);
+    expect($city->code)->toBe(3374);
+    expect($city->name)->toBe('KOTA SEMARANG');
+    expect($city->latitude)->toBe('-7.0051453');
+    expect($city->longitude)->toBe('110.4381254');
 });
 
 it('can get city model relations', function () {
-    expect(City::find(3374)->province)
-        ->toBeInstanceOf(Province::class)
-        ->code->toBe(33)
-        ->name->toBe('JAWA TENGAH');
+    $province = City::find(3374)->province;
+    expect($province)->toBeInstanceOf(Province::class);
+    expect($province->code)->toBe(33);
+    expect($province->name)->toBe('JAWA TENGAH');
 
-    expect(City::find(3374)->districts)
-        ->toBeInstanceOf(Collection::class)
-        ->count()->toBe(16)
-        ->first()->code->toBe(337401)
-        ->first()->name->toBe('SEMARANG TENGAH')
-        ->last()->code->toBe(337416)
-        ->last()->name->toBe('TUGU');
+    $districts = City::find(3374)->districts;
+    expect($districts)->toBeInstanceOf(Collection::class);
+    expect($districts->count())->toBe(16);
+    expect($districts->first()->code)->toBe(337401);
+    expect($districts->first()->name)->toBe('SEMARANG TENGAH');
+    expect($districts->last()->code)->toBe(337416);
+    expect($districts->last()->name)->toBe('TUGU');
 
-    expect(City::find(3374)->villages)
-        ->toBeInstanceOf(Collection::class)
-        ->count()->toBe(177)
-        ->first()->code->toBe(3374011001)
-        ->first()->name->toBe('MIROTO')
-        ->last()->code->toBe(3374161007)
-        ->last()->name->toBe('MANGUNHARJO');
+    $cities = City::find(3374)->villages;
+    expect($cities)->toBeInstanceOf(Collection::class);
+    expect($cities->count())->toBe(177);
+    expect($cities->first()->code)->toBe(3374011001);
+    expect($cities->first()->name)->toBe('MIROTO');
+    expect($cities->last()->code)->toBe(3374161007);
+    expect($cities->last()->name)->toBe('MANGUNHARJO');
 });
 
 it('can get a district', function () {
     expect(District::first())->not->toBeEmpty();
 
-    expect(District::find(337401))
-        ->code->toBe(337401)
-        ->name->toBe('SEMARANG TENGAH')
-        ->latitude->toBe('-6.9805495')
-        ->longitude->toBe('110.4202505');
+    $district = District::find(337401);
+    expect($district->code)->toBe(337401);
+    expect($district->name)->toBe('SEMARANG TENGAH');
+    expect($district->latitude)->toBe('-6.9805495');
+    expect($district->longitude)->toBe('110.4202505');
 });
 
 it('can get district model relations', function () {
-    expect(District::find(337401)->province)
-        ->toBeInstanceOf(Province::class)
-        ->code->toBe(33)
-        ->name->toBe('JAWA TENGAH');
+    $province = District::find(337401)->province;
+    expect($province)->toBeInstanceOf(Province::class);
+    expect($province->code)->toBe(33);
+    expect($province->name)->toBe('JAWA TENGAH');
 
-    expect(District::find(337401)->city)
-        ->toBeInstanceOf(City::class)
-        ->code->toBe(3374)
-        ->name->toBe('KOTA SEMARANG');
+    $city = District::find(337401)->city;
+    expect($city)->toBeInstanceOf(City::class);
+    expect($city->code)->toBe(3374);
+    expect($city->name)->toBe('KOTA SEMARANG');
 
-    expect(District::find(337401)->villages)
-        ->toBeInstanceOf(Collection::class)
-        ->count()->toBe(15)
-        ->first()->code->toBe(3374011001)
-        ->first()->name->toBe('MIROTO')
-        ->last()->code->toBe(3374011015)
-        ->last()->name->toBe('PINDRIKAN LOR');
+    $villlages = District::find(337401)->villages;
+    expect($villlages)->toBeInstanceOf(Collection::class);
+    expect($villlages->count())->toBe(15);
+    expect($villlages->first()->code)->toBe(3374011001);
+    expect($villlages->first()->name)->toBe('MIROTO');
+    expect($villlages->last()->code)->toBe(3374011015);
+    expect($villlages->last()->name)->toBe('PINDRIKAN LOR');
 });
 
 it('can get a village', function () {
     expect(Village::first())->not->toBeEmpty();
 
-    expect(Village::find(3374011001))
-        ->code->toBe(3374011001)
-        ->name->toBe('MIROTO')
-        ->latitude->toBe('-6.9837576')
-        ->longitude->toBe('110.4195057');
+    $village = Village::find(3374011001);
+    expect($village->code)->toBe(3374011001);
+    expect($village->name)->toBe('MIROTO');
+    expect($village->latitude)->toBe('-6.9837576');
+    expect($village->longitude)->toBe('110.4195057');
 });
 
 it('can get village model relations', function () {
-    expect(Village::find(3374011001)->province)
-        ->toBeInstanceOf(Province::class)
-        ->code->toBe(33)
-        ->name->toBe('JAWA TENGAH');
+    $province = Village::find(3374011001)->province;
+    expect($province)->toBeInstanceOf(Province::class);
+    expect($province->code)->toBe(33);
+    expect($province->name)->toBe('JAWA TENGAH');
 
-    expect(Village::find(3374011001)->city)
-        ->toBeInstanceOf(City::class)
-        ->code->toBe(3374)
-        ->name->toBe('KOTA SEMARANG');
+    $city = Village::find(3374011001)->city;
+    expect($city)->toBeInstanceOf(City::class);
+    expect($city->code)->toBe(3374);
+    expect($city->name)->toBe('KOTA SEMARANG');
 
-    expect(Village::find(3374011001)->district)
-        ->toBeInstanceOf(District::class)
-        ->code->toBe(337401)
-        ->name->toBe('SEMARANG TENGAH');
+    $district = Village::find(3374011001)->district;
+    expect($district)->toBeInstanceOf(District::class);
+    expect($district->code)->toBe(337401);
+    expect($district->name)->toBe('SEMARANG TENGAH');
 });

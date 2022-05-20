@@ -1,5 +1,5 @@
 vendor/
-composer.lock
-database.sqlite
-.phpunit.result.cache
 .php-cs-fixer.cache
+.phpunit.result.cache
+composer.lock
+testing.sh
