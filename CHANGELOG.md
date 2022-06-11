@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-indonesia` will be documented in this file.
 
+## [v1.0.2](https://github.com/kodepandai/laravel-indonesia/compare/v1.0.1...v1.0.2) - 11 Jun 2022
+
+### Added
+- Add support for laravel 7 and 8 with no breaking changes
+
 ## [v1.0.1](https://github.com/kodepandai/laravel-indonesia/compare/v1.0.0...v1.0.1) - 29 Mar 2022
 
 ### Added
