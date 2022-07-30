@@ -2,6 +2,11 @@
 
 All notable changes to `laravel-indonesia` will be documented in this file.
 
+## [v1.0.3](https://github.com/kodepandai/laravel-indonesia/compare/v1.0.2...v1.0.3) - 30 Jul 2022
+
+### Fixed
+- Unable to seed on windows because of PHP_EOL
+
 ## [v1.0.2](https://github.com/kodepandai/laravel-indonesia/compare/v1.0.1...v1.0.2) - 11 Jun 2022
 
 ### Added
