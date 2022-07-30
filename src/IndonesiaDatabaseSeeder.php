@@ -137,7 +137,7 @@ class IndonesiaDatabaseSeeder extends Seeder
     {
         $data = [];
 
-        foreach (explode(PHP_EOL, $content) as $item) {
+        foreach (explode("\n", $content) as $item) {
             if (! empty($item)) {
                 $data[] = str_getcsv($item);
             }
