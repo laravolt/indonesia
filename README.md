@@ -9,7 +9,9 @@ Data wilayah diambil dari [edwardsamuel/Wilayah-Administratif-Indonesia](https:/
 ## Instalasi
 
 ### Install Package Via Composer
-`composer require laravolt/indonesia`
+```
+composer require laravolt/indonesia
+```
 
 ### Daftarkan Service Provider dan Facade (Untuk Laravel < 5.5)
 
