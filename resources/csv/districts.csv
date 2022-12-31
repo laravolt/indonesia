@@ -7228,39 +7228,39 @@
 927108,9271,KLAURUNG,-0.9316366,131.3510866
 927109,9271,MALAIMSIMSA,-0.8820606,131.2965939
 927110,9271,MALADUM MES,-0.8056881,131.336045
-117203,1172,Sukamakmue,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-122113,1221,Barumun Baru,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-122114,1221,Ulu Sosa,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-122115,1221,Sosa Julu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-122116,1221,Barumun Barat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-122117,1221,Sosa Timur,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-147113,1471,Tuahmadani,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-147114,1471,Kulim,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-147115,1471,Rumbai Timur,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-150122,1501,Tanah Cogok,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-150123,1501,Danau Kerinci Barat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-150311,1503,Mandiangin Timur,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-180815,1808,Umpu Semenguk,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-210510,2105,Kute Siantan,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-530518,5305,Abad Selatan,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-531411,5314,Loaholu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-531706,5317,Umbu Ratu Nggay Tengah,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-531910,5319,Kota Komba Utara,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-531911,5319,Lamba Leda Utara,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-531912,5319,Congkar,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-630222,6302,Pulaulaut Sigam,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-631011,6310,Kusan Tengah,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-631012,6310,Teluk Kepayang,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-640219,6402,Kota Bangun Darat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-640220,6402,Semboja Barat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-650320,6503,Lumbis Pansiangan,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-650321,6503,Lumbis Hulu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-747111,7471,Nambo,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-820110,8201,Loloda Tengah,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-820706,8207,Pulau Rao,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-910121,9101,Padua,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-910122,9101,Kontuar,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-911820,9118,Joutu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-911821,9118,Aswi,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-911822,9118,Awyu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
-911823,9118,Koroway Buluanop,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+117203,1172,Sukamakmue,NULL,NULL
+122113,1221,Barumun Baru,NULL,NULL
+122114,1221,Ulu Sosa,NULL,NULL
+122115,1221,Sosa Julu,NULL,NULL
+122116,1221,Barumun Barat,NULL,NULL
+122117,1221,Sosa Timur,NULL,NULL
+147113,1471,Tuahmadani,NULL,NULL
+147114,1471,Kulim,NULL,NULL
+147115,1471,Rumbai Timur,NULL,NULL
+150122,1501,Tanah Cogok,NULL,NULL
+150123,1501,Danau Kerinci Barat,NULL,NULL
+150311,1503,Mandiangin Timur,NULL,NULL
+180815,1808,Umpu Semenguk,NULL,NULL
+210510,2105,Kute Siantan,NULL,NULL
+530518,5305,Abad Selatan,NULL,NULL
+531411,5314,Loaholu,NULL,NULL
+531706,5317,Umbu Ratu Nggay Tengah,NULL,NULL
+531910,5319,Kota Komba Utara,NULL,NULL
+531911,5319,Lamba Leda Utara,NULL,NULL
+531912,5319,Congkar,NULL,NULL
+630222,6302,Pulaulaut Sigam,NULL,NULL
+631011,6310,Kusan Tengah,NULL,NULL
+631012,6310,Teluk Kepayang,NULL,NULL
+640219,6402,Kota Bangun Darat,NULL,NULL
+640220,6402,Semboja Barat,NULL,NULL
+650320,6503,Lumbis Pansiangan,NULL,NULL
+650321,6503,Lumbis Hulu,NULL,NULL
+747111,7471,Nambo,NULL,NULL
+820110,8201,Loloda Tengah,NULL,NULL
+820706,8207,Pulau Rao,NULL,NULL
+910121,9101,Padua,NULL,NULL
+910122,9101,Kontuar,NULL,NULL
+911820,9118,Joutu,NULL,NULL
+911821,9118,Aswi,NULL,NULL
+911822,9118,Awyu,NULL,NULL
+911823,9118,Koroway Buluanop,NULL,NULL
