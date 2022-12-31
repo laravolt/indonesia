@@ -12,7 +12,7 @@
 110112,1101,LABUHAN HAJI BARAT,3.5849934,96.974604
 110113,1101,KLUET TENGAH,3.4318905,97.3084571
 110114,1101,KLUET TIMUR,3.1710406,97.4597725
-110115,1101,BAKONGAN  TIMUR,NULL,NULL
+110115,1101,BAKONGAN TIMUR,NULL,NULL
 110116,1101,TRUMON TIMUR,2.8905999,97.8068851
 110117,1101,KOTA BAHAGIA,3.011331,97.5463885
 110118,1101,TRUMON TENGAH,2.9014657,97.6656625
@@ -48,7 +48,7 @@
 110314,1103,IDI TUNONG,4.9162588,97.725376
 110315,1103,BANDA ALAM,4.8600813,97.6873706
 110316,1103,PEUDAWA,4.8791578,97.8177601
-110317,1103,PEUREULAK  TIMUR,NULL,NULL
+110317,1103,PEUREULAK TIMUR,NULL,NULL
 110318,1103,PEUREULAK BARAT,4.8580773,97.8612767
 110319,1103,SUNGAI RAYA,4.6621644,97.9374948
 110320,1103,SIMPANG JERNIH,4.3787677,97.6765157
@@ -108,7 +108,7 @@
 110703,1107,BATEE,5.417769,95.8881542
 110704,1107,DELIMA,5.3394768,95.9039944
 110705,1107,GEUMPANG,4.8238623,96.195132
-110706,1107,GEULUMPANG  TIGA,NULL,NULL
+110706,1107,GEULUMPANG TIGA,NULL,NULL
 110707,1107,INDRA JAYA,5.0166816,95.4149003
 110708,1107,KEMBANG TANJONG,5.31218,96.0361574
 110709,1107,KOTA SIGLI,5.3847763,95.9602371
@@ -126,7 +126,7 @@
 110724,1107,MUTIARA TIMUR,5.255443,95.9885456
 110725,1107,GRONG-GRONG,NULL,NULL
 110727,1107,MANE,4.8867326,96.0891032
-110729,1107,GLUMPANG  BARO,NULL,NULL
+110729,1107,GLUMPANG BARO,NULL,NULL
 110731,1107,TITEUE,5.2094331,95.9092754
 110801,1108,BAKTIYA,5.0901929,97.4056928
 110802,1108,DEWANTARA,5.2395677,97.0175879
@@ -191,7 +191,7 @@
 111113,1111,KOTA JUANG,5.2065989,96.7119409
 111114,1111,KUALA,5.2272338,96.722641
 111115,1111,PEUSANGAN SIBLAH KRUENG,5.0761383,96.8029489
-111116,1111,PEUSANGAN  SELATAN,NULL,NULL
+111116,1111,PEUSANGAN SELATAN,NULL,NULL
 111117,1111,KUTA BLANG,5.2053351,96.8297403
 111201,1112,BLANG PIDIE,3.7431465,96.8326488
 111202,1112,TANGAN-TANGAN,3.6959787,96.9423844
@@ -7228,3 +7228,39 @@
 927108,9271,KLAURUNG,-0.9316366,131.3510866
 927109,9271,MALAIMSIMSA,-0.8820606,131.2965939
 927110,9271,MALADUM MES,-0.8056881,131.336045
+117203,1172,Sukamakmue,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+122113,1221,Barumun Baru,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+122114,1221,Ulu Sosa,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+122115,1221,Sosa Julu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+122116,1221,Barumun Barat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+122117,1221,Sosa Timur,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+147113,1471,Tuahmadani,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+147114,1471,Kulim,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+147115,1471,Rumbai Timur,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+150122,1501,Tanah Cogok,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+150123,1501,Danau Kerinci Barat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+150311,1503,Mandiangin Timur,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+180815,1808,Umpu Semenguk,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+210510,2105,Kute Siantan,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+530518,5305,Abad Selatan,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+531411,5314,Loaholu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+531706,5317,Umbu Ratu Nggay Tengah,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+531910,5319,Kota Komba Utara,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+531911,5319,Lamba Leda Utara,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+531912,5319,Congkar,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+630222,6302,Pulaulaut Sigam,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+631011,6310,Kusan Tengah,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+631012,6310,Teluk Kepayang,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+640219,6402,Kota Bangun Darat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+640220,6402,Semboja Barat,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+650320,6503,Lumbis Pansiangan,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+650321,6503,Lumbis Hulu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+747111,7471,Nambo,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+820110,8201,Loloda Tengah,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+820706,8207,Pulau Rao,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+910121,9101,Padua,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+910122,9101,Kontuar,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+911820,9118,Joutu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+911821,9118,Aswi,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+911822,9118,Awyu,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
+911823,9118,Koroway Buluanop,"""{\""lat\"":\""NULL\"",\""long\"":\""NULL\""
