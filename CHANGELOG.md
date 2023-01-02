@@ -2,6 +2,13 @@
 
 All notable changes to `laravel-indonesia` will be documented in this file.
 
+## [v2.0.0](https://github.com/kodepandai/laravel-indonesia/compare/v1.0.3...v2.0.0) - 2 Jan 2022
+
+### Added
+- New district and village data from upstream, based on
+[PR#98](https://github.com/laravolt/indonesia/pull/98) 
+and [PR#99](https://github.com/laravolt/indonesia/pull/99)
+
 ## [v1.0.3](https://github.com/kodepandai/laravel-indonesia/compare/v1.0.2...v1.0.3) - 30 Jul 2022
 
 ### Fixed

@@ -3,7 +3,7 @@
 Laravel package for Indonesia administrative data.
 
 This is a lightweight version of [laravolt/indonesia](https://github.com/laravel/indonesia)
-which *ONLY* provides model, migration, seeder and a simple API endpoint.
+which **ONLY** provides model, migration, seeder and a simple API endpoint.
 
 ## Comparison
 
@@ -11,21 +11,20 @@ which *ONLY* provides model, migration, seeder and a simple API endpoint.
 |--------------------| ---------------------------- | ---------------------- |
 | installed size     | 1.6 MB                       | 4.6 MB                 |
 | raw data           | compressed with gzip         | uncompressed           |
-
-TODO: add more feature comparison
+| api                | simple                       | complex, for laravolt  |
 
 ## Installation
 
 Install with composer:
 
 ```sh
-$ composer require kodepandai/laravel-indonesia
+composer require kodepandai/laravel-indonesia
 ```
 
 (Optional) publish the package migration and configuration:
 
 ```
-$ php artisan vendor:publish --provider="KodePandai\Indonesia\IndonesiaServiceProvider"
+php artisan vendor:publish --provider="KodePandai\Indonesia\IndonesiaServiceProvider"
 ```
 
 ## Configuration
@@ -88,7 +87,8 @@ $village->district; // get district of the village
 
 ### API
 
-This package provides API endpoint to get administrative data. The API is enabled by default, to disable it, change the configuration file.
+This package provides API endpoint to get administrative data. 
+The API is enabled by default, to disable it, change the configuration file.
 
 #### Province
 
