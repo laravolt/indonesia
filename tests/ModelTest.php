@@ -160,3 +160,31 @@ it('can get village model relations', function () {
     expect($district->code)->toBe(337401);
     expect($district->name)->toBe('SEMARANG TENGAH');
 });
+
+it('can get new districts added in v2', function() {
+    $district = District::find(110115);
+    expect($district->code)->toBe(110115);
+    expect($district->name)->toBe('BAKONGAN TIMUR');
+    expect($district->latitude)->toBe('NULL');
+    expect($district->longitude)->toBe('NULL');
+    
+    $district = District::find(911823);
+    expect($district->code)->toBe(911823);
+    expect($district->name)->toBe('KOROWAY BULUANOP');
+    expect($district->latitude)->toBe('NULL');
+    expect($district->longitude)->toBe('NULL');
+});
+
+it('can get new villages added in v2', function() {
+    $village = Village::find(1207212002);
+    expect($village->code)->toBe(1207212002);
+    expect($village->name)->toBe('PATUMBAK I');
+    expect($village->latitude)->toBe('NULL');
+    expect($village->longitude)->toBe('NULL');
+    
+    $village = Village::find(9201502009);
+    expect($village->code)->toBe(9201502009);
+    expect($village->name)->toBe('MLARON');
+    expect($village->latitude)->toBe('NULL');
+    expect($village->longitude)->toBe('NULL');
+});

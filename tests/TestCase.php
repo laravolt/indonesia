@@ -3,6 +3,7 @@
 namespace KodePandai\Indonesia\Tests;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Support\Facades\Artisan;
 use KodePandai\Indonesia\IndonesiaServiceProvider;
 
 /**
@@ -10,7 +11,17 @@ use KodePandai\Indonesia\IndonesiaServiceProvider;
  */
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+
     use DatabaseTransactions;
+
+    // protected function setUp(): void
+    // {
+    //     parent::setUp();
+    //     Artisan::call('migrate');
+    //     Artisan::call('db:seed', [
+    //         'class' => \KodePandai\Indonesia\IndonesiaDatabaseSeeder::class,
+    //     ]);
+    // }
 
     /**
      * @param  \Illuminate\Foundation\Application  $app
