@@ -161,7 +161,7 @@ it('can get village model relations', function () {
     expect($district->name)->toBe('SEMARANG TENGAH');
 });
 
-it('can get new districts added in v2', function() {
+it('can get new districts added in v2', function () {
     $district = District::find(110115);
     expect($district->code)->toBe(110115);
     expect($district->name)->toBe('BAKONGAN TIMUR');
@@ -175,7 +175,7 @@ it('can get new districts added in v2', function() {
     expect($district->longitude)->toBe('NULL');
 });
 
-it('can get new villages added in v2', function() {
+it('can get new villages added in v2', function () {
     $village = Village::find(1207212002);
     expect($village->code)->toBe(1207212002);
     expect($village->name)->toBe('PATUMBAK I');

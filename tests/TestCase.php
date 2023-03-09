@@ -11,7 +11,6 @@ use KodePandai\Indonesia\IndonesiaServiceProvider;
  */
 class TestCase extends \Orchestra\Testbench\TestCase
 {
-
     use DatabaseTransactions;
 
     // protected function setUp(): void
