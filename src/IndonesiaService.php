@@ -103,7 +103,7 @@ class IndonesiaService
         return Models\Village::paginate($numRows);
     }
 
-    public function findProvince($provinceId, $with = null)
+    public function findProvince($provinceId, $with = null, $whereCode = false)
     {
         $with = (array) $with;
 
@@ -113,31 +113,57 @@ class IndonesiaService
             if ($withVillages !== false) {
                 unset($with[$withVillages]);
 
-                $province = Models\Province::with($with)->find($provinceId);
+                if(!$whereCode) {
+                    $province = Models\Province::with($with)->find($provinceId);
+                }
+                else {
+                    $province = Models\Province::with($with)->where('code', $provinceId)->firstOrFail();
+                }
 
                 $province = $this->loadRelation($province, 'cities.districts.villages');
             } else {
-                $province = Models\Province::with($with)->find($provinceId);
+                if(!$whereCode) {
+                    $province = Models\Province::with($with)->find($provinceId);
+                }
+                else {
+                    $province = Models\Province::with($with)->where('code', $provinceId)->firstOrFail();
+                }
             }
 
             return $province;
         }
 
-        return Models\Province::find($provinceId);
+        if(!$whereCode) {
+            return Models\Province::find($provinceId);
+        }
+        else {
+            return Models\Province::where('code', $provinceId)->firstOrFail();
+        }
+
     }
 
-    public function findCity($cityId, $with = null)
+    public function findCity($cityId, $with = null, $whereCode = false)
     {
         $with = (array) $with;
 
         if ($with) {
-            return Models\City::with($with)->find($cityId);
+            if(!$whereCode) {
+                return Models\City::with($with)->find($cityId);
+            }
+            else {
+                return Models\City::with($with)->where('code', $cityId)->firstOrFail();
+            }
         }
 
-        return Models\City::find($cityId);
+        if(!$whereCode) {
+            return Models\City::find($cityId);
+        }
+        else {
+            return Models\City::where('code', $cityId)->firstOrFail();
+        }
     }
 
-    public function findDistrict($districtId, $with = null)
+    public function findDistrict($districtId, $with = null, $whereCode = false)
     {
         $with = (array) $with;
 
@@ -147,20 +173,35 @@ class IndonesiaService
             if ($withProvince !== false) {
                 unset($with[$withProvince]);
 
-                $district = Models\District::with($with)->find($districtId);
+                if(!$whereCode) {
+                    $district = Models\District::with($with)->find($districtId);
+                }
+                else {
+                    $district = Models\District::with($with)->where('code', $districtId)->firstOrFail();
+                }
 
                 $district = $this->loadRelation($district, 'city.province', true);
             } else {
-                $district = Models\District::with($with)->find($districtId);
+                if(!$whereCode) {
+                    $district = Models\District::with($with)->find($districtId);
+                }
+                else {
+                    $district = Models\District::with($with)->where('code', $districtId)->firstOrFail();
+                }
             }
 
             return $district;
         }
 
-        return Models\District::find($districtId);
+        if(!$whereCode) {
+            return Models\District::find($districtId);
+        }
+        else {
+            return Models\District::where('code', $districtId)->firstOrFail();
+        }
     }
 
-    public function findVillage($villageId, $with = null)
+    public function findVillage($villageId, $with = null, $whereCode = false)
     {
         $with = (array) $with;
 
@@ -172,7 +213,12 @@ class IndonesiaService
                 unset($with[$withCity]);
                 unset($with[$withProvince]);
 
-                $village = Models\Village::with($with)->find($villageId);
+                if(!$whereCode) {
+                    $village = Models\Village::with($with)->find($villageId);
+                }
+                else {
+                    $village = Models\Village::with($with)->where('code', $villageId)->firstOrFail();
+                }
 
                 $village = $this->loadRelation($village, 'district.city', true);
 
@@ -180,23 +226,43 @@ class IndonesiaService
             } elseif ($withCity !== false) {
                 unset($with[$withCity]);
 
-                $village = Models\Village::with($with)->find($villageId);
+                if(!$whereCode) {
+                    $village = Models\Village::with($with)->find($villageId);
+                }
+                else {
+                    $village = Models\Village::with($with)->where('code', $villageId)->firstOrFail();
+                }
 
                 $village = $this->loadRelation($village, 'district.city', true);
             } elseif ($withProvince !== false) {
                 unset($with[$withProvince]);
 
-                $village = Models\Village::with($with)->find($villageId);
+                if(!$whereCode) {
+                    $village = Models\Village::with($with)->find($villageId);
+                }
+                else {
+                    $village = Models\Village::with($with)->where('code', $villageId)->firstOrFail();
+                }
 
                 $village = $this->loadRelation($village, 'district.city.province', true);
             } else {
-                $village = Models\Village::with($with)->find($villageId);
+                if(!$whereCode) {
+                    $village = Models\Village::with($with)->find($villageId);
+                }
+                else {
+                    $village = Models\Village::with($with)->where('code', $villageId)->firstOrFail();
+                }
             }
 
             return $village;
         }
 
-        return Models\Village::find($villageId);
+        if(!$whereCode) {
+            return Models\Village::find($villageId);
+        }
+        else {
+            return Models\Village::where('code', $villageId)->firstOrFail();
+        }
     }
 
     private function loadRelation($object, $relation, $belongsTo = false)
