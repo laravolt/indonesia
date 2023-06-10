@@ -113,7 +113,7 @@ class IndonesiaService
             if ($withVillages !== false) {
                 unset($with[$withVillages]);
 
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $province = Models\Province::with($with)->find($provinceId);
                 }
                 else {
@@ -122,7 +122,7 @@ class IndonesiaService
 
                 $province = $this->loadRelation($province, 'cities.districts.villages');
             } else {
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $province = Models\Province::with($with)->find($provinceId);
                 }
                 else {
@@ -133,7 +133,7 @@ class IndonesiaService
             return $province;
         }
 
-        if(!$whereCode) {
+        if (!$whereCode) {
             return Models\Province::find($provinceId);
         }
         else {
@@ -147,7 +147,7 @@ class IndonesiaService
         $with = (array) $with;
 
         if ($with) {
-            if(!$whereCode) {
+            if (!$whereCode) {
                 return Models\City::with($with)->find($cityId);
             }
             else {
@@ -155,7 +155,7 @@ class IndonesiaService
             }
         }
 
-        if(!$whereCode) {
+        if (!$whereCode) {
             return Models\City::find($cityId);
         }
         else {
@@ -173,7 +173,7 @@ class IndonesiaService
             if ($withProvince !== false) {
                 unset($with[$withProvince]);
 
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $district = Models\District::with($with)->find($districtId);
                 }
                 else {
@@ -182,7 +182,7 @@ class IndonesiaService
 
                 $district = $this->loadRelation($district, 'city.province', true);
             } else {
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $district = Models\District::with($with)->find($districtId);
                 }
                 else {
@@ -193,7 +193,7 @@ class IndonesiaService
             return $district;
         }
 
-        if(!$whereCode) {
+        if (!$whereCode) {
             return Models\District::find($districtId);
         }
         else {
@@ -213,7 +213,7 @@ class IndonesiaService
                 unset($with[$withCity]);
                 unset($with[$withProvince]);
 
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $village = Models\Village::with($with)->find($villageId);
                 }
                 else {
@@ -226,7 +226,7 @@ class IndonesiaService
             } elseif ($withCity !== false) {
                 unset($with[$withCity]);
 
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $village = Models\Village::with($with)->find($villageId);
                 }
                 else {
@@ -237,7 +237,7 @@ class IndonesiaService
             } elseif ($withProvince !== false) {
                 unset($with[$withProvince]);
 
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $village = Models\Village::with($with)->find($villageId);
                 }
                 else {
@@ -246,7 +246,7 @@ class IndonesiaService
 
                 $village = $this->loadRelation($village, 'district.city.province', true);
             } else {
-                if(!$whereCode) {
+                if (!$whereCode) {
                     $village = Models\Village::with($with)->find($villageId);
                 }
                 else {
@@ -257,7 +257,7 @@ class IndonesiaService
             return $village;
         }
 
-        if(!$whereCode) {
+        if (!$whereCode) {
             return Models\Village::find($villageId);
         }
         else {
