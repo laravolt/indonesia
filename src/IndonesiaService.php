@@ -121,7 +121,8 @@ class IndonesiaService
                 }
 
                 $province = $this->loadRelation($province, 'cities.districts.villages');
-            } else {
+            }
+            else {
                 if (!$whereCode) {
                     $province = Models\Province::with($with)->find($provinceId);
                 }
@@ -181,7 +182,8 @@ class IndonesiaService
                 }
 
                 $district = $this->loadRelation($district, 'city.province', true);
-            } else {
+            }
+            else {
                 if (!$whereCode) {
                     $district = Models\District::with($with)->find($districtId);
                 }
@@ -245,7 +247,8 @@ class IndonesiaService
                 }
 
                 $village = $this->loadRelation($village, 'district.city.province', true);
-            } else {
+            }
+            else {
                 if (!$whereCode) {
                     $village = Models\Village::with($with)->find($villageId);
                 }
@@ -279,7 +282,8 @@ class IndonesiaService
         $object->load([$relation => function ($q) use (&$createdValue, $belongsTo) {
             if ($belongsTo) {
                 $createdValue = $q->first();
-            } else {
+            }
+            else {
                 $createdValue = $q->get()->unique();
             }
         }]);
