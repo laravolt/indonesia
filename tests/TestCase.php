@@ -20,6 +20,7 @@ class TestCase extends \Orchestra\Testbench\TestCase
     //     Artisan::call('db:seed', [
     //         'class' => \KodePandai\Indonesia\IndonesiaDatabaseSeeder::class,
     //     ]);
+    //     die(0); // disable DatabaseTransaction first
     // }
 
     /**

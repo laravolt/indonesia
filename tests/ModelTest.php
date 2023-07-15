@@ -167,7 +167,7 @@ it('can get new districts added in v2', function () {
     expect($district->name)->toBe('BAKONGAN TIMUR');
     expect($district->latitude)->toBe('NULL');
     expect($district->longitude)->toBe('NULL');
-    
+
     $district = District::find(911823);
     expect($district->code)->toBe(911823);
     expect($district->name)->toBe('KOROWAY BULUANOP');
@@ -181,10 +181,18 @@ it('can get new villages added in v2', function () {
     expect($village->name)->toBe('PATUMBAK I');
     expect($village->latitude)->toBe('NULL');
     expect($village->longitude)->toBe('NULL');
-    
+
     $village = Village::find(9201502009);
     expect($village->code)->toBe(9201502009);
     expect($village->name)->toBe('MLARON');
     expect($village->latitude)->toBe('NULL');
     expect($village->longitude)->toBe('NULL');
+});
+
+it('can test new data for v2.0.2', function () {
+    $district = District::find(331710);
+    expect($district->code)->toBe(331710);
+    expect($district->name)->toBe('REMBANG');
+    expect($district->latitude)->toBe('-6.7147586');
+    expect($district->longitude)->toBe('111.3281411');
 });

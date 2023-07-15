@@ -2,6 +2,18 @@
 
 All notable changes to `laravel-indonesia` will be documented in this file.
 
+## [v2.0.2](https://github.com/kodepandai/laravel-indonesia/compare/v2.0.1...v2.0.2) - 15 Jul 2023
+
+### Added
+- Sync data with upstream
+  - https://github.com/laravolt/indonesia/commit/9caeec616c48af4a46010c3090e25d52ff7c8a6b
+
+## [v2.0.1](https://github.com/kodepandai/laravel-indonesia/compare/v2.0.0...v2.0.1) - 9 Mar 2022
+
+### Added
+- Support for laravel 10
+- Sync data with upstream
+
 ## [v2.0.0](https://github.com/kodepandai/laravel-indonesia/compare/v1.0.3...v2.0.0) - 2 Jan 2022
 
 ### Added
