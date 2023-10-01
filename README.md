@@ -1,6 +1,7 @@
 [![StyleCI](https://github.styleci.io/repos/63410706/shield?branch=master)](https://github.styleci.io/repos/63410706)
 [![Build Status](https://travis-ci.org/laravolt/indonesia.svg?branch=master)](https://travis-ci.org/laravolt/indonesia)
 [![Coverage Status](https://coveralls.io/repos/github/laravolt/indonesia/badge.svg?branch=master)](https://coveralls.io/github/laravolt/indonesia?branch=master)
+
 # LARAVOLT INDONESIA
 
 Package Laravel yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia.
@@ -9,6 +10,7 @@ Data wilayah diambil dari [edwardsamuel/Wilayah-Administratif-Indonesia](https:/
 ## Instalasi
 
 ### Install Package Via Composer
+
 ```
 composer require laravolt/indonesia
 ```
@@ -36,13 +38,16 @@ Tambahkan Service Provider dan Facade pada `config.app`
 ```
 
 ### Daftarkan Service Provider dan Facade untuk Lumen
+
 Dalam file `bootstrap/app.php`, uncomment baris berikut
+
 ```php
 $app->withFacades();
 $app->withEloquent();
 ```
 
-Dalam file `bootstrap/app.php`, daftarkan service provider dan alias/facade dengan menambahkan kode berokut.
+Dalam file `bootstrap/app.php`, daftarkan service provider dan alias/facade dengan menambahkan kode berikut.
+
 ```php
 $app->register(Laravolt\Indonesia\ServiceProvider::class);
 
@@ -52,6 +57,7 @@ class_alias(Laravolt\Indonesia\Facade::class, 'Indonesia');
 ```
 
 Untuk mengatur prefix tabel, buat file `config/laravolt.php`, lalu copy kode berikut (ganti `indonesia_` dengan nilai prefix tabel yang diinginkan),
+
 ```php
 <?php
 
@@ -61,7 +67,9 @@ return [
     ],
 ];
 ```
+
 Lalu daftarkan konfigurasi dalam `bootstrap/app.php` dengan menambahkan kode berikut.
+
 ```php
 $app->configure('laravolt');
 ```
@@ -72,22 +80,27 @@ Untuk selanjutnya, konfigurasi bisa dipanggil dengan cara `config('laravolt.indo
 
 Jika Anda menggunakan Laravel/Lumen versi 5.3 ke atas, abaikan langkah di bawah ini.
 Untuk Laravel:
+
 ```php
 php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
 ```
+
 Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/database/migrations` atau [Migrations](database/migrations/)
 
 ### Jalankan Migration
+
 ```php
 php artisan migrate
 ```
 
 ### Jalankan Seeder Untuk Mengisi Data Wilayah
+
 ```php
 php artisan laravolt:indonesia:seed
 ```
 
 ### Untuk menambahkan seedernya ke file `DatabaseSeeder.php` ikuti contoh berikut:
+
 ```php
 namespace Database\Seeders;
 
