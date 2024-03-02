@@ -39,12 +39,12 @@
     },
     "require": {
         "php": "^7.3|^8.0",
-        "illuminate/support": "^8.0|^9.0|^10.0"
+        "illuminate/support": "^8.0|^9.0|^10.0|^11.0"
     },
     "require-dev": {
-        "phpunit/phpunit": "^9.0",
+        "phpunit/phpunit": "^9.0|^10.5",
         "php-coveralls/php-coveralls": "^2.1",
-        "orchestra/testbench": "^6.0|^7.0|^8.0"
+        "orchestra/testbench": "^6.0|^7.0|^8.0|^9.0"
     },
     "suggest": {
         "laravolt/suitable": "Required if you want to access editor panel",
