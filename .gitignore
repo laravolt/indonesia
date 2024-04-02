@@ -4,3 +4,4 @@ vendor/
 composer.lock
 testing.sh
 .DS_Store
+.phpunit.cache

@@ -9,6 +9,22 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - laravel: 11.*
+            php: 8.2
+            testbench: ^7.0
+            stability: prefer-stable
+          - laravel: 11.*
+            php: 8.2
+            testbench: ^7.0
+            stability: prefer-lowest
+          - laravel: 10.*
+            php: 8.1
+            testbench: ^7.0
+            stability: prefer-stable
+          - laravel: 10.*
+            php: 8.1
+            testbench: ^7.0
+            stability: prefer-lowest
           - laravel: 9.*
             php: 8.1
             testbench: ^7.0
