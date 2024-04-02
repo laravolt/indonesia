@@ -11,19 +11,19 @@ jobs:
         include:
           - laravel: 11.*
             php: 8.2
-            testbench: ^7.0
+            testbench: ^9.0
             stability: prefer-stable
           - laravel: 11.*
             php: 8.2
-            testbench: ^7.0
+            testbench: ^9.0
             stability: prefer-lowest
           - laravel: 10.*
             php: 8.1
-            testbench: ^7.0
+            testbench: ^8.0
             stability: prefer-stable
           - laravel: 10.*
             php: 8.1
-            testbench: ^7.0
+            testbench: ^8.0
             stability: prefer-lowest
           - laravel: 9.*
             php: 8.1
