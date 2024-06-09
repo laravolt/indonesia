@@ -29,9 +29,9 @@ class TestCase extends \Orchestra\Testbench\TestCase
     {
         $app['config']->set('database.default', 'sqlite');
         $app['config']->set('database.connections.sqlite', [
-            'driver'   => 'sqlite',
+            'driver' => 'sqlite',
             'database' => ':memory:',
-            'prefix'   => 'indonesia_',
+            'prefix' => 'indonesia_',
         ]);
         $app['config']->set('indonesia.table_prefix', 'indonesia_');
     }
