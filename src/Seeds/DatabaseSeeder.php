@@ -30,7 +30,6 @@ class DatabaseSeeder extends Seeder
 
     public function reset()
     {
-
         Schema::disableForeignKeyConstraints();
 
         Kelurahan::truncate();
@@ -42,7 +41,7 @@ class DatabaseSeeder extends Seeder
     }
 
     /**
-     * Extract compressed CSV files if they exist and CSV files don't exist
+     * Extract compressed CSV files if they exist and CSV files don't exist.
      *
      * @return void
      */
@@ -75,10 +74,11 @@ class DatabaseSeeder extends Seeder
     }
 
     /**
-     * Extract a gzipped file
+     * Extract a gzipped file.
      *
      * @param string $gzFile
      * @param string $csvFile
+     *
      * @return void
      */
     protected function extractGzFile($gzFile, $csvFile)
@@ -93,7 +93,7 @@ class DatabaseSeeder extends Seeder
             gzclose($gzHandle);
             fclose($csvHandle);
 
-            echo "Extracted: ".basename($csvFile)."\n";
+            echo 'Extracted: '.basename($csvFile)."\n";
         } else {
             throw new \Exception("Failed to extract: {$gzFile}");
         }
