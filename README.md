@@ -4,8 +4,7 @@
 
 # LARAVOLT INDONESIA
 
-Package Laravel yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia.
-Data wilayah diambil dari [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia)
+Package Laravel yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia. Data wilayah diambil dari repository [Cahya](https://github.com/cahyadsn).
 
 ## Instalasi
 
@@ -23,17 +22,13 @@ Tambahkan Service Provider dan Facade pada `config.app`
 
 ```php
 'providers' => [
-
     Laravolt\Indonesia\ServiceProvider::class
-
 ]
 ```
 
 ```php
 'aliases' => [
-
     'Indonesia' => Laravolt\Indonesia\Facade::class
-
 ]
 ```
 
