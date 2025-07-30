@@ -94,6 +94,8 @@ php artisan migrate
 php artisan laravolt:indonesia:seed
 ```
 
+**Note**: Data CSV disimpan dalam format terkompresi (gzip) untuk menghemat ruang repository (~75% lebih kecil). Seeder akan secara otomatis mengekstrak file yang diperlukan saat pertama kali dijalankan.
+
 ### Untuk menambahkan seedernya ke file `DatabaseSeeder.php` ikuti contoh berikut:
 
 ```php
