@@ -25,28 +25,27 @@ class IndonesiaService
     public function search($location)
     {
         $this->search = strtoupper($location);
+
         return $this;
     }
 
     public function setCacheTtl($ttl)
     {
         $this->cacheTtl = $ttl;
+
         return $this;
     }
 
     private function getCacheKey($method, $params = [])
     {
-
-        $key = $this->cachePrefix . ':' . $method;
+        $key = $this->cachePrefix.':'.$method;
 
         if ($this->search) {
-
-            $key .= ':search:' . $this->search;
+            $key .= ':search:'.$this->search;
         }
 
         if (!empty($params)) {
-
-            $key .= ':' . md5(serialize($params));
+            $key .= ':'.md5(serialize($params));
         }
 
         return $key;
@@ -272,10 +271,6 @@ class IndonesiaService
         });
     }
 
-    /**
-     *
-     * Clear all cache for this service
-     */
     public function clearCache()
     {
         $pattern = $this->cachePrefix . ':*';
@@ -295,10 +290,7 @@ class IndonesiaService
         return $this;
     }
 
-    /**
-     *
-     * Clear cache for specific method
-     */
+
     public function clearCacheFor($method, $params = [])
     {
         $cacheKey = $this->getCacheKey($method, $params);
@@ -307,20 +299,14 @@ class IndonesiaService
         return $this;
     }
 
-    /**
-     *
-     * Get cached data without hitting database
-     */
+
     public function getCached($method, $params = [])
     {
         $cacheKey = $this->getCacheKey($method, $params);
         return Cache::get($cacheKey);
     }
 
-    /**
-     *
-     * Check if data is cached
-     */
+
     public function isCached($method, $params = [])
     {
         $cacheKey = $this->getCacheKey($method, $params);
