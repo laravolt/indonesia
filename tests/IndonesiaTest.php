@@ -282,5 +282,4 @@ class IndonesiaTest extends TestCase
 
         $this->assertNotEmpty($results);
     }
-
 }

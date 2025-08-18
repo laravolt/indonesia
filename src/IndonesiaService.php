@@ -273,7 +273,7 @@ class IndonesiaService
 
     public function clearCache()
     {
-        $pattern = $this->cachePrefix . ':*';
+        $pattern = $this->cachePrefix.':*';
 
         // If using Redis
         if (config('cache.default') === 'redis') {
@@ -290,7 +290,6 @@ class IndonesiaService
         return $this;
     }
 
-
     public function clearCacheFor($method, $params = [])
     {
         $cacheKey = $this->getCacheKey($method, $params);
@@ -299,17 +298,16 @@ class IndonesiaService
         return $this;
     }
 
-
     public function getCached($method, $params = [])
     {
         $cacheKey = $this->getCacheKey($method, $params);
         return Cache::get($cacheKey);
     }
 
-
     public function isCached($method, $params = [])
     {
         $cacheKey = $this->getCacheKey($method, $params);
+
         return Cache::has($cacheKey);
     }
 
@@ -340,4 +338,5 @@ class IndonesiaService
 
         return $newObject;
     }
+
 }
