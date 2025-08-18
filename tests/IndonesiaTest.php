@@ -63,7 +63,6 @@ class IndonesiaTest extends TestCase
         $this->assertNotEquals($jakartaResults->first()->name, $baliResults->first->name);
     }
 
-
     /** @test */
     public function it_handles_cache_with_different_parameters()
     {

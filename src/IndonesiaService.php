@@ -36,13 +36,16 @@ class IndonesiaService
 
     private function getCacheKey($method, $params = [])
     {
+
         $key = $this->cachePrefix . ':' . $method;
 
         if ($this->search) {
+
             $key .= ':search:' . $this->search;
         }
 
         if (!empty($params)) {
+
             $key .= ':' . md5(serialize($params));
         }
 
@@ -79,6 +82,7 @@ class IndonesiaService
             if ($this->search) {
                 return Models\Province::search($this->search)->get();
             }
+
             return Models\Province::all();
         });
     }
@@ -104,6 +108,7 @@ class IndonesiaService
             if ($this->search) {
                 return Models\City::search($this->search)->get();
             }
+
             return Models\City::all();
         });
     }
@@ -125,6 +130,7 @@ class IndonesiaService
             if ($this->search) {
                 return Models\District::search($this->search)->get();
             }
+
             return Models\District::all();
         });
     }
@@ -146,6 +152,7 @@ class IndonesiaService
             if ($this->search) {
                 return Models\Village::search($this->search)->get();
             }
+
             return Models\Village::all();
         });
     }
@@ -266,6 +273,7 @@ class IndonesiaService
     }
 
     /**
+     *
      * Clear all cache for this service
      */
     public function clearCache()
@@ -288,6 +296,7 @@ class IndonesiaService
     }
 
     /**
+     *
      * Clear cache for specific method
      */
     public function clearCacheFor($method, $params = [])
@@ -299,6 +308,7 @@ class IndonesiaService
     }
 
     /**
+     *
      * Get cached data without hitting database
      */
     public function getCached($method, $params = [])
@@ -308,6 +318,7 @@ class IndonesiaService
     }
 
     /**
+     *
      * Check if data is cached
      */
     public function isCached($method, $params = [])
