@@ -301,6 +301,7 @@ class IndonesiaService
     public function getCached($method, $params = [])
     {
         $cacheKey = $this->getCacheKey($method, $params);
+
         return Cache::get($cacheKey);
     }
 
@@ -338,5 +339,4 @@ class IndonesiaService
 
         return $newObject;
     }
-
 }
