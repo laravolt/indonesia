@@ -16,11 +16,29 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public $timestamps = false;
 
-    public function __construct(array $attributes = [])
+    /**
+     * Dynamic DB connection (package-level)
+     */
+    public function getConnectionName()
     {
-        parent::__construct($attributes);
+        return config('indonesia.database.connection')
+            ?: parent::getConnectionName();
+    }
 
-        $this->table = config('laravolt.indonesia.table_prefix').$this->table;
+    /**
+     * Dynamic table prefix (package-level)
+     */
+    public function getTable(): string
+    {
+        $table = parent::getTable();
+        $prefix = config('laravolt.indonesia.table_prefix');
+
+        // ✅ idempotent — prefix only once
+        if (str_starts_with($table, $prefix)) {
+            return $table;
+        }
+
+        return $prefix . $table;
     }
 
     public function scopeSearch($query, $keyword)

@@ -18,4 +18,7 @@ return [
         'prefix' => env('INDONESIA_CACHE_PREFIX', 'indonesia_service'),
         'store' => env('INDONESIA_CACHE_STORE', 'redis'),
     ],
+    'database' => [
+        'connection' => env('INDONESIA_DB_CONNECTION', null),
+    ],
 ];
