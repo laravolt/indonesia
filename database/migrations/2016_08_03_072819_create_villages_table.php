@@ -21,6 +21,7 @@ class CreateVillagesTable extends Migration
      */
     public function up()
     {
+
         Schema::connection(($this->connection()))->create(config('laravolt.indonesia.table_prefix').'villages', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('code', 10)->unique();

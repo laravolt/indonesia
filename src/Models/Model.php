@@ -15,21 +15,11 @@ class Model extends \Illuminate\Database\Eloquent\Model
     protected $guarded = [];
 
     public $timestamps = false;
-
-    /**
-     *
-     * Dynamic DB connection (package-level)
-     */
     public function getConnectionName()
     {
         return config('indonesia.database.connection')
             ?: parent::getConnectionName();
     }
-
-    /**
-     *
-     * Dynamic table prefix (package-level)
-     */
     public function getTable(): string
     {
         $table = parent::getTable();
@@ -39,7 +29,6 @@ class Model extends \Illuminate\Database\Eloquent\Model
         if (str_starts_with($table, $prefix)) {
             return $table;
         }
-
         return $prefix . $table;
     }
 
