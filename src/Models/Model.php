@@ -17,6 +17,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     public $timestamps = false;
 
     /**
+     *
      * Dynamic DB connection (package-level)
      */
     public function getConnectionName()
@@ -26,6 +27,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
     }
 
     /**
+     *
      * Dynamic table prefix (package-level)
      */
     public function getTable(): string

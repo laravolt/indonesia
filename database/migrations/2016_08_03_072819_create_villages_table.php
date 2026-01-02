@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateVillagesTable extends Migration
 {
-
     protected function connection()
     {
         // New config (optional)
