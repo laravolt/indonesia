@@ -15,12 +15,21 @@ class Model extends \Illuminate\Database\Eloquent\Model
     protected $guarded = [];
 
     public $timestamps = false;
-
-    public function __construct(array $attributes = [])
+    public function getConnectionName()
     {
-        parent::__construct($attributes);
+        return config('indonesia.database.connection')
+            ?: parent::getConnectionName();
+    }
+    public function getTable(): string
+    {
+        $table = parent::getTable();
+        $prefix = config('laravolt.indonesia.table_prefix');
 
-        $this->table = config('laravolt.indonesia.table_prefix').$this->table;
+        // ✅ idempotent — prefix only once
+        if (str_starts_with($table, $prefix)) {
+            return $table;
+        }
+        return $prefix . $table;
     }
 
     public function scopeSearch($query, $keyword)

@@ -6,6 +6,14 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateDistrictsTable extends Migration
 {
+    protected function connection()
+    {
+        // New config (optional)
+        return config('indonesia.database.connection')
+            // Backward compatibility
+            ?? config('database.default');
+    }
+
     /**
      * Run the migrations.
      *
@@ -13,7 +21,8 @@ class CreateDistrictsTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('laravolt.indonesia.table_prefix').'districts', function (Blueprint $table) {
+
+        Schema::connection(($this->connection()))->create(config('laravolt.indonesia.table_prefix').'districts', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('code', 7)->unique();
             $table->char('city_code', 4);
