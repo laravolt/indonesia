@@ -21,8 +21,7 @@ class CreateProvincesTable extends Migration
      */
     public function up()
     {
-
-        Schema::connection(($this->connection()))->create(config('laravolt.indonesia.table_prefix').'provinces', function (Blueprint $table) {
+        Schema::connection($this->connection())->create(config('laravolt.indonesia.table_prefix').'provinces', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('code', 2)->unique();
             $table->string('name', 255);

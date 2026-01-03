@@ -15,11 +15,13 @@ class Model extends \Illuminate\Database\Eloquent\Model
     protected $guarded = [];
 
     public $timestamps = false;
+
     public function getConnectionName()
     {
         return config('indonesia.database.connection')
             ?: parent::getConnectionName();
     }
+
     public function getTable(): string
     {
         $table = parent::getTable();
@@ -29,7 +31,8 @@ class Model extends \Illuminate\Database\Eloquent\Model
         if (str_starts_with($table, $prefix)) {
             return $table;
         }
-        return $prefix . $table;
+
+        return $prefix.$table;
     }
 
     public function scopeSearch($query, $keyword)
