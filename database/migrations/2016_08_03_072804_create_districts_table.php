@@ -43,6 +43,6 @@ class CreateDistrictsTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('laravolt.indonesia.table_prefix').'districts');
+        Schema::connection($this->connection())->drop(config('laravolt.indonesia.table_prefix').'districts');
     }
 }

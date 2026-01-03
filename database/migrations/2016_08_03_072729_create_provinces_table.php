@@ -37,6 +37,6 @@ class CreateProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('laravolt.indonesia.table_prefix').'provinces');
+        Schema::connection($this->connection())->drop(config('laravolt.indonesia.table_prefix').'provinces');
     }
 }

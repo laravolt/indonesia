@@ -29,6 +29,56 @@ Add Facade and Service Provider in `config/app.php`
 ]
 ```
 
+### Publish Configuration File (Optional)
+
+```
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag="config"
+```
+
+### Database Connection Configuration (Optional)
+
+If you want to store Indonesian region data in a separate database from your main application database, you can configure a custom database connection:
+
+1. Define a new database connection in `config/database.php`:
+
+```php
+'connections' => [
+    // ... other connections
+
+    'indonesia' => [
+        'driver' => 'mysql',
+        'host' => env('INDONESIA_DB_HOST', '127.0.0.1'),
+        'database' => env('INDONESIA_DB_DATABASE', 'indonesia'),
+        'username' => env('INDONESIA_DB_USERNAME', 'root'),
+        'password' => env('INDONESIA_DB_PASSWORD', ''),
+        // ... other configuration
+    ],
+]
+```
+
+2. Set environment variables in your `.env` file:
+
+```
+INDONESIA_DB_CONNECTION=indonesia
+INDONESIA_DB_HOST=127.0.0.1
+INDONESIA_DB_DATABASE=indonesia_regions
+INDONESIA_DB_USERNAME=root
+INDONESIA_DB_PASSWORD=
+```
+
+3. Or configure directly in `config/laravolt/indonesia.php`:
+
+```php
+return [
+    'table_prefix' => 'indonesia_',
+    'database' => [
+        'connection' => env('INDONESIA_DB_CONNECTION', null),
+    ],
+];
+```
+
+If not configured, the package will use your application's default database connection.
+
 ### Publish Migration (Only for Laravel 5.2)
 If you are using Laravel version 5.3+, you can ignore this step.
 ```

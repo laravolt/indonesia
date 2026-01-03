@@ -13,6 +13,7 @@ class VillagesSeeder extends Seeder
     {
         $now = Carbon::now();
         $csv = new CsvtoArray();
+        $connection = config('indonesia.database.connection');
         $resourceFiles = File::allFiles(__DIR__.'/../../resources/csv/villages');
         foreach ($resourceFiles as $file) {
             $header = ['code', 'district_code', 'name', 'lat', 'long', 'pos'];
@@ -27,7 +28,7 @@ class VillagesSeeder extends Seeder
 
             $collection = collect($data);
             foreach ($collection->chunk(50) as $chunk) {
-                DB::table(config('laravolt.indonesia.table_prefix').'villages')->insertOrIgnore($chunk->toArray());
+                DB::connection($connection)->table(config('laravolt.indonesia.table_prefix').'villages')->insertOrIgnore($chunk->toArray());
             }
         }
     }
