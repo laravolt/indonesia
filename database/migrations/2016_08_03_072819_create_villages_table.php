@@ -43,6 +43,6 @@ class CreateVillagesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('laravolt.indonesia.table_prefix').'villages');
+        Schema::connection($this->connection())->drop(config('laravolt.indonesia.table_prefix').'villages');
     }
 }

@@ -43,6 +43,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('laravolt.indonesia.table_prefix').'cities');
+        Schema::connection($this->connection())->drop(config('laravolt.indonesia.table_prefix').'cities');
     }
 }
