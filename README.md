@@ -76,6 +76,56 @@ $app->configure('laravolt');
 
 Untuk selanjutnya, konfigurasi bisa dipanggil dengan cara `config('laravolt.indonesia.table_prefix')`.
 
+### Publish Configuration File (Opsional)
+
+```php
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag="config"
+```
+
+### Konfigurasi Database Connection (Opsional)
+
+Jika Anda ingin menyimpan data wilayah Indonesia di database yang terpisah dari database utama aplikasi, Anda dapat mengatur koneksi database khusus:
+
+1. Definisikan koneksi database baru di `config/database.php`:
+
+```php
+'connections' => [
+    // ... koneksi lainnya
+
+    'indonesia' => [
+        'driver' => 'mysql',
+        'host' => env('INDONESIA_DB_HOST', '127.0.0.1'),
+        'database' => env('INDONESIA_DB_DATABASE', 'indonesia'),
+        'username' => env('INDONESIA_DB_USERNAME', 'root'),
+        'password' => env('INDONESIA_DB_PASSWORD', ''),
+        // ... konfigurasi lainnya
+    ],
+]
+```
+
+2. Atur environment variable di file `.env`:
+
+```
+INDONESIA_DB_CONNECTION=indonesia
+INDONESIA_DB_HOST=127.0.0.1
+INDONESIA_DB_DATABASE=indonesia_regions
+INDONESIA_DB_USERNAME=root
+INDONESIA_DB_PASSWORD=
+```
+
+3. Atau atur langsung di file `config/laravolt/indonesia.php`:
+
+```php
+return [
+    'table_prefix' => 'indonesia_',
+    'database' => [
+        'connection' => env('INDONESIA_DB_CONNECTION', null),
+    ],
+];
+```
+
+Jika tidak diatur, package akan menggunakan koneksi database default aplikasi.
+
 ### Publish Migration (Hanya Untuk Laravel/Lumen 5.2)
 
 Jika Anda menggunakan Laravel/Lumen versi 5.3 ke atas, abaikan langkah di bawah ini.

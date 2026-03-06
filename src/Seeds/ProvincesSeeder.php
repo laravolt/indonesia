@@ -22,6 +22,7 @@ class ProvincesSeeder extends Seeder
             return $arr + ['created_at' => $now, 'updated_at' => $now];
         }, $data);
 
-        DB::table(config('laravolt.indonesia.table_prefix').'provinces')->insertOrIgnore($data);
+        $connection = config('indonesia.database.connection');
+        DB::connection($connection)->table(config('laravolt.indonesia.table_prefix').'provinces')->insertOrIgnore($data);
     }
 }
