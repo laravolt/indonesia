@@ -16,8 +16,10 @@ class ServiceProvider extends BaseServiceProvider
     {
         $this->app->bind('indonesia', function () {
             return new IndonesiaService(
-                config('indonesia.cache.ttl'),
-                config('indonesia.cache.prefix')
+                config('laravolt.indonesia.cache.ttl'),
+                config('laravolt.indonesia.cache.prefix'),
+                config('laravolt.indonesia.cache.store'),
+                config('laravolt.indonesia.cache.data_format')
             );
         });
 

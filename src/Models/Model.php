@@ -18,7 +18,7 @@ class Model extends \Illuminate\Database\Eloquent\Model
 
     public function getConnectionName()
     {
-        return config('indonesia.database.connection')
+        return config('laravolt.indonesia.database.connection')
             ?: parent::getConnectionName();
     }
 
