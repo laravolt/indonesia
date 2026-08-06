@@ -2,8 +2,11 @@
 
 namespace Laravolt\Indonesia\Test;
 
+use Illuminate\Database\Eloquent\Collection as EloquentCollection;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Illuminate\Support\Facades\Cache;
+use Laravolt\Indonesia\IndonesiaService;
+use Laravolt\Indonesia\Models\Province;
 
 class IndonesiaTest extends TestCase
 {
@@ -15,6 +18,8 @@ class IndonesiaTest extends TestCase
 
         // Clear cache before each test
         config()->set('cache.default', 'array');
+        config()->set('laravolt.indonesia.cache.store', 'array');
+        config()->set('laravolt.indonesia.cache.data_format', 'model');
         Cache::flush();
     }
 
@@ -41,6 +46,102 @@ class IndonesiaTest extends TestCase
 
         $this->assertEquals($provinces1->count(), $provinces2->count());
         $this->assertEquals($provinces1->toArray(), $provinces2->toArray());
+    }
+
+    /** @test */
+    public function test_default_cache_data_format_keeps_model_cache_behavior()
+    {
+        $this->artisan('laravolt:indonesia:seed');
+
+        $service = new IndonesiaService(3600, 'test_indonesia', 'array');
+        $provinces = $service->allProvinces();
+        $cached = $service->getCached('provinces');
+
+        $this->assertInstanceOf(EloquentCollection::class, $provinces);
+        $this->assertInstanceOf(Province::class, $provinces->first());
+        $this->assertInstanceOf(EloquentCollection::class, $cached);
+    }
+
+    /** @test */
+    public function test_array_cache_data_format_stores_plain_array_data()
+    {
+        $this->artisan('laravolt:indonesia:seed');
+
+        $service = new IndonesiaService(3600, 'test_indonesia_array', 'array', 'array');
+        $provinces = $service->allProvinces();
+        $cached = $service->getCached('provinces');
+        $serializedCache = serialize($cached);
+
+        $this->assertInstanceOf(EloquentCollection::class, $provinces);
+        $this->assertIsArray($cached);
+        $this->assertIsArray($cached[0]);
+        $this->assertArrayHasKey('id', $cached[0]);
+        $this->assertArrayHasKey('code', $cached[0]);
+        $this->assertArrayHasKey('name', $cached[0]);
+        $this->assertStringNotContainsString('Illuminate\Database\Eloquent\Collection', $serializedCache);
+        $this->assertStringNotContainsString('Laravolt\Indonesia\Models\Province', $serializedCache);
+    }
+
+    /** @test */
+    public function test_facade_binding_uses_laravolt_indonesia_cache_configuration()
+    {
+        config()->set('laravolt.indonesia.cache.prefix', 'test_laravolt_config');
+        config()->set('laravolt.indonesia.cache.store', 'array');
+        config()->set('laravolt.indonesia.cache.data_format', 'array');
+        app()->forgetInstance('indonesia');
+
+        $this->artisan('laravolt:indonesia:seed');
+
+        $provinces = \Indonesia::allProvinces();
+        $cached = \Indonesia::getCached('provinces');
+        $serializedCache = serialize($cached);
+
+        $this->assertInstanceOf(EloquentCollection::class, $provinces);
+        $this->assertIsArray($cached);
+        $this->assertStringNotContainsString('Illuminate\Database\Eloquent\Collection', $serializedCache);
+        $this->assertStringNotContainsString('Laravolt\Indonesia\Models\Province', $serializedCache);
+    }
+
+    /** @test */
+    public function test_models_use_laravolt_indonesia_database_configuration()
+    {
+        config()->set('database.connections.indonesia_testing', [
+            'driver' => 'sqlite',
+            'database' => ':memory:',
+            'prefix' => 'indonesia_',
+        ]);
+        config()->set('laravolt.indonesia.database.connection', 'indonesia_testing');
+
+        $this->assertEquals('indonesia_testing', (new Province())->getConnectionName());
+    }
+
+    /** @test */
+    public function test_array_cache_data_format_restores_existing_collection_api_from_cache()
+    {
+        $this->artisan('laravolt:indonesia:seed');
+
+        $service = new IndonesiaService(3600, 'test_indonesia_array_restore', 'array', 'array');
+        $firstResult = $service->allProvinces();
+        $secondResult = $service->allProvinces();
+
+        $this->assertInstanceOf(EloquentCollection::class, $secondResult);
+        $this->assertInstanceOf(Province::class, $secondResult->first());
+        $this->assertEquals($firstResult->first()->name, $secondResult->first()->name);
+    }
+
+    /** @test */
+    public function test_array_cache_data_format_restores_existing_model_api_from_cache()
+    {
+        $this->artisan('laravolt:indonesia:seed');
+
+        $service = new IndonesiaService(3600, 'test_indonesia_array_model_restore', 'array', 'array');
+        $provinceId = $service->allProvinces()->first()->id;
+        $firstResult = $service->findProvince($provinceId, ['cities']);
+        $secondResult = $service->findProvince($provinceId, ['cities']);
+
+        $this->assertInstanceOf(Province::class, $secondResult);
+        $this->assertEquals($firstResult->name, $secondResult->name);
+        $this->assertNotEmpty($secondResult->cities);
     }
 
     /** @test */

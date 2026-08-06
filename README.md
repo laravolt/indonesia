@@ -76,26 +76,63 @@ $app->configure('laravolt');
 
 Untuk selanjutnya, konfigurasi bisa dipanggil dengan cara `config('laravolt.indonesia.table_prefix')`.
 
-### Publish Migration (Hanya Untuk Laravel/Lumen 5.2)
+### Publish Konfigurasi
 
-Jika Anda menggunakan Laravel/Lumen versi 5.3 ke atas, abaikan langkah di bawah ini.
-Untuk Laravel:
+Untuk mempublikasikan konfigurasi package:
 
-```php
-php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
+```bash
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=config
 ```
 
-Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/database/migrations` atau [Migrations](database/migrations/)
+File konfigurasi akan dibuat di:
+
+```text
+config/laravolt/indonesia.php
+```
+
+Semua konfigurasi runtime dibaca melalui namespace:
+
+```php
+config('laravolt.indonesia')
+```
+
+Contoh:
+
+```php
+config('laravolt.indonesia.table_prefix');
+config('laravolt.indonesia.database.connection');
+config('laravolt.indonesia.cache.data_format');
+```
+
+### Publish Migration
+
+Package ini menyediakan struktur tabel untuk data provinsi, kota/kabupaten, kecamatan, dan desa/kelurahan. Jika Anda ingin menyimpan file migration di aplikasi dan mengontrolnya bersama migration lain, publish migration dengan:
+
+```bash
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=migrations
+```
+
+File migration akan dipublish ke direktori:
+
+```text
+database/migrations
+```
+
+Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/database/migrations` atau [Migrations](database/migrations/).
 
 ### Jalankan Migration
 
-```php
+Setelah migration tersedia, jalankan:
+
+```bash
 php artisan migrate
 ```
 
 ### Jalankan Seeder Untuk Mengisi Data Wilayah
 
-```php
+Nilai utama package ini adalah data wilayah Indonesia. Setelah tabel dibuat, isi data wilayah dengan:
+
+```bash
 php artisan laravolt:indonesia:seed
 ```
 
@@ -129,6 +166,114 @@ class DatabaseSeeder extends Seeder
 }
 
 ```
+
+## Konfigurasi
+
+Contoh konfigurasi utama:
+
+```php
+return [
+    'table_prefix' => 'indonesia_',
+
+    'cache' => [
+        'ttl' => env('INDONESIA_CACHE_TTL', 3600),
+        'prefix' => env('INDONESIA_CACHE_PREFIX', 'indonesia_service'),
+        'store' => env('INDONESIA_CACHE_STORE', 'redis'),
+        'data_format' => env('INDONESIA_CACHE_DATA_FORMAT', 'model'),
+    ],
+
+    'database' => [
+        'connection' => env('INDONESIA_DB_CONNECTION', null),
+    ],
+];
+```
+
+### Konfigurasi Database
+
+Secara default package menggunakan koneksi database default Laravel. Jika data Indonesia ingin disimpan di koneksi database khusus, set nilai berikut:
+
+```env
+INDONESIA_DB_CONNECTION=mysql
+```
+
+Konfigurasi tersebut dibaca melalui:
+
+```php
+config('laravolt.indonesia.database.connection')
+```
+
+### Konfigurasi Cache
+
+Package ini menyimpan hasil query utama ke cache agar pemanggilan berikutnya lebih cepat.
+
+```env
+INDONESIA_CACHE_TTL=3600
+INDONESIA_CACHE_PREFIX=indonesia_service
+INDONESIA_CACHE_STORE=redis
+INDONESIA_CACHE_DATA_FORMAT=model
+```
+
+Opsi `INDONESIA_CACHE_DATA_FORMAT` mendukung dua nilai:
+
+| Nilai | Perilaku |
+| --- | --- |
+| `model` | Menyimpan Eloquent Model/Collection di cache. Ini adalah default dan mempertahankan perilaku lama. |
+| `array` | Menyimpan data array biasa di cache. |
+
+Gunakan `array` jika aplikasi Anda memakai Redis cache pada Laravel versi baru yang membatasi unserialize object PHP.
+
+```env
+INDONESIA_CACHE_DATA_FORMAT=array
+```
+
+Dengan konfigurasi tersebut:
+
+- Redis menyimpan array data biasa.
+- Public API tetap mengembalikan Eloquent Model/Collection.
+- Kode lama tetap berjalan:
+
+```php
+Indonesia::allProvinces()->first()->name;
+```
+
+Contoh perbedaan isi cache:
+
+```text
+# data_format=model
+O:39:"Illuminate\Database\Eloquent\Collection":...
+
+# data_format=array
+a:38:{i:0;a:6:{s:2:"id";i:1;s:4:"code";s:2:"11";s:4:"name";s:4:"ACEH";...}}
+```
+
+Setelah mengubah konfigurasi cache di `.env`, jalankan:
+
+```bash
+php artisan optimize:clear
+php artisan cache:clear
+```
+
+Jika Redis masih berisi serialized Eloquent object seperti berikut:
+
+```text
+O:39:"Illuminate\Database\Eloquent\Collection":...
+O:34:"Laravolt\Indonesia\Models\Province":...
+```
+
+Pastikan konfigurasi yang aktif adalah:
+
+```php
+config('laravolt.indonesia.cache.data_format'); // array
+config('laravolt.indonesia.cache.store');       // redis
+```
+
+Lalu hapus key cache lama sesuai prefix aplikasi Anda:
+
+```bash
+redis-cli -n 1 del "indonesia_service:provinces"
+```
+
+Setelah cache dibuat ulang, payload Redis untuk mode `array` tidak boleh berisi nama class Eloquent seperti `Illuminate\Database\Eloquent\Collection` atau `Laravolt\Indonesia\Models\Province`.
 
 ## Penggunaan
 

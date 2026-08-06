@@ -29,21 +29,173 @@ Add Facade and Service Provider in `config/app.php`
 ]
 ```
 
-### Publish Migration (Only for Laravel 5.2)
-If you are using Laravel version 5.3+, you can ignore this step.
-```
-php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
+### Publish Configuration
+
+Publish the package configuration with:
+
+```bash
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=config
 ```
 
-### Run Migration
+The configuration file will be published to:
+
+```text
+config/laravolt/indonesia.php
 ```
+
+Runtime configuration is read from the `laravolt.indonesia` namespace:
+
+```php
+config('laravolt.indonesia')
+```
+
+Examples:
+
+```php
+config('laravolt.indonesia.table_prefix');
+config('laravolt.indonesia.database.connection');
+config('laravolt.indonesia.cache.data_format');
+```
+
+### Publish Migrations
+
+This package provides table structures for provinces, cities/regencies, districts, and villages. If you want to keep the migration files inside your application and manage them with your own migrations, publish them with:
+
+```bash
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=migrations
+```
+
+The migration files will be published to:
+
+```text
+database/migrations
+```
+
+For Lumen, migration files must be copied manually from `vendor/laravolt/indonesia/database/migrations` or [Migrations](database/migrations/).
+
+### Run Migration
+
+After the migrations are available, run:
+
+```bash
 php artisan migrate
 ```
 
 ### Run Database Seeder to Populate the Database
-```
+
+The main value of this package is the Indonesia administrative area data. After the tables are created, populate them with:
+
+```bash
 php artisan laravolt:indonesia:seed
 ```
+
+## Configuration
+
+Main configuration example:
+
+```php
+return [
+    'table_prefix' => 'indonesia_',
+
+    'cache' => [
+        'ttl' => env('INDONESIA_CACHE_TTL', 3600),
+        'prefix' => env('INDONESIA_CACHE_PREFIX', 'indonesia_service'),
+        'store' => env('INDONESIA_CACHE_STORE', 'redis'),
+        'data_format' => env('INDONESIA_CACHE_DATA_FORMAT', 'model'),
+    ],
+
+    'database' => [
+        'connection' => env('INDONESIA_DB_CONNECTION', null),
+    ],
+];
+```
+
+### Database Configuration
+
+By default, this package uses Laravel's default database connection. To store Indonesia data in a dedicated connection, set:
+
+```env
+INDONESIA_DB_CONNECTION=mysql
+```
+
+The value is read from:
+
+```php
+config('laravolt.indonesia.database.connection')
+```
+
+### Cache Configuration
+
+The package caches the main query results to make repeated calls faster.
+
+```env
+INDONESIA_CACHE_TTL=3600
+INDONESIA_CACHE_PREFIX=indonesia_service
+INDONESIA_CACHE_STORE=redis
+INDONESIA_CACHE_DATA_FORMAT=model
+```
+
+`INDONESIA_CACHE_DATA_FORMAT` accepts two values:
+
+| Value | Behavior |
+| --- | --- |
+| `model` | Stores Eloquent models/collections in cache. This is the default and preserves the existing behavior. |
+| `array` | Stores plain array data in cache. |
+
+Use `array` when your application uses Redis cache on newer Laravel versions that restrict unserializing PHP objects.
+
+```env
+INDONESIA_CACHE_DATA_FORMAT=array
+```
+
+With this configuration:
+
+- Redis stores plain array data.
+- The public API still returns Eloquent models/collections.
+- Existing code keeps working:
+
+```php
+Indonesia::allProvinces()->first()->name;
+```
+
+Cache payload example:
+
+```text
+# data_format=model
+O:39:"Illuminate\Database\Eloquent\Collection":...
+
+# data_format=array
+a:38:{i:0;a:6:{s:2:"id";i:1;s:4:"code";s:2:"11";s:4:"name";s:4:"ACEH";...}}
+```
+
+After changing cache configuration in `.env`, run:
+
+```bash
+php artisan optimize:clear
+php artisan cache:clear
+```
+
+If Redis still contains serialized Eloquent objects like:
+
+```text
+O:39:"Illuminate\Database\Eloquent\Collection":...
+O:34:"Laravolt\Indonesia\Models\Province":...
+```
+
+Make sure the active configuration is:
+
+```php
+config('laravolt.indonesia.cache.data_format'); // array
+config('laravolt.indonesia.cache.store');       // redis
+```
+
+Then delete the old cache key according to your application prefix:
+
+```bash
+redis-cli -n 1 del "indonesia_service:provinces"
+```
+
+After the cache is rebuilt, the Redis payload for `array` mode should not contain Eloquent class names such as `Illuminate\Database\Eloquent\Collection` or `Laravolt\Indonesia\Models\Province`.
 
 ## Usage
 

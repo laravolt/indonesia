@@ -9,7 +9,7 @@ class CreateProvincesTable extends Migration
     protected function connection()
     {
         // New config (optional)
-        return config('indonesia.database.connection')
+        return config('laravolt.indonesia.database.connection')
             // Backward compatibility
             ?? config('database.default');
     }
