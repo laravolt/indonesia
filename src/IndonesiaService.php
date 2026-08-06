@@ -398,7 +398,7 @@ class IndonesiaService
             }
         }
 
-        $model = (new $modelClass)->newFromBuilder($modelAttributes);
+        $model = (new $modelClass())->newFromBuilder($modelAttributes);
 
         foreach ($loadedRelations as $relation => $value) {
             $relationModelClass = $relations[$relation];

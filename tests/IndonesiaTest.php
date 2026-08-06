@@ -112,7 +112,7 @@ class IndonesiaTest extends TestCase
         ]);
         config()->set('laravolt.indonesia.database.connection', 'indonesia_testing');
 
-        $this->assertEquals('indonesia_testing', (new Province)->getConnectionName());
+        $this->assertEquals('indonesia_testing', (new Province())->getConnectionName());
     }
 
     /** @test */
