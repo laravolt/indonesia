@@ -7,10 +7,11 @@ use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Village;
 use Laravolt\Indonesia\Test\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class DistrictTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function a_district_has_belongs_to_city_relation()
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
@@ -22,7 +23,7 @@ class DistrictTest extends TestCase
         $this->assertEquals($district->city_code, $district->city->code);
     }
 
-    /** @test */
+    #[Test]
     public function a_district_has_many_villages_relation()
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
@@ -34,7 +35,7 @@ class DistrictTest extends TestCase
         $this->assertInstanceOf(Village::class, $district->villages->first());
     }
 
-    /** @test */
+    #[Test]
     public function a_district_has_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');
@@ -44,7 +45,7 @@ class DistrictTest extends TestCase
         $this->assertEquals('BAKONGAN', $district->name);
     }
 
-    /** @test */
+    #[Test]
     public function a_district_has_city_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
@@ -55,7 +56,7 @@ class DistrictTest extends TestCase
         $this->assertEquals('KABUPATEN ACEH SELATAN', $district->city_name);
     }
 
-    /** @test */
+    #[Test]
     public function a_district_has_province_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
@@ -67,7 +68,7 @@ class DistrictTest extends TestCase
         $this->assertEquals('ACEH', $district->province_name);
     }
 
-    /** @test */
+    #[Test]
     public function a_district_can_store_meta_column()
     {
         $this->seed('Laravolt\Indonesia\Seeds\DistrictsSeeder');

@@ -3,8 +3,14 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     colors="true"
     bootstrap="vendor/autoload.php"
-    xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
-    <coverage processUncoveredFiles="true">
+    cacheDirectory=".phpunit.cache"
+    xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd">
+    <testsuites>
+        <testsuite name="Laravolt Indonesia Test Suite">
+            <directory>tests</directory>
+        </testsuite>
+    </testsuites>
+    <source>
         <include>
             <directory suffix=".php">./src</directory>
         </include>
@@ -12,10 +18,5 @@
             <directory>./src/migrations</directory>
             <directory>./src/Seeds</directory>
         </exclude>
-    </coverage>
-    <testsuites>
-        <testsuite name="Laravolt Indonesia Test Suite">
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
+    </source>
 </phpunit>

@@ -4,6 +4,7 @@ namespace Laravolt\Indonesia\Test;
 
 use Illuminate\Foundation\Testing\Concerns\InteractsWithDatabase;
 use Illuminate\Support\Facades\Cache;
+use PHPUnit\Framework\Attributes\Test;
 
 class IndonesiaTest extends TestCase
 {
@@ -18,7 +19,7 @@ class IndonesiaTest extends TestCase
         Cache::flush();
     }
 
-    /** @test */
+    #[Test]
     public function it_can_call_indonesia_service()
     {
         $this->artisan('laravolt:indonesia:seed');
@@ -30,7 +31,7 @@ class IndonesiaTest extends TestCase
         $this->search();
     }
 
-    /** @test */
+    #[Test]
     public function it_can_cache_service_results()
     {
         $this->artisan('laravolt:indonesia:seed');
@@ -43,7 +44,7 @@ class IndonesiaTest extends TestCase
         $this->assertEquals($provinces1->toArray(), $provinces2->toArray());
     }
 
-    /** @test */
+    #[Test]
     public function it_caches_search_results_independently()
     {
         $this->artisan('laravolt:indonesia:seed');
@@ -63,7 +64,7 @@ class IndonesiaTest extends TestCase
         $this->assertNotEquals($jakartaResults->first()->name, $baliResults->first->name);
     }
 
-    /** @test */
+    #[Test]
     public function it_handles_cache_with_different_parameters()
     {
         $this->artisan('laravolt:indonesia:seed');
@@ -90,7 +91,7 @@ class IndonesiaTest extends TestCase
         $this->assertTrue(isset($province2->districts));
     }
 
-    /** @test */
+    #[Test]
     public function it_can_set_custom_cache_ttl()
     {
         $this->artisan('laravolt:indonesia:seed');
@@ -108,7 +109,7 @@ class IndonesiaTest extends TestCase
         $this->assertNotEmpty($cities);
     }
 
-    /** @test */
+    #[Test]
     public function it_can_handle_empty_search_results()
     {
         $this->artisan('laravolt:indonesia:seed');
