@@ -8,10 +8,11 @@ use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Models\Village;
 use Laravolt\Indonesia\Test\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class CityTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function a_city_has_belongs_to_province_relation()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
@@ -23,7 +24,7 @@ class CityTest extends TestCase
         $this->assertEquals($city->province_code, $city->province->code);
     }
 
-    /** @test */
+    #[Test]
     public function a_city_has_many_districts_relation()
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
@@ -35,7 +36,7 @@ class CityTest extends TestCase
         $this->assertInstanceOf(District::class, $city->districts->first());
     }
 
-    /** @test */
+    #[Test]
     public function a_city_has_many_villages_relation()
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
@@ -48,7 +49,7 @@ class CityTest extends TestCase
         $this->assertInstanceOf(Village::class, $city->villages->first());
     }
 
-    /** @test */
+    #[Test]
     public function a_city_has_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
@@ -58,7 +59,7 @@ class CityTest extends TestCase
         $this->assertEquals('KABUPATEN ACEH SELATAN', $city->name);
     }
 
-    /** @test */
+    #[Test]
     public function a_city_has_province_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
@@ -69,7 +70,7 @@ class CityTest extends TestCase
         $this->assertEquals('ACEH', $city->province_name);
     }
 
-    /** @test */
+    #[Test]
     public function a_city_has_logo_path_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');
@@ -79,7 +80,7 @@ class CityTest extends TestCase
         $this->assertNull($city->logo_path);
     }
 
-    /** @test */
+    #[Test]
     public function a_city_can_store_meta_column()
     {
         $this->seed('Laravolt\Indonesia\Seeds\CitiesSeeder');

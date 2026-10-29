@@ -7,10 +7,11 @@ use Laravolt\Indonesia\Models\City;
 use Laravolt\Indonesia\Models\District;
 use Laravolt\Indonesia\Models\Province;
 use Laravolt\Indonesia\Test\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class ProvinceTest extends TestCase
 {
-    /** @test */
+    #[Test]
     public function a_province_has_many_cities_relation()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
@@ -22,7 +23,7 @@ class ProvinceTest extends TestCase
         $this->assertInstanceOf(City::class, $province->cities->first());
     }
 
-    /** @test */
+    #[Test]
     public function a_province_has_many_districts_relation()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
@@ -35,7 +36,7 @@ class ProvinceTest extends TestCase
         $this->assertInstanceOf(District::class, $province->districts->first());
     }
 
-    /** @test */
+    #[Test]
     public function a_province_has_name_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
@@ -45,7 +46,7 @@ class ProvinceTest extends TestCase
         $this->assertEquals('ACEH', $province->name);
     }
 
-    /** @test */
+    #[Test]
     public function a_province_has_logo_path_attribute()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
@@ -55,7 +56,7 @@ class ProvinceTest extends TestCase
         $this->assertNull($province->logo_path);
     }
 
-    /** @test */
+    #[Test]
     public function a_province_can_store_meta_column()
     {
         $this->seed('Laravolt\Indonesia\Seeds\ProvincesSeeder');
