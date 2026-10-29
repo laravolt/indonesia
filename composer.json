@@ -39,7 +39,7 @@
     },
     "require": {
         "php": "^8.3",
-        "illuminate/support": "^12.0|^13.0"
+        "illuminate/support": "^12.68|^13.29"
     },
     "require-dev": {
         "phpunit/phpunit": "^12.5|^13.4",
