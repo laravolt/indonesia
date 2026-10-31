@@ -14,10 +14,13 @@ class ServiceProvider extends BaseServiceProvider
 {
     public function register()
     {
+        $this->mergeConfigFrom(__DIR__.'/../config/indonesia.php', 'laravolt.indonesia');
+
         $this->app->bind('indonesia', function () {
             return new IndonesiaService(
-                config('indonesia.cache.ttl'),
-                config('indonesia.cache.prefix')
+                config('laravolt.indonesia.cache.ttl'),
+                config('laravolt.indonesia.cache.prefix'),
+                config('laravolt.indonesia.cache.store')
             );
         });
 
@@ -32,8 +35,6 @@ class ServiceProvider extends BaseServiceProvider
     */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/indonesia.php', 'laravolt.indonesia');
-
         $databasePath = __DIR__.'/../database/migrations';
         if ($this->isLumen()) {
             $this->loadMigrationsFrom($databasePath);
