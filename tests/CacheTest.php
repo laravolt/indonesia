@@ -80,4 +80,12 @@ class CacheTest extends TestCase
 
         $this->assertInstanceOf(Province::class, $values[0]);
     }
+
+    #[Test]
+    public function a_search_does_not_filter_later_calls_through_the_facade()
+    {
+        $this->assertNotSame(Province::count(), \Indonesia::search('JAKARTA')->allProvinces()->count());
+
+        $this->assertSame(Province::count(), \Indonesia::allProvinces()->count());
+    }
 }
