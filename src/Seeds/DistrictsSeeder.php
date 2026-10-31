@@ -24,7 +24,7 @@ class DistrictsSeeder extends Seeder
 
         $collection = collect($data);
         foreach ($collection->chunk(50) as $chunk) {
-            DB::connection(config('laravolt.indonesia.database.connection'))->table(config('laravolt.indonesia.table_prefix').'districts')->insertOrIgnore($chunk->toArray());
+            DB::connection(config('laravolt.indonesia.database.connection'))->table(config('laravolt.indonesia.table_prefix').'districts')->upsert($chunk->toArray(), ['code'], ['name', 'updated_at']);
         }
     }
 }

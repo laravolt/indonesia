@@ -1,7 +1,7 @@
 # LARAVOLT INDONESIA
 
 Laravel Package that contains Provinces Data, City/Districts, and Villages in Indonesia.
-Data was taken from [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia)
+Region codes and names follow **Kepmendagri No. 300.2.2-2138 of 2025** (the Ministry of Home Affairs decree on region codes and data): 38 provinces, 514 regencies/cities, 7,285 districts and 83,762 villages. Its amendment, Kepmendagri No. 300.2.2-2430 of 2025, only changes island data. Names are cross-checked against [cahyadsn/wilayah](https://github.com/cahyadsn/wilayah) (MIT). Early versions of this package used data from [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia).
 
 ## Installation
 

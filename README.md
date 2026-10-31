@@ -5,7 +5,7 @@
 # LARAVOLT INDONESIA
 
 Package Laravel yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia.
-Data wilayah diambil dari [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia)
+Kode dan nama wilayah mengikuti **Kepmendagri No. 300.2.2-2138 Tahun 2025** tentang Pemberian dan Pemutakhiran Kode, Data Wilayah Administrasi Pemerintahan, dan Pulau: 38 provinsi, 514 kabupaten/kota, 7.285 kecamatan, dan 83.762 desa/kelurahan. Perubahannya, Kepmendagri No. 300.2.2-2430 Tahun 2025, hanya menyangkut data pulau. Nama diperiksa silang dengan [cahyadsn/wilayah](https://github.com/cahyadsn/wilayah) (MIT). Versi awal paket ini memakai data [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia).
 
 ## Instalasi
 
