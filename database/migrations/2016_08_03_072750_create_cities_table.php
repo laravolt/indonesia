@@ -9,7 +9,7 @@ class CreateCitiesTable extends Migration
     protected function connection()
     {
         // New config (optional)
-        return config('indonesia.database.connection')
+        return config('laravolt.indonesia.database.connection')
             // Backward compatibility
             ?? config('database.default');
     }
@@ -43,6 +43,6 @@ class CreateCitiesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('laravolt.indonesia.table_prefix').'cities');
+        Schema::connection($this->connection())->drop(config('laravolt.indonesia.table_prefix').'cities');
     }
 }

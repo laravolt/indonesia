@@ -9,7 +9,7 @@ class CreateProvincesTable extends Migration
     protected function connection()
     {
         // New config (optional)
-        return config('indonesia.database.connection')
+        return config('laravolt.indonesia.database.connection')
             // Backward compatibility
             ?? config('database.default');
     }
@@ -37,6 +37,6 @@ class CreateProvincesTable extends Migration
      */
     public function down()
     {
-        Schema::drop(config('laravolt.indonesia.table_prefix').'provinces');
+        Schema::connection($this->connection())->drop(config('laravolt.indonesia.table_prefix').'provinces');
     }
 }

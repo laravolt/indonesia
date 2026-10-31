@@ -16,7 +16,7 @@ return [
     'cache' => [
         'ttl' => env('INDONESIA_CACHE_TTL', 3600),
         'prefix' => env('INDONESIA_CACHE_PREFIX', 'indonesia_service'),
-        'store' => env('INDONESIA_CACHE_STORE', 'redis'),
+        'store' => env('INDONESIA_CACHE_STORE'),
     ],
     'database' => [
         'connection' => env('INDONESIA_DB_CONNECTION', null),
