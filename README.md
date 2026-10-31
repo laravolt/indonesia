@@ -1,235 +1,155 @@
+[![run-tests](https://github.com/laravolt/indonesia/actions/workflows/run-tests.yml/badge.svg)](https://github.com/laravolt/indonesia/actions/workflows/run-tests.yml)
 [![StyleCI](https://github.styleci.io/repos/63410706/shield?branch=master)](https://github.styleci.io/repos/63410706)
-[![Build Status](https://travis-ci.org/laravolt/indonesia.svg?branch=master)](https://travis-ci.org/laravolt/indonesia)
-[![Coverage Status](https://coveralls.io/repos/github/laravolt/indonesia/badge.svg?branch=master)](https://coveralls.io/github/laravolt/indonesia?branch=master)
 
 # LARAVOLT INDONESIA
 
-Package Laravel yang berisi data Provinsi, Kabupaten/Kota, dan Kecamatan/Desa di seluruh Indonesia.
+[English](README_en.md)
+
+Package Laravel berisi data provinsi, kabupaten/kota, kecamatan, dan desa/kelurahan di seluruh Indonesia, lengkap dengan model Eloquent, seeder, dan facade untuk mengambil datanya.
+
+## Sumber data
+
 Kode dan nama wilayah mengikuti **Kepmendagri No. 300.2.2-2138 Tahun 2025** tentang Pemberian dan Pemutakhiran Kode, Data Wilayah Administrasi Pemerintahan, dan Pulau: 38 provinsi, 514 kabupaten/kota, 7.285 kecamatan, dan 83.762 desa/kelurahan. Perubahannya, Kepmendagri No. 300.2.2-2430 Tahun 2025, hanya menyangkut data pulau. Nama diperiksa silang dengan [cahyadsn/wilayah](https://github.com/cahyadsn/wilayah) (MIT). Versi awal paket ini memakai data [edwardsamuel/Wilayah-Administratif-Indonesia](https://github.com/edwardsamuel/Wilayah-Administratif-Indonesia).
+
+## Kebutuhan
+
+- PHP 8.3 atau lebih baru
+- Laravel 12.68+ atau 13.29+
 
 ## Instalasi
 
-### Install Package Via Composer
-
-```
+```bash
 composer require laravolt/indonesia
 ```
 
-### Daftarkan Service Provider dan Facade (Untuk Laravel < 5.5)
+Service provider dan facade `Indonesia` terdaftar otomatis.
 
-Mulai versi 5.5 ke atas, Laravel sudah support fitur auto discover sehingga tidak perlu lagi mendaftarkan Service Provider dan Facade secara manual.
+### Konfigurasi (opsional)
 
-Tambahkan Service Provider dan Facade pada `config.app`
-
-```php
-'providers' => [
-
-    Laravolt\Indonesia\ServiceProvider::class
-
-]
+```bash
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=config
 ```
 
-```php
-'aliases' => [
+Perintah ini membuat `config/laravolt/indonesia.php`. Semua nilai dibaca dari `laravolt.indonesia.*`, dan sebagian bisa diatur lewat `.env`:
 
-    'Indonesia' => Laravolt\Indonesia\Facade::class
+| Kunci | `.env` | Bawaan | Keterangan |
+|---|---|---|---|
+| `table_prefix` | | `indonesia_` | Prefix nama tabel |
+| `database.connection` | `INDONESIA_DB_CONNECTION` | koneksi bawaan aplikasi | Simpan data wilayah di database terpisah |
+| `cache.store` | `INDONESIA_CACHE_STORE` | cache store bawaan aplikasi | Store untuk hasil query |
+| `cache.ttl` | `INDONESIA_CACHE_TTL` | `3600` | Lama cache, dalam detik |
+| `cache.prefix` | `INDONESIA_CACHE_PREFIX` | `indonesia_service` | Prefix kunci cache |
+| `route.enabled` | | `false` | Aktifkan halaman pengelolaan data wilayah |
+| `menu.enabled` | | `false` | Tampilkan menu-nya di sidebar Laravolt |
 
-]
-```
+Bila memakai koneksi terpisah, definisikan dulu koneksinya di `config/database.php`. Model, migration, dan seeder semuanya memakai koneksi tersebut.
 
-### Daftarkan Service Provider dan Facade untuk Lumen
+### Migration
 
-Dalam file `bootstrap/app.php`, uncomment baris berikut
-
-```php
-$app->withFacades();
-$app->withEloquent();
-```
-
-Dalam file `bootstrap/app.php`, daftarkan service provider dan alias/facade dengan menambahkan kode berikut.
-
-```php
-$app->register(Laravolt\Indonesia\ServiceProvider::class);
-
-
-// class aliases
-class_alias(Laravolt\Indonesia\Facade::class, 'Indonesia');
-```
-
-Untuk mengatur prefix tabel, buat file `config/laravolt.php`, lalu copy kode berikut (ganti `indonesia_` dengan nilai prefix tabel yang diinginkan),
-
-```php
-<?php
-
-return [
-    'indonesia' => [
-        'table_prefix' => 'id_',
-    ],
-];
-```
-
-Lalu daftarkan konfigurasi dalam `bootstrap/app.php` dengan menambahkan kode berikut.
-
-```php
-$app->configure('laravolt');
-```
-
-Untuk selanjutnya, konfigurasi bisa dipanggil dengan cara `config('laravolt.indonesia.table_prefix')`.
-
-### Publish Migration (Hanya Untuk Laravel/Lumen 5.2)
-
-Jika Anda menggunakan Laravel/Lumen versi 5.3 ke atas, abaikan langkah di bawah ini.
-Untuk Laravel:
-
-```php
-php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider"
-```
-
-Untuk Lumen, file migrations harus di-copy manual dari direktori `vendor/laravolt/indonesia/database/migrations` atau [Migrations](database/migrations/)
-
-### Jalankan Migration
-
-```php
+```bash
+php artisan vendor:publish --provider="Laravolt\Indonesia\ServiceProvider" --tag=migrations
 php artisan migrate
 ```
 
-### Jalankan Seeder Untuk Mengisi Data Wilayah
+### Mengisi data wilayah
 
-```php
+```bash
 php artisan laravolt:indonesia:seed
 ```
 
-### Untuk menambahkan seedernya ke file `DatabaseSeeder.php` ikuti contoh berikut:
+Seeder aman dijalankan ulang. Baris baru akan ditambahkan, dan nama wilayah yang sudah ada diperbarui sesuai data terbaru. `id` dan kolom `meta` (koordinat) tidak diubah.
+
+Untuk menjalankannya dari `DatabaseSeeder`:
 
 ```php
-namespace Database\Seeders;
-
-use Illuminate\Database\Seeder;
 use Laravolt\Indonesia\Seeds\CitiesSeeder;
-use Laravolt\Indonesia\Seeds\VillagesSeeder;
 use Laravolt\Indonesia\Seeds\DistrictsSeeder;
 use Laravolt\Indonesia\Seeds\ProvincesSeeder;
+use Laravolt\Indonesia\Seeds\VillagesSeeder;
 
-class DatabaseSeeder extends Seeder
+public function run(): void
 {
-    /**
-     * Seed the application's database.
-     *
-     * @return void
-     */
-    public function run()
-    {
-        $this->call([
-            ProvincesSeeder::class,
-            CitiesSeeder::class,
-            DistrictsSeeder::class,
-            VillagesSeeder::class,
-        ]);
-    }
+    $this->call([
+        ProvincesSeeder::class,
+        CitiesSeeder::class,
+        DistrictsSeeder::class,
+        VillagesSeeder::class,
+    ]);
 }
-
 ```
 
 ## Penggunaan
 
 ```php
-\Indonesia::allProvinces()
-\Indonesia::paginateProvinces($numRows = 15)
-\Indonesia::allCities()
-\Indonesia::paginateCities($numRows = 15)
-\Indonesia::allDistricts()
-\Indonesia::paginateDistricts($numRows = 15)
-\Indonesia::allVillages()
-\Indonesia::paginateVillages($numRows = 15)
+use Laravolt\Indonesia\Facade as Indonesia; // atau alias global \Indonesia
+
+Indonesia::allProvinces();
+Indonesia::paginateProvinces($numRows = 15);
+Indonesia::allCities();
+Indonesia::paginateCities($numRows = 15);
+Indonesia::allDistricts();
+Indonesia::paginateDistricts($numRows = 15);
+Indonesia::allVillages();
+Indonesia::paginateVillages($numRows = 15);
 ```
 
----
+### Mencari satu wilayah beserta relasinya
 
 ```php
-\Indonesia::findProvince($provinceId, $with = null)
-// array $with : ['cities', 'districts', 'villages', 'cities.districts', 'cities.districts.villages', 'districts.villages']
+Indonesia::findProvince($provinceId, $with = null);
+// $with: ['cities', 'districts', 'villages', 'cities.districts', 'cities.districts.villages', 'districts.villages']
 
-\Indonesia::findCity($cityId, $with = null)
-// array $with : ['province', 'districts', 'villages', 'districts.villages']
+Indonesia::findCity($cityId, $with = null);
+// $with: ['province', 'districts', 'villages', 'districts.villages']
 
-Indonesia::findDistrict($districtId, $with = null)
-// array $with : ['province', 'city', 'city.province', 'villages']
+Indonesia::findDistrict($districtId, $with = null);
+// $with: ['province', 'city', 'city.province', 'villages']
 
-\Indonesia::findVillage($villageId, $with = null)
-// array $with : ['province', 'city', 'district', 'district.city', 'district.city.province']
+Indonesia::findVillage($villageId, $with = null);
+// $with: ['province', 'city', 'district', 'district.city', 'district.city.province']
 ```
 
-#### Examples
+Contoh:
 
 ```php
-Indonesia::findProvince(11, ['cities']);
+$aceh = Indonesia::findProvince(11, ['cities']);
 
-/*
-Will return
-Province Object {
-    'id' => 11,
-    'name' => 'ACEH',
-    'cities' => City Collections {
-        City Object,
-        City Object,
-        City Object,
-        ...
-    }
-}
-*/
-
-Indonesia::findProvince(11, ['cities', 'districts.villages']);
-
-/*
-Will return
-Province Object {
-    'id' => 11,
-    'name' => 'ACEH',
-    'cities' => City Collections {
-        City Object,
-        City Object,
-        City Object,
-        ...
-    },
-    'districts' => District Collections {
-        District Object {
-            'id' => 1101010
-            'city_id' => '1101'
-            'name' => 'TEUPAH SELATAN'
-            'province_id' => '11'
-            'villages' => Village Colletions {
-                Village Object,
-                Village Object,
-                Village Object,
-                ...
-            }
-        },
-        ...
-    }
-}
-*/
+$aceh->name;           // "ACEH"
+$aceh->cities->count(); // 23
 ```
 
----
+### Pencarian
 
 ```php
-\Indonesia::search('jakarta')->all()
-\Indonesia::search('jakarta')->allProvinces()
-\Indonesia::search('jakarta')->paginateProvinces()
-\Indonesia::search('jakarta')->allCities()
-\Indonesia::search('jakarta')->paginateCities()
-\Indonesia::search('jakarta')->allDistricts()
-\Indonesia::search('jakarta')->paginateDistricts()
-\Indonesia::search('jakarta')->allVillages()
-\Indonesia::search('jakarta')->paginateVillages()
+Indonesia::search('jakarta')->all();               // provinsi, kota, kecamatan, dan desa sekaligus
+Indonesia::search('jakarta')->allProvinces();
+Indonesia::search('jakarta')->paginateProvinces();
+Indonesia::search('jakarta')->allCities();
+Indonesia::search('jakarta')->paginateCities();
+Indonesia::search('jakarta')->allDistricts();
+Indonesia::search('jakarta')->paginateDistricts();
+Indonesia::search('jakarta')->allVillages();
+Indonesia::search('jakarta')->paginateVillages();
 ```
 
----
+### Cache
 
-# Testing
+Hasil `all*()`, `find*()`, dan `search()` disimpan di cache selama `cache.ttl`. Yang disimpan berupa array biasa, lalu dibangun ulang menjadi model saat dibaca, sehingga aman untuk Laravel 13 (`cache.serializable_classes = false`) dengan store apa pun. Hasil `paginate*()` tidak di-cache.
 
-Run
-
+```php
+Indonesia::clearCache();                                   // hapus semua cache paket ini
+Indonesia::clearCacheFor('find_province', ['id' => 11, 'with' => ['cities']]);
 ```
-vendor/bin/phpunit tests
+
+`clearCache()` pada store selain Redis mengosongkan **seluruh** store tersebut. Gunakan store terpisah (`INDONESIA_CACHE_STORE`) bila itu tidak diinginkan.
+
+## Testing
+
+```bash
+composer install
+vendor/bin/phpunit
 ```
+
+## Lisensi
+
+MIT

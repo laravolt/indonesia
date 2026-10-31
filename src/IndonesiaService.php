@@ -101,11 +101,15 @@ class IndonesiaService
         return $value;
     }
 
+    /**
+     * Returns a copy, so the facade's shared instance is not left filtered.
+     */
     public function search($location)
     {
-        $this->search = strtoupper($location);
+        $service = clone $this;
+        $service->search = strtoupper($location);
 
-        return $this;
+        return $service;
     }
 
     public function setCacheTtl($ttl)
