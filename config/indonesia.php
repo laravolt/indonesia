@@ -4,7 +4,9 @@ return [
     'table_prefix' => 'indonesia_',
     'route' => [
         'enabled' => false,
-        'middleware' => ['web', 'auth'],
+        // The pages can create, edit and delete region data, so they require the
+        // indonesia::manage-all permission (laravolt/acl registers it).
+        'middleware' => ['web', 'auth', 'can:indonesia::manage-all'],
         'prefix' => 'indonesia',
     ],
     'view' => [

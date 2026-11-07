@@ -40,6 +40,7 @@ Perintah ini membuat `config/laravolt/indonesia.php`. Semua nilai dibaca dari `l
 | `cache.ttl` | `INDONESIA_CACHE_TTL` | `3600` | Lama cache, dalam detik |
 | `cache.prefix` | `INDONESIA_CACHE_PREFIX` | `indonesia_service` | Prefix kunci cache |
 | `route.enabled` | | `false` | Aktifkan halaman pengelolaan data wilayah |
+| `route.middleware` | | `['web', 'auth', 'can:indonesia::manage-all']` | Middleware halaman tersebut; hanya pemegang permission `indonesia::manage-all` yang bisa mengubah data |
 | `menu.enabled` | | `false` | Tampilkan menu-nya di sidebar Laravolt |
 
 Bila memakai koneksi terpisah, definisikan dulu koneksinya di `config/database.php`. Model, migration, dan seeder semuanya memakai koneksi tersebut.
